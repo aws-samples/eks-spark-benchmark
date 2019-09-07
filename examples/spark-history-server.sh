@@ -11,3 +11,6 @@
 --conf spark.hadoop.fs.s3a.secret.key= \
 --conf spark.eventLog.enabled=true \
 --conf spark.kubernetes.authenticate.driver.serviceAccountName=spark local:///opt/spark/examples/jars/spark-examples_2.11-2.4.3.jar
+
+
+https://github.com/helm/charts/tree/master/stable/spark-history-server
