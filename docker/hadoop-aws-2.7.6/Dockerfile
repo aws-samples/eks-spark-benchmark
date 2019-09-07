@@ -20,7 +20,7 @@ FROM seedjeffwan/spark:2.4.5-SNAPSHOT
 ARG hadoop_aws_jar=https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/2.7.6/hadoop-aws-2.7.6.jar
 ARG aws_java_sdk=https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk/1.7.6/aws-java-sdk-1.7.6.jar
 
-COPY ${hadoop_aws_jar} /opt/spark/jars
-COPY ${aws_java_sdk} /opt/spark/jars
+ADD ${hadoop_aws_jar} /opt/spark/jars
+ADD ${aws_java_sdk} /opt/spark/jars
 
 ENTRYPOINT [ "/opt/entrypoint.sh" ]
