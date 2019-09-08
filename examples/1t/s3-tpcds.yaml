@@ -9,7 +9,6 @@ spec:
   image: seedjeffwan/spark:2.4.5-SNAPSHOT-examples
   sparkVersion: 2.4.5-SNAPSHOT
   mainClass: com.amazonaws.eks.tpcds.BenchmarkSparkSQL
-  # mainApplicationFile: local:///usr/hdp/spark/examples/jars/spark-k8s-examples-assembly-1.1.jar
   mainApplicationFile: local:///opt/spark/examples/jars/eks-spark-examples-assembly-1.0.jar
   mode: cluster
   arguments:
@@ -20,7 +19,7 @@ spec:
   # Path to kit in the docker image
     - "/opt/tpcds-kit/tools"
   # Scale factor (in GB)
-    - "100"
+    - "1000"
   # Number of iterations
     - "1"
   # Optimize queries
@@ -31,7 +30,7 @@ spec:
     - "true"
   sparkConf:
     # Cloud specific - need to run with speculation to avoid strugglers
-    "spark.speculation": "true"
+    "spark.speculation": "false"
     "spark.speculation.multiplier": "3"
     "spark.speculation.quantile": "0.9"
     # TPCDs Specific
@@ -40,30 +39,26 @@ spec:
     "spark.sql.parquet.mergeSchema": "false"
     "spark.sql.parquet.filterPushdown": "true"
     # S3 credential
-    "spark.hadoop.fs.s3a.aws.credentials.provider": "org.apache.hadoop.fs.s3a.SharedInstanceProfileCredentialsProvider"
+    "spark.hadoop.fs.s3a.aws.credentials.provider": "com.amazonaws.auth.InstanceProfileCredentialsProvider"
     # S3 Specific config (remove if s3 not used)
     # We need it to speed up uploads, and outputcommiter/parquet to have consistent writes due to speculation
     "spark.hadoop.fs.s3a.connection.timeout": "1200000"
     "spark.hadoop.fs.s3a.path.style.access": "true"
     "spark.hadoop.fs.s3a.connection.maximum": "200"
     "spark.hadoop.fs.s3a.fast.upload": "true"
+    # S3A Committer
     "spark.hadoop.fs.s3a.committer.name": "directory"
     "spark.hadoop.fs.s3a.committer.staging.conflict-mode": "append"
-    "spark.hadoop.mapreduce.fileoutputcommitter.algorithm.version": "2"
     "spark.hadoop.mapreduce.outputcommitter.factory.scheme.s3a": "org.apache.hadoop.fs.s3a.commit.S3ACommitterFactory"
   driver:
-    cores: 2
-    coreLimit: "2096m"
-    memory: "4000m"
-    labels:
-      version: 2.4.0
+    cores: 6
+    coreLimit: "6144m"
+    memory: "8000m"
     serviceAccount: spark
   executor:
-    instances: 15
+    instances: 90
     cores: 1
     memory: "8000m"
     memoryOverhead: "2g"
-    labels:
-      version: 2.4.0
   restartPolicy:
     type: Never

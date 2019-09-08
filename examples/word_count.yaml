@@ -23,8 +23,6 @@ spec:
     cores: 0.1
     coreLimit: "200m"
     memory: "512m"
-    labels:
-      version: 2.4.3
     serviceAccount: spark
     volumeMounts:
       - name: persistent-storage
@@ -33,8 +31,6 @@ spec:
     cores: 1
     instances: 1
     memory: "1g"
-    labels:
-      version: 2.4.3
     volumeMounts:
       - name: persistent-storage
         mountPath: /data

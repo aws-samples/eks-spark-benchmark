@@ -1,7 +1,7 @@
 apiVersion: "sparkoperator.k8s.io/v1beta1"
 kind: SparkApplication
 metadata:
-  name: tpcds-benchmark-100g
+  name: tpcds-benchmark-10t
   namespace: default
 spec:
   type: Scala
@@ -13,13 +13,13 @@ spec:
   mode: cluster
   arguments:
   # working directory where data table reside (must exists and have tables directly)
-    - "s3a://spark-k8s-data/TPCDS-TEST-100G"
+    - "s3a://spark-k8s-data/TPCDS-TEST-10T"
   # location to store results
-    - "s3a://spark-k8s-data/TPCDS-TEST-100G-RESULT"
+    - "s3a://spark-k8s-data/TPCDS-TEST-10T-RESULT"
   # Path to kit in the docker image
     - "/opt/tpcds-kit/tools"
   # Scale factor (in GB)
-    - "100"
+    - "10000"
   # Number of iterations
     - "1"
   # Optimize queries
@@ -51,12 +51,12 @@ spec:
     "spark.hadoop.fs.s3a.committer.staging.conflict-mode": "append"
     "spark.hadoop.mapreduce.outputcommitter.factory.scheme.s3a": "org.apache.hadoop.fs.s3a.commit.S3ACommitterFactory"
   driver:
-    cores: 4
-    coreLimit: "4096m"
+    cores: 6
+    coreLimit: "6144m"
     memory: "8000m"
     serviceAccount: spark
   executor:
-    instances: 80
+    instances: 95
     cores: 1
     memory: "8000m"
     memoryOverhead: "2g"

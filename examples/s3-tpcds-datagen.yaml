@@ -1,7 +1,7 @@
 apiVersion: "sparkoperator.k8s.io/v1beta1"
 kind: SparkApplication
 metadata:
-  name: tpcds-datagen-10t
+  name: tpcds-datagen-1g-test
   namespace: default
 spec:
   type: Scala
@@ -17,9 +17,9 @@ spec:
   # Path to kit in the docker image
     - "/opt/tpcds-kit/tools"
   # Scale factor (in GB)
-    - "10000"
+    - "1"
   # Generate data num partitions
-    - "2000"
+    - "100"
   # Create the partitioned fact tables
     - "false"
   # Shuffle to get partitions coalesced into single files.

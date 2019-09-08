@@ -1,7 +1,7 @@
 apiVersion: "sparkoperator.k8s.io/v1beta1"
 kind: SparkApplication
 metadata:
-  name: tpcds-benchmark-10t
+  name: tpcds-benchmark-1g-test
   namespace: default
 spec:
   type: Scala
@@ -14,13 +14,13 @@ spec:
   mode: cluster
   arguments:
   # working directory where data table reside (must exists and have tables directly)
-    - "s3a://spark-k8s-data/TPCDS-TEST-10T"
+    - "s3a://spark-k8s-data/TPCDS-TEST-1G"
   # location to store results
-    - "s3a://spark-k8s-data/TPCDS-TEST-10T-RESULT"
+    - "s3a://spark-k8s-data/TPCDS-TEST-1G-Test-RESULT"
   # Path to kit in the docker image
     - "/opt/tpcds-kit/tools"
   # Scale factor (in GB)
-    - "10000"
+    - "1"
   # Number of iterations
     - "1"
   # Optimize queries
@@ -30,13 +30,9 @@ spec:
   # Logging set to WARN
     - "true"
   sparkConf:
-    # Cloud specific - need to run with speculation to avoid strugglers
-    "spark.speculation": "true"
-    "spark.speculation.multiplier": "3"
-    "spark.speculation.quantile": "0.9"
     # TPCDs Specific
     "spark.sql.broadcastTimeout": "7200"
-    "spark.sql.crossJoin.enabled": "true"
+    "spark.sql.crossJoin.enabled": "false"
     "spark.sql.parquet.mergeSchema": "false"
     "spark.sql.parquet.filterPushdown": "true"
     # S3 credential
@@ -47,9 +43,9 @@ spec:
     "spark.hadoop.fs.s3a.path.style.access": "true"
     "spark.hadoop.fs.s3a.connection.maximum": "200"
     "spark.hadoop.fs.s3a.fast.upload": "true"
+    # S3A Committer
     "spark.hadoop.fs.s3a.committer.name": "directory"
     "spark.hadoop.fs.s3a.committer.staging.conflict-mode": "append"
-    "spark.hadoop.mapreduce.fileoutputcommitter.algorithm.version": "2"
     "spark.hadoop.mapreduce.outputcommitter.factory.scheme.s3a": "org.apache.hadoop.fs.s3a.commit.S3ACommitterFactory"
   driver:
     cores: 6
@@ -59,9 +55,9 @@ spec:
       version: 2.4.5-SNAPSHOT
     serviceAccount: spark
   executor:
-    instances: 95
+    instances: 10
     cores: 1
-    memory: "8000m"
+    memory: "4000m"
     memoryOverhead: "2g"
     labels:
       version: 2.4.5-SNAPSHOT

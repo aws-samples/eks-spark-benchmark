@@ -20,15 +20,11 @@ spec:
     cores: 0.1
     coreLimit: "200m"
     memory: "512m"
-    labels:
-      version: 2.4.5-SNAPSHOT
     serviceAccount: spark
   executor:
     cores: 1
     instances: 10
     memory: "512m"
-    labels:
-      version: 2.4.5-SNAPSHOT
   monitoring:
     exposeDriverMetrics: true
     exposeExecutorMetrics: true

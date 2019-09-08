@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: ephemeral-storage-limit-range
+spec:
+  limits:
+  - default:
+      ephemeral-storage: 5Gi
+    defaultRequest:
+      ephemeral-storage: 3Gi
+    type: Container
