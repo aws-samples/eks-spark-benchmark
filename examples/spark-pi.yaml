@@ -1,21 +1,26 @@
 apiVersion: "sparkoperator.k8s.io/v1beta1"
 kind: SparkApplication
 metadata:
-  name: spark-pi-prometheus
+  name: spark-pi
   namespace: default
 spec:
   type: Scala
   mode: cluster
-  image: "seedjeffwan/spark:2.4.5-SNAPSHOT-prometheus"
+  image: "seedjeffwan/spark:2.4.5-SNAPSHOT"
   imagePullPolicy: Always
   mainClass: org.apache.spark.examples.SparkPi
   # mainApplicationFile: "local:///opt/spark/examples/jars/spark-examples_2.11-2.4.3.jar"
   mainApplicationFile: "local:///opt/spark/examples/target/original-spark-examples_2.11-2.4.5-SNAPSHOT.jar"
   arguments:
-    - "100000"
+    - "1000"
   sparkVersion: "2.4.5-SNAPSHOT"
   restartPolicy:
     type: Never
+  volumes:
+    - name: "test-volume"
+      hostPath:
+        path: "/tmp"
+        type: Directory
   driver:
     cores: 0.1
     coreLimit: "200m"
@@ -23,15 +28,15 @@ spec:
     labels:
       version: 2.4.5-SNAPSHOT
     serviceAccount: spark
+    volumeMounts:
+      - name: "test-volume"
+        mountPath: "/tmp"
   executor:
     cores: 1
-    instances: 10
+    instances: 2
     memory: "512m"
     labels:
       version: 2.4.5-SNAPSHOT
-  monitoring:
-    exposeDriverMetrics: true
-    exposeExecutorMetrics: true
-    prometheus:
-      jmxExporterJar: "/prometheus/jmx_prometheus_javaagent-0.12.0.jar"
-      port: 8090
+    volumeMounts:
+      - name: "test-volume"
+        mountPath: "/tmp"
