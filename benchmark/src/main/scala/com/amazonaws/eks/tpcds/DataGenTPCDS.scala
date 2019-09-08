@@ -38,7 +38,7 @@ object DataGenTPCDS {
       useDoubleForDecimal = false,
       useStringForDate = false)
 
-    println(s"Generating data")
+    println(s"Generating TPCDS data")
 
     tables.genData(
       location = tpcdsDataDir,
@@ -51,5 +51,7 @@ object DataGenTPCDS {
       numPartitions = genPartitions)
 
     println(s"Data generated at $tpcdsDataDir")
+
+    spark.stop()
   }
 }

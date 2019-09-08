@@ -34,12 +34,6 @@ object BenchmarkSparkSQL {
       LogManager.getLogger("org").setLevel(Level.WARN)
     }
 
-    var query_filter : Seq[String] = Seq()
-    if (!filterQueries.isEmpty) {
-      println(s"Running only queries: $filterQueries")
-      query_filter = filterQueries.split(",").toSeq
-    }
-
     val tables = new TPCDSTables(spark.sqlContext,
       dsdgenDir = dsdgenDir,
       scaleFactor = scaleFactor,
@@ -58,6 +52,12 @@ object BenchmarkSparkSQL {
     }
 
     val tpcds = new TPCDS(spark.sqlContext)
+
+    var query_filter : Seq[String] = Seq()
+    if (!filterQueries.isEmpty) {
+      println(s"Running only queries: $filterQueries")
+      query_filter = filterQueries.split(",").toSeq
+    }
 
     val filtered_queries = query_filter match {
       case Seq() => tpcds.tpcds2_4Queries
@@ -102,5 +102,6 @@ object BenchmarkSparkSQL {
     stageMetrics.end()
     stageMetrics.printReport()
     spark.table("PerfStageMetrics").repartition(1).write.format("csv").option("header", "true").save(s"$resultPath/sparkmeasure.csv")
+    spark.stop()
   }
 }

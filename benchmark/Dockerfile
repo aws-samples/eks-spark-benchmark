@@ -16,7 +16,7 @@
 #
 
 # Use the one from spark kubernetes example
-FROM JDK-8 as examples-builder
+FROM amazonlinux:2 as builder
 
 RUN mkdir -p /tmp
 
@@ -27,7 +27,8 @@ RUN yum group install -y "Development Tools" && \
     cd /tmp/tpcds-kit/tools && \
     make OS=LINUX
 
-FROM seedjeffwan/spark:2.4.5-SNAPSHOT
+FROM seedjeffwan/spark:2.4.5-SNAPSHOT-s3
 LABEL maintainer="Jiaxin Shan"
 
-COPY --from=examples-builder /tmp/tpcds-kit/tools /opt/tpcds-kit/tools
+COPY --from=builder /tmp/tpcds-kit/tools /opt/tpcds-kit/tools
+COPY ./target/scala-2.11/*jar ${SPARK_HOME}/examples/jars/

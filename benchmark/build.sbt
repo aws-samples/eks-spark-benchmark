@@ -13,7 +13,9 @@ libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-core" % "2.4.4" % "provided",
   "org.apache.spark" %% "spark-sql" % "2.4.4" % "provided",
   // JSON serialization
-  "org.json4s" %% "json4s-native" % "3.2.10"
+  "org.json4s" %% "json4s-native" % "3.2.10",
+  // scala logging
+  "com.typesafe.scala-logging" %% "scala-logging" % "3.9.0"
 )
 
 // Remove stub classes
