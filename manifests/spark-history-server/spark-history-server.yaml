@@ -72,7 +72,7 @@ spec:
         - name: SPARK_NO_DAEMONIZE
           value: "false"
         - name: SPARK_HISTORY_OPTS
-          value: "-Dspark.history.fs.logDirectory=s3a://spark-eks/spark-history-server/ -Dspark.hadoop.fs.s3a.secret.key=AKIA2CURGJTGXY53Y5HQ -Dspark.hadoop.fs.s3a.access.key=gvbsfEQcowWBiFeRx4Qz8ga5LVDtuWQJpzxdi+aA"
+          value: "-Dspark.history.fs.logDirectory=s3a://spark-k8s-data/spark-history-server/"
         ports:
         - containerPort: 18080
         resources:
