@@ -2,7 +2,7 @@ name := "eks-spark-examples"
 
 version := "1.0"
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.12.10"
 
 javacOptions ++= Seq("-source", "1.8", "-target", "1.8")
 
@@ -13,7 +13,7 @@ libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-core" % "2.4.4" % "provided",
   "org.apache.spark" %% "spark-sql" % "2.4.4" % "provided",
   // JSON serialization
-  "org.json4s" %% "json4s-native" % "3.2.10",
+  "org.json4s" %% "json4s-native" % "3.6.7",
   // scala logging
   "com.typesafe.scala-logging" %% "scala-logging" % "3.9.0"
 )
