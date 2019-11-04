@@ -27,7 +27,7 @@ RUN yum group install -y "Development Tools" && \
     cd /tmp/tpcds-kit/tools && \
     make OS=LINUX
 
-FROM seedjeffwan/spark:2.4.5-SNAPSHOT-s3
+FROM seedjeffwan/spark:2.4.5-SNAPSHOT
 LABEL maintainer="Jiaxin Shan"
 
 COPY --from=builder /tmp/tpcds-kit/tools /opt/tpcds-kit/tools

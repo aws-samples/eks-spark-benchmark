@@ -1,4 +1,4 @@
-apiVersion: "sparkoperator.k8s.io/v1beta1"
+apiVersion: "sparkoperator.k8s.io/v1beta2"
 kind: SparkApplication
 metadata:
   name: tpcds-benchmark-10t
@@ -11,6 +11,10 @@ spec:
   mainClass: com.amazonaws.eks.tpcds.BenchmarkSparkSQL
   mainApplicationFile: local:///opt/spark/examples/jars/eks-spark-examples-assembly-1.0.jar
   mode: cluster
+  volumes:
+    - name: "spark-local-dir-1"
+      hostPath:
+        path: "/tmp/spark-local-dir"
   arguments:
   # working directory where data table reside (must exists and have tables directly)
     - "s3a://spark-k8s-data/TPCDS-TEST-10T"
@@ -50,15 +54,24 @@ spec:
     "spark.hadoop.fs.s3a.committer.name": "directory"
     "spark.hadoop.fs.s3a.committer.staging.conflict-mode": "append"
     "spark.hadoop.mapreduce.outputcommitter.factory.scheme.s3a": "org.apache.hadoop.fs.s3a.commit.S3ACommitterFactory"
+    # History Server
+    "spark.eventLog.enabled": "true"
+    "spark.eventLog.dir": "s3a://spark-k8s-data/spark-history-server/"
   driver:
     cores: 6
     coreLimit: "6144m"
     memory: "8000m"
     serviceAccount: spark
+    volumeMounts:
+      - name: "spark-local-dir-1"
+        mountPath: "/tmp/spark-local-dir"
   executor:
-    instances: 95
+    instances: 45
     cores: 1
     memory: "8000m"
     memoryOverhead: "2g"
+    volumeMounts:
+      - name: "spark-local-dir-1"
+        mountPath: "/tmp/spark-local-dir"
   restartPolicy:
     type: Never
