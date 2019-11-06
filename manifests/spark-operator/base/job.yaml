@@ -1,0 +1,102 @@
+
+# apiVersion: batch/v1
+# kind: Job
+# metadata:
+#   name: sparkoperator-crd-cleanup
+#   namespace: spark-operator
+#   annotations:
+#     "helm.sh/hook": pre-delete
+#     "helm.sh/hook-delete-policy": hook-succeeded
+#   labels:
+#     app.kubernetes.io/name: sparkoperator
+# spec:
+#   template:
+#     spec:
+#       serviceAccountName: sparkoperator
+#       restartPolicy: OnFailure
+#       imagePullSecrets:
+#         []
+#       containers:
+#         - name: delete-sparkapp-crd
+#           image: gcr.io/spark-operator/spark-operator:v1beta2-1.0.1-2.4.4
+#           imagePullPolicy: IfNotPresent
+#           command:
+#             - "/bin/sh"
+#             - "-c"
+#             - "curl -ik \
+#           -X DELETE \
+#           -H \"Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)\" \
+#           -H \"Accept: application/json\" \
+#           -H \"Content-Type: application/json\" \
+#           https://kubernetes.default.svc/apis/apiextensions.k8s.io/v1beta1/customresourcedefinitions/sparkapplications.sparkoperator.k8s.io"
+#         - name: delete-scheduledsparkapp-crd
+#           image: gcr.io/spark-operator/spark-operator:v1beta2-1.0.1-2.4.4
+#           imagePullPolicy: IfNotPresent
+#           command:
+#             - "/bin/sh"
+#             - "-c"
+#             - "curl -ik \
+#           -X DELETE \
+#           -H \"Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)\" \
+#           -H \"Accept: application/json\" \
+#           -H \"Content-Type: application/json\" \
+#           https://kubernetes.default.svc/apis/apiextensions.k8s.io/v1beta1/customresourcedefinitions/scheduledsparkapplications.sparkoperator.k8s.io"
+
+
+---
+# Source: sparkoperator/templates/webhook-cleanup-job.yaml
+
+# apiVersion: batch/v1
+# kind: Job
+# metadata:
+#   name: sparkoperator-webhook-cleanup
+#   namespace: spark-operator
+#   annotations:
+#     "helm.sh/hook": pre-delete, pre-upgrade
+#     "helm.sh/hook-delete-policy": hook-succeeded
+#   labels:
+#     app.kubernetes.io/name: sparkoperator
+# spec:
+#   template:
+#     spec:
+#       serviceAccountName: sparkoperator
+#       restartPolicy: OnFailure
+#       imagePullSecrets:
+#         []
+#       containers:
+#       - name: main
+#         image: gcr.io/spark-operator/spark-operator:v1beta2-1.0.1-2.4.4
+#         imagePullPolicy: IfNotPresent
+#         command:
+#         - "/bin/sh"
+#         - "-c"
+#         - "curl -ik \
+#           -X DELETE \
+#           -H \"Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)\" \
+#           -H \"Accept: application/json\" \
+#           -H \"Content-Type: application/json\" \
+#           https://kubernetes.default.svc/api/v1/namespaces/spark-operator/secrets/spark-webhook-certs"
+
+
+---
+# Source: sparkoperator/templates/webhook-init-job.yaml
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: sparkoperator-init
+  namespace: spark-operator
+  labels:
+    app.kubernetes.io/name: sparkoperator
+spec:
+  template:
+    spec:
+      serviceAccountName: sparkoperator
+      restartPolicy: OnFailure
+      imagePullSecrets:
+        []
+      containers:
+      - name: main
+        image: gcr.io/spark-operator/spark-operator:v1beta2-1.0.1-2.4.4
+        imagePullPolicy: IfNotPresent
+        command: ["/usr/bin/gencerts.sh", "-n", "spark-operator", "-s", "webhook", "-p"]

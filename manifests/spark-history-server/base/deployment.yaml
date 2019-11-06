@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spark-history-server
+  labels:
+    app.kubernetes.io/name: spark-history-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: spark-history-server
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: spark-history-server
+    spec:
+      serviceAccountName: spark-history-server
+      containers:
+      - name: spark-history-server
+        image: "seedjeffwan/spark"
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: SPARK_NO_DAEMONIZE
+          value: "false"
+        - name: SPARK_HISTORY_OPTS
+          value: "-Dspark.history.fs.logDirectory=s3a://spark-k8s-data/spark-history-server/"
+        ports:
+        - containerPort: 18080
+        resources:
+          {}
+        command:
+        - /opt/spark/sbin/start-history-server.sh
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 500m
+            memory: 512Mi
