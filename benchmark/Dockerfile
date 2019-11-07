@@ -14,11 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+ARG SPARK_BASE_IMAGE=seedjeffwan/spark:2.4.5-SNAPSHOT
 
-# Use the one from spark kubernetes example
 FROM amazonlinux:2 as builder
-
-RUN mkdir -p /tmp
 
 ENV TPCDS_KIT_VERSION "master"
 
@@ -27,8 +25,8 @@ RUN yum group install -y "Development Tools" && \
     cd /tmp/tpcds-kit/tools && \
     make OS=LINUX
 
-FROM seedjeffwan/spark:2.4.5-SNAPSHOT
+FROM ${SPARK_BASE_IMAGE}
 LABEL maintainer="Jiaxin Shan"
 
 COPY --from=builder /tmp/tpcds-kit/tools /opt/tpcds-kit/tools
-COPY ./target/scala-2.11/*jar ${SPARK_HOME}/examples/jars/
+COPY ./target/scala-2.12/*jar ${SPARK_HOME}/examples/jars/

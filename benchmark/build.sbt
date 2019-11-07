@@ -1,4 +1,4 @@
-name := "eks-spark-examples"
+name := "eks-spark-benchmark"
 
 version := "1.0"
 
