@@ -16,11 +16,11 @@ spec:
   restartPolicy:
     type: Never
   sparkConf:
-    # S3 Basic Authentication - not recommended
+    # Option 1: S3 Basic Authentication - not recommended
     # "spark.hadoop.fs.s3a.aws.credentials.provider": "org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider"
     # "spark.hadoop.fs.s3a.secret.key": "<your_aws_secret_key>"
     # "spark.hadoop.fs.s3a.access.key" : "<your_aws_access_key_id>"
-    # S3 Suggest to use this way
+    # Option 2: S3 Suggest to use this way
     "spark.hadoop.fs.s3a.aws.credentials.provider": "com.amazonaws.auth.InstanceProfileCredentialsProvider"
   driver:
     cores: 1

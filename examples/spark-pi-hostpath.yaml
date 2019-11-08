@@ -12,8 +12,6 @@ spec:
   mainApplicationFile: "local:///opt/spark/examples/jars/spark-examples_2.11-2.4.5-SNAPSHOT.jar"
   arguments:
     - "10000"
-#  sparkConf:
-#    "spark.local.dir": "/tmp/mnt-1,/tmp/mnt-2,/tmp/mnt-3"
   sparkVersion: "2.4.5-SNAPSHOT"
   restartPolicy:
     type: Never
@@ -56,7 +54,6 @@ spec:
         mountPath: "/tmp/mnt-3"
 
 
-# volumeMounts are not there.
 # /opt/spark/bin/spark-submit
 # --class org.apache.spark.examples.SparkPi
 # --master k8s://https://10.100.0.1:443

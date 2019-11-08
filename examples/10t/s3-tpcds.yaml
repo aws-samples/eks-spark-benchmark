@@ -51,23 +51,23 @@ spec:
     "spark.hadoop.fs.s3a.connection.maximum": "200"
     "spark.hadoop.fs.s3a.fast.upload": "true"
     # S3A Committer
+    "spark.hadoop.mapreduce.outputcommitter.factory.scheme.s3a": "org.apache.hadoop.fs.s3a.commit.S3ACommitterFactory"
     "spark.hadoop.fs.s3a.committer.name": "directory"
     "spark.hadoop.fs.s3a.committer.staging.conflict-mode": "append"
-    "spark.hadoop.mapreduce.outputcommitter.factory.scheme.s3a": "org.apache.hadoop.fs.s3a.commit.S3ACommitterFactory"
     # History Server
-    "spark.eventLog.enabled": "true"
-    "spark.eventLog.dir": "s3a://spark-k8s-data/spark-history-server/"
+#    "spark.eventLog.enabled": "true"
+#    "spark.eventLog.dir": "s3a://spark-k8s-data/spark-history-server/"
   driver:
-    cores: 6
-    coreLimit: "6144m"
-    memory: "8000m"
+    cores: 4
+    coreLimit: "4096m"
+    memory: "6000m"
     serviceAccount: spark
     volumeMounts:
       - name: "spark-local-dir-1"
         mountPath: "/tmp/spark-local-dir"
   executor:
     instances: 45
-    cores: 1
+    cores: 2
     memory: "8000m"
     memoryOverhead: "2g"
     volumeMounts:

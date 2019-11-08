@@ -36,8 +36,8 @@ Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
 19/09/08 01:44:59 INFO SparkContext: Submitted application: TPCDS DataGen 10000 GB
 19/09/08 01:44:59 INFO SecurityManager: Changing view acls to: root
 19/09/08 01:44:59 INFO SecurityManager: Changing modify acls to: root
-19/09/08 01:44:59 INFO SecurityManager: Changing view acls groups to: 
-19/09/08 01:44:59 INFO SecurityManager: Changing modify acls groups to: 
+19/09/08 01:44:59 INFO SecurityManager: Changing view acls groups to:
+19/09/08 01:44:59 INFO SecurityManager: Changing modify acls groups to:
 19/09/08 01:44:59 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(root); groups with view permissions: Set(); users  with modify permissions: Set(root); groups with modify permissions: Set()
 19/09/08 01:44:59 INFO Utils: Successfully started service 'sparkDriver' on port 7078.
 19/09/08 01:44:59 INFO SparkEnv: Registering MapOutputTracker

@@ -34,8 +34,8 @@ Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
 19/09/08 18:48:08 INFO SparkContext: Submitted application: TPCDS SQL Benchmark 1000 GB
 19/09/08 18:48:08 INFO SecurityManager: Changing view acls to: root
 19/09/08 18:48:08 INFO SecurityManager: Changing modify acls to: root
-19/09/08 18:48:08 INFO SecurityManager: Changing view acls groups to: 
-19/09/08 18:48:08 INFO SecurityManager: Changing modify acls groups to: 
+19/09/08 18:48:08 INFO SecurityManager: Changing view acls groups to:
+19/09/08 18:48:08 INFO SecurityManager: Changing modify acls groups to:
 19/09/08 18:48:08 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(root); groups with view permissions: Set(); users  with modify permissions: Set(root); groups with modify permissions: Set()
 19/09/08 18:48:09 INFO Utils: Successfully started service 'sparkDriver' on port 7078.
 19/09/08 18:48:09 INFO SparkEnv: Registering MapOutputTracker
@@ -270,7 +270,7 @@ Table web_page exists.
 Couldn't read table ssci and its not defined as a Benchmark.Table.
 Couldn't read table csci and its not defined as a Benchmark.Table.
 Running execution q1-v2.4 iteration: 1, StandardRun=true
-19/09/08 18:50:04 INFO Query: 
+19/09/08 18:50:04 INFO Query:
 == Query: q1-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -305,7 +305,7 @@ GlobalLimit 100
                   +- Relation[c_customer_sk#412,c_customer_id#413,c_current_cdemo_sk#414,c_current_hdemo_sk#415,c_current_addr_sk#416,c_first_shipto_date_sk#417,c_first_sales_date_sk#418,c_salutation#419,c_first_name#420,c_last_name#421,c_preferred_cust_flag#422,c_birth_day#423,c_birth_month#424,c_birth_year#425,c_birth_country#426,c_login#427,c_email_address#428,c_last_review_date#429] parquet
 
      : benchmark
-19/09/08 18:50:04 INFO Query: 
+19/09/08 18:50:04 INFO Query:
 == Query: q1-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -342,7 +342,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 34.231924574s
 Running execution q2-v2.4 iteration: 1, StandardRun=true
-19/09/08 18:50:40 INFO Query: 
+19/09/08 18:50:40 INFO Query:
 == Query: q2-v2.4 ==
 Sort [d_week_seq1#8781 ASC NULLS FIRST], true
 +- Project [d_week_seq1#8781, round(CheckOverflow((promote_precision(cast(sun_sales1#8782 as decimal(17,2))) / promote_precision(cast(sun_sales2#8790 as decimal(17,2)))), DecimalType(37,20)), 2) AS round((sun_sales1 / sun_sales2), 2)#8871, round(CheckOverflow((promote_precision(cast(mon_sales1#8783 as decimal(17,2))) / promote_precision(cast(mon_sales2#8791 as decimal(17,2)))), DecimalType(37,20)), 2) AS round((mon_sales1 / mon_sales2), 2)#8872, round(CheckOverflow((promote_precision(cast(tue_sales1#8784 as decimal(17,2))) / promote_precision(cast(tue_sales2#8792 as decimal(17,2)))), DecimalType(37,20)), 2) AS round((tue_sales1 / tue_sales2), 2)#8873, round(CheckOverflow((promote_precision(cast(wed_sales1#8785 as decimal(17,2))) / promote_precision(cast(wed_sales2#8793 as decimal(17,2)))), DecimalType(37,20)), 2) AS round((wed_sales1 / wed_sales2), 2)#8874, round(CheckOverflow((promote_precision(cast(thu_sales1#8786 as decimal(17,2))) / promote_precision(cast(thu_sales2#8794 as decimal(17,2)))), DecimalType(37,20)), 2) AS round((thu_sales1 / thu_sales2), 2)#8875, round(CheckOverflow((promote_precision(cast(fri_sales1#8787 as decimal(17,2))) / promote_precision(cast(fri_sales2#8795 as decimal(17,2)))), DecimalType(37,20)), 2) AS round((fri_sales1 / fri_sales2), 2)#8876, round(CheckOverflow((promote_precision(cast(sat_sales1#8788 as decimal(17,2))) / promote_precision(cast(sat_sales2#8796 as decimal(17,2)))), DecimalType(37,20)), 2) AS round((sat_sales1 / sat_sales2), 2)#8877]
@@ -394,7 +394,7 @@ Sort [d_week_seq1#8781 ASC NULLS FIRST], true
                         +- Relation[d_date_sk#8843,d_date_id#8844,d_date#8845,d_month_seq#8846,d_week_seq#8847,d_quarter_seq#8848,d_year#8849,d_dow#8850,d_moy#8851,d_dom#8852,d_qoy#8853,d_fy_year#8854,d_fy_quarter_seq#8855,d_fy_week_seq#8856,d_day_name#8857,d_quarter_name#8858,d_holiday#8859,d_weekend#8860,d_following_holiday#8861,d_first_dom#8862,d_last_dom#8863,d_same_day_ly#8864,d_same_day_lq#8865,d_current_day#8866,... 4 more fields] parquet
 
      : benchmark
-19/09/08 18:50:40 INFO Query: 
+19/09/08 18:50:40 INFO Query:
 == Query: q2-v2.4 ==
 Sort [d_week_seq1#8886 ASC NULLS FIRST], true
 +- Project [d_week_seq1#8886, round(CheckOverflow((promote_precision(cast(sun_sales1#8887 as decimal(17,2))) / promote_precision(cast(sun_sales2#8895 as decimal(17,2)))), DecimalType(37,20)), 2) AS round((sun_sales1 / sun_sales2), 2)#8976, round(CheckOverflow((promote_precision(cast(mon_sales1#8888 as decimal(17,2))) / promote_precision(cast(mon_sales2#8896 as decimal(17,2)))), DecimalType(37,20)), 2) AS round((mon_sales1 / mon_sales2), 2)#8977, round(CheckOverflow((promote_precision(cast(tue_sales1#8889 as decimal(17,2))) / promote_precision(cast(tue_sales2#8897 as decimal(17,2)))), DecimalType(37,20)), 2) AS round((tue_sales1 / tue_sales2), 2)#8978, round(CheckOverflow((promote_precision(cast(wed_sales1#8890 as decimal(17,2))) / promote_precision(cast(wed_sales2#8898 as decimal(17,2)))), DecimalType(37,20)), 2) AS round((wed_sales1 / wed_sales2), 2)#8979, round(CheckOverflow((promote_precision(cast(thu_sales1#8891 as decimal(17,2))) / promote_precision(cast(thu_sales2#8899 as decimal(17,2)))), DecimalType(37,20)), 2) AS round((thu_sales1 / thu_sales2), 2)#8980, round(CheckOverflow((promote_precision(cast(fri_sales1#8892 as decimal(17,2))) / promote_precision(cast(fri_sales2#8900 as decimal(17,2)))), DecimalType(37,20)), 2) AS round((fri_sales1 / fri_sales2), 2)#8981, round(CheckOverflow((promote_precision(cast(sat_sales1#8893 as decimal(17,2))) / promote_precision(cast(sat_sales2#8901 as decimal(17,2)))), DecimalType(37,20)), 2) AS round((sat_sales1 / sat_sales2), 2)#8982]
@@ -448,7 +448,7 @@ Sort [d_week_seq1#8886 ASC NULLS FIRST], true
       running Thread[benchmark runner,5,main]
 Execution time: 22.007735606999997s
 Running execution q3-v2.4 iteration: 1, StandardRun=true
-19/09/08 18:51:03 INFO Query: 
+19/09/08 18:51:03 INFO Query:
 == Query: q3-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -466,7 +466,7 @@ GlobalLimit 100
                   +- Relation[i_item_sk#564,i_item_id#565,i_rec_start_date#566,i_rec_end_date#567,i_item_desc#568,i_current_price#569,i_wholesale_cost#570,i_brand_id#571,i_brand#572,i_class_id#573,i_class#574,i_category_id#575,i_category#576,i_manufact_id#577,i_manufact#578,i_size#579,i_formulation#580,i_color#581,i_units#582,i_container#583,i_manager_id#584,i_product_name#585] parquet
 
      : benchmark
-19/09/08 18:51:03 INFO Query: 
+19/09/08 18:51:03 INFO Query:
 == Query: q3-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -486,7 +486,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 12.847368397s
 Running execution q4-v2.4 iteration: 1, StandardRun=true
-19/09/08 18:51:19 INFO Query: 
+19/09/08 18:51:19 INFO Query:
 == Query: q4-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -704,7 +704,7 @@ GlobalLimit 100
                                     +- Relation[d_date_sk#492,d_date_id#493,d_date#494,d_month_seq#495,d_week_seq#496,d_quarter_seq#497,d_year#498,d_dow#499,d_moy#500,d_dom#501,d_qoy#502,d_fy_year#503,d_fy_quarter_seq#504,d_fy_week_seq#505,d_day_name#506,d_quarter_name#507,d_holiday#508,d_weekend#509,d_following_holiday#510,d_first_dom#511,d_last_dom#512,d_same_day_ly#513,d_same_day_lq#514,d_current_day#515,... 4 more fields] parquet
 
      : benchmark
-19/09/08 18:51:20 INFO Query: 
+19/09/08 18:51:20 INFO Query:
 == Query: q4-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -924,7 +924,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 268.65036112999996s
 Running execution q5-v2.4 iteration: 1, StandardRun=true
-19/09/08 18:55:52 INFO Query: 
+19/09/08 18:55:52 INFO Query:
 == Query: q5-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -994,7 +994,7 @@ GlobalLimit 100
                                        +- Relation[web_site_sk#798,web_site_id#799,web_rec_start_date#800,web_rec_end_date#801,web_name#802,web_open_date_sk#803,web_close_date_sk#804,web_class#805,web_manager#806,web_mkt_id#807,web_mkt_class#808,web_mkt_desc#809,web_market_manager#810,web_company_id#811,web_company_name#812,web_street_number#813,web_street_name#814,web_street_type#815,web_suite_number#816,web_city#817,web_county#818,web_state#819,web_zip#820,web_country#821,... 2 more fields] parquet
 
      : benchmark
-19/09/08 18:55:52 INFO Query: 
+19/09/08 18:55:52 INFO Query:
 == Query: q5-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -1066,7 +1066,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 63.173913617s
 Running execution q6-v2.4 iteration: 1, StandardRun=true
-19/09/08 18:56:58 INFO Query: 
+19/09/08 18:56:58 INFO Query:
 == Query: q6-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -1107,7 +1107,7 @@ GlobalLimit 100
                               +- Relation[i_item_sk#564,i_item_id#565,i_rec_start_date#566,i_rec_end_date#567,i_item_desc#568,i_current_price#569,i_wholesale_cost#570,i_brand_id#571,i_brand#572,i_class_id#573,i_class#574,i_category_id#575,i_category#576,i_manufact_id#577,i_manufact#578,i_size#579,i_formulation#580,i_color#581,i_units#582,i_container#583,i_manager_id#584,i_product_name#585] parquet
 
      : benchmark
-19/09/08 18:56:58 INFO Query: 
+19/09/08 18:56:58 INFO Query:
 == Query: q6-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -1150,7 +1150,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 55.365758087s
 Running execution q7-v2.4 iteration: 1, StandardRun=true
-19/09/08 18:57:54 INFO Query: 
+19/09/08 18:57:54 INFO Query:
 == Query: q7-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -1174,7 +1174,7 @@ GlobalLimit 100
                      +- Relation[p_promo_sk#608,p_promo_id#609,p_start_date_sk#610,p_end_date_sk#611,p_item_sk#612,p_cost#613,p_response_target#614,p_promo_name#615,p_channel_dmail#616,p_channel_email#617,p_channel_catalog#618,p_channel_tv#619,p_channel_radio#620,p_channel_press#621,p_channel_event#622,p_channel_demo#623,p_channel_details#624,p_purpose#625,p_discount_active#626] parquet
 
      : benchmark
-19/09/08 18:57:54 INFO Query: 
+19/09/08 18:57:54 INFO Query:
 == Query: q7-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -1200,7 +1200,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 19.272139716s
 Running execution q8-v2.4 iteration: 1, StandardRun=true
-19/09/08 18:58:15 INFO Query: 
+19/09/08 18:58:15 INFO Query:
 == Query: q8-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -1238,7 +1238,7 @@ GlobalLimit 100
                                                       +- Relation[c_customer_sk#412,c_customer_id#413,c_current_cdemo_sk#414,c_current_hdemo_sk#415,c_current_addr_sk#416,c_first_shipto_date_sk#417,c_first_sales_date_sk#418,c_salutation#419,c_first_name#420,c_last_name#421,c_preferred_cust_flag#422,c_birth_day#423,c_birth_month#424,c_birth_year#425,c_birth_country#426,c_login#427,c_email_address#428,c_last_review_date#429] parquet
 
      : benchmark
-19/09/08 18:58:15 INFO Query: 
+19/09/08 18:58:15 INFO Query:
 == Query: q8-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -1278,7 +1278,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 14.825732599s
 Running execution q9-v2.4 iteration: 1, StandardRun=true
-19/09/08 18:58:32 INFO Query: 
+19/09/08 18:58:32 INFO Query:
 == Query: q9-v2.4 ==
 Project [CASE WHEN (scalar-subquery#10702 [] > cast(74129 as bigint)) THEN scalar-subquery#10703 [] ELSE scalar-subquery#10704 [] END AS bucket1#10705, CASE WHEN (scalar-subquery#10706 [] > cast(122840 as bigint)) THEN scalar-subquery#10707 [] ELSE scalar-subquery#10708 [] END AS bucket2#10709, CASE WHEN (scalar-subquery#10710 [] > cast(56580 as bigint)) THEN scalar-subquery#10711 [] ELSE scalar-subquery#10712 [] END AS bucket3#10713, CASE WHEN (scalar-subquery#10714 [] > cast(10097 as bigint)) THEN scalar-subquery#10715 [] ELSE scalar-subquery#10716 [] END AS bucket4#10717, CASE WHEN (scalar-subquery#10718 [] > cast(165306 as bigint)) THEN scalar-subquery#10719 [] ELSE scalar-subquery#10720 [] END AS bucket5#10721]
 :  :- Aggregate [count(1) AS count(1)#10723L]
@@ -1346,7 +1346,7 @@ Project [CASE WHEN (scalar-subquery#10702 [] > cast(74129 as bigint)) THEN scala
       +- Relation[r_reason_sk#646,r_reason_id#647,r_reason_desc#648] parquet
 
      : benchmark
-19/09/08 18:58:32 INFO Query: 
+19/09/08 18:58:32 INFO Query:
 == Query: q9-v2.4 ==
 Project [CASE WHEN (scalar-subquery#10757 [] > cast(74129 as bigint)) THEN scalar-subquery#10758 [] ELSE scalar-subquery#10759 [] END AS bucket1#10760, CASE WHEN (scalar-subquery#10761 [] > cast(122840 as bigint)) THEN scalar-subquery#10762 [] ELSE scalar-subquery#10763 [] END AS bucket2#10764, CASE WHEN (scalar-subquery#10765 [] > cast(56580 as bigint)) THEN scalar-subquery#10766 [] ELSE scalar-subquery#10767 [] END AS bucket3#10768, CASE WHEN (scalar-subquery#10769 [] > cast(10097 as bigint)) THEN scalar-subquery#10770 [] ELSE scalar-subquery#10771 [] END AS bucket4#10772, CASE WHEN (scalar-subquery#10773 [] > cast(165306 as bigint)) THEN scalar-subquery#10774 [] ELSE scalar-subquery#10775 [] END AS bucket5#10776]
 :  :- Aggregate [count(1) AS count(1)#10778L]
@@ -1416,7 +1416,7 @@ Project [CASE WHEN (scalar-subquery#10757 [] > cast(74129 as bigint)) THEN scala
       running Thread[benchmark runner,5,main]
 Execution time: 64.590482742s
 Running execution q10-v2.4 iteration: 1, StandardRun=true
-19/09/08 18:59:38 INFO Query: 
+19/09/08 18:59:38 INFO Query:
 == Query: q10-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -1456,7 +1456,7 @@ GlobalLimit 100
                   +- Relation[cd_demo_sk#474,cd_gender#475,cd_marital_status#476,cd_education_status#477,cd_purchase_estimate#478,cd_credit_rating#479,cd_dep_count#480,cd_dep_employed_count#481,cd_dep_college_count#482] parquet
 
      : benchmark
-19/09/08 18:59:38 INFO Query: 
+19/09/08 18:59:38 INFO Query:
 == Query: q10-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -1498,7 +1498,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 21.724999276s
 Running execution q11-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:00:02 INFO Query: 
+19/09/08 19:00:02 INFO Query:
 == Query: q11-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -1602,7 +1602,7 @@ GlobalLimit 100
                                     +- Relation[d_date_sk#492,d_date_id#493,d_date#494,d_month_seq#495,d_week_seq#496,d_quarter_seq#497,d_year#498,d_dow#499,d_moy#500,d_dom#501,d_qoy#502,d_fy_year#503,d_fy_quarter_seq#504,d_fy_week_seq#505,d_day_name#506,d_quarter_name#507,d_holiday#508,d_weekend#509,d_following_holiday#510,d_first_dom#511,d_last_dom#512,d_same_day_ly#513,d_same_day_lq#514,d_current_day#515,... 4 more fields] parquet
 
      : benchmark
-19/09/08 19:00:02 INFO Query: 
+19/09/08 19:00:02 INFO Query:
 == Query: q11-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -1708,7 +1708,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 86.635199495s
 Running execution q12-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:01:31 INFO Query: 
+19/09/08 19:01:31 INFO Query:
 == Query: q12-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -1728,7 +1728,7 @@ GlobalLimit 100
                            +- Relation[d_date_sk#492,d_date_id#493,d_date#494,d_month_seq#495,d_week_seq#496,d_quarter_seq#497,d_year#498,d_dow#499,d_moy#500,d_dom#501,d_qoy#502,d_fy_year#503,d_fy_quarter_seq#504,d_fy_week_seq#505,d_day_name#506,d_quarter_name#507,d_holiday#508,d_weekend#509,d_following_holiday#510,d_first_dom#511,d_last_dom#512,d_same_day_ly#513,d_same_day_lq#514,d_current_day#515,... 4 more fields] parquet
 
      : benchmark
-19/09/08 19:01:31 INFO Query: 
+19/09/08 19:01:31 INFO Query:
 == Query: q12-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -1750,7 +1750,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 6.817133044s
 Running execution q13-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:01:39 INFO Query: 
+19/09/08 19:01:39 INFO Query:
 == Query: q13-v2.4 ==
 Aggregate [avg(cast(ss_quantity#140 as bigint)) AS avg(ss_quantity)#11593, avg(ss_ext_sales_price#145) AS avg(ss_ext_sales_price)#11594, avg(ss_ext_wholesale_cost#146) AS avg(ss_ext_wholesale_cost)#11595, sum(ss_ext_wholesale_cost#146) AS sum(ss_ext_wholesale_cost)#11596]
 +- Filter ((((s_store_sk#664 = ss_store_sk#137) && (ss_sold_date_sk#130 = d_date_sk#492)) && (d_year#498 = 2001)) && (((((((ss_hdemo_sk#135 = hd_demo_sk#548) && (cd_demo_sk#474 = ss_cdemo_sk#134)) && (cd_marital_status#476 = M)) && (((cd_education_status#477 = Advanced Degree) && ((cast(ss_sales_price#143 as decimal(7,2)) >= cast(100.00 as decimal(7,2))) && (cast(ss_sales_price#143 as decimal(7,2)) <= cast(150.00 as decimal(7,2))))) && (hd_dep_count#551 = 3))) || ((((ss_hdemo_sk#135 = hd_demo_sk#548) && (cd_demo_sk#474 = ss_cdemo_sk#134)) && (cd_marital_status#476 = S)) && (((cd_education_status#477 = College) && ((cast(ss_sales_price#143 as decimal(7,2)) >= cast(50.00 as decimal(7,2))) && (cast(ss_sales_price#143 as decimal(7,2)) <= cast(100.00 as decimal(7,2))))) && (hd_dep_count#551 = 1)))) || ((((ss_hdemo_sk#135 = hd_demo_sk#548) && (cd_demo_sk#474 = ss_cdemo_sk#134)) && (cd_marital_status#476 = W)) && (((cd_education_status#477 = 2 yr Degree) && ((cast(ss_sales_price#143 as decimal(7,2)) >= cast(150.00 as decimal(7,2))) && (cast(ss_sales_price#143 as decimal(7,2)) <= cast(200.00 as decimal(7,2))))) && (hd_dep_count#551 = 1)))) && (((((ss_addr_sk#136 = ca_address_sk#448) && (ca_country#458 = United States)) && (ca_state#456 IN (TX,OH,TX) && ((cast(ss_net_profit#152 as decimal(7,2)) >= cast(cast(100 as decimal(3,0)) as decimal(7,2))) && (cast(ss_net_profit#152 as decimal(7,2)) <= cast(cast(200 as decimal(3,0)) as decimal(7,2)))))) || (((ss_addr_sk#136 = ca_address_sk#448) && (ca_country#458 = United States)) && (ca_state#456 IN (OR,NM,KY) && ((cast(ss_net_profit#152 as decimal(7,2)) >= cast(cast(150 as decimal(3,0)) as decimal(7,2))) && (cast(ss_net_profit#152 as decimal(7,2)) <= cast(cast(300 as decimal(3,0)) as decimal(7,2))))))) || (((ss_addr_sk#136 = ca_address_sk#448) && (ca_country#458 = United States)) && (ca_state#456 IN (VA,TX,MS) && ((cast(ss_net_profit#152 as decimal(7,2)) >= cast(cast(50 as decimal(2,0)) as decimal(7,2))) && (cast(ss_net_profit#152 as decimal(7,2)) <= cast(cast(250 as decimal(3,0)) as decimal(7,2)))))))))
@@ -1773,7 +1773,7 @@ Aggregate [avg(cast(ss_quantity#140 as bigint)) AS avg(ss_quantity)#11593, avg(s
          +- Relation[d_date_sk#492,d_date_id#493,d_date#494,d_month_seq#495,d_week_seq#496,d_quarter_seq#497,d_year#498,d_dow#499,d_moy#500,d_dom#501,d_qoy#502,d_fy_year#503,d_fy_quarter_seq#504,d_fy_week_seq#505,d_day_name#506,d_quarter_name#507,d_holiday#508,d_weekend#509,d_following_holiday#510,d_first_dom#511,d_last_dom#512,d_same_day_ly#513,d_same_day_lq#514,d_current_day#515,... 4 more fields] parquet
 
      : benchmark
-19/09/08 19:01:39 INFO Query: 
+19/09/08 19:01:39 INFO Query:
 == Query: q13-v2.4 ==
 Aggregate [avg(cast(ss_quantity#140 as bigint)) AS avg(ss_quantity)#11605, avg(ss_ext_sales_price#145) AS avg(ss_ext_sales_price)#11606, avg(ss_ext_wholesale_cost#146) AS avg(ss_ext_wholesale_cost)#11607, sum(ss_ext_wholesale_cost#146) AS sum(ss_ext_wholesale_cost)#11608]
 +- Filter ((((s_store_sk#664 = ss_store_sk#137) && (ss_sold_date_sk#130 = d_date_sk#492)) && (d_year#498 = 2001)) && (((((((ss_hdemo_sk#135 = hd_demo_sk#548) && (cd_demo_sk#474 = ss_cdemo_sk#134)) && (cd_marital_status#476 = M)) && (((cd_education_status#477 = Advanced Degree) && ((cast(ss_sales_price#143 as decimal(7,2)) >= cast(100.00 as decimal(7,2))) && (cast(ss_sales_price#143 as decimal(7,2)) <= cast(150.00 as decimal(7,2))))) && (hd_dep_count#551 = 3))) || ((((ss_hdemo_sk#135 = hd_demo_sk#548) && (cd_demo_sk#474 = ss_cdemo_sk#134)) && (cd_marital_status#476 = S)) && (((cd_education_status#477 = College) && ((cast(ss_sales_price#143 as decimal(7,2)) >= cast(50.00 as decimal(7,2))) && (cast(ss_sales_price#143 as decimal(7,2)) <= cast(100.00 as decimal(7,2))))) && (hd_dep_count#551 = 1)))) || ((((ss_hdemo_sk#135 = hd_demo_sk#548) && (cd_demo_sk#474 = ss_cdemo_sk#134)) && (cd_marital_status#476 = W)) && (((cd_education_status#477 = 2 yr Degree) && ((cast(ss_sales_price#143 as decimal(7,2)) >= cast(150.00 as decimal(7,2))) && (cast(ss_sales_price#143 as decimal(7,2)) <= cast(200.00 as decimal(7,2))))) && (hd_dep_count#551 = 1)))) && (((((ss_addr_sk#136 = ca_address_sk#448) && (ca_country#458 = United States)) && (ca_state#456 IN (TX,OH,TX) && ((cast(ss_net_profit#152 as decimal(7,2)) >= cast(cast(100 as decimal(3,0)) as decimal(7,2))) && (cast(ss_net_profit#152 as decimal(7,2)) <= cast(cast(200 as decimal(3,0)) as decimal(7,2)))))) || (((ss_addr_sk#136 = ca_address_sk#448) && (ca_country#458 = United States)) && (ca_state#456 IN (OR,NM,KY) && ((cast(ss_net_profit#152 as decimal(7,2)) >= cast(cast(150 as decimal(3,0)) as decimal(7,2))) && (cast(ss_net_profit#152 as decimal(7,2)) <= cast(cast(300 as decimal(3,0)) as decimal(7,2))))))) || (((ss_addr_sk#136 = ca_address_sk#448) && (ca_country#458 = United States)) && (ca_state#456 IN (VA,TX,MS) && ((cast(ss_net_profit#152 as decimal(7,2)) >= cast(cast(50 as decimal(2,0)) as decimal(7,2))) && (cast(ss_net_profit#152 as decimal(7,2)) <= cast(cast(250 as decimal(3,0)) as decimal(7,2)))))))))
@@ -1798,7 +1798,7 @@ Aggregate [avg(cast(ss_quantity#140 as bigint)) AS avg(ss_quantity)#11605, avg(s
       running Thread[benchmark runner,5,main]
 Execution time: 69.940721246s
 Running execution q14a-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:02:53 INFO Query: 
+19/09/08 19:02:53 INFO Query:
 == Query: q14a-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -2066,7 +2066,7 @@ GlobalLimit 100
                                        +- Relation[d_date_sk#492,d_date_id#493,d_date#494,d_month_seq#495,d_week_seq#496,d_quarter_seq#497,d_year#498,d_dow#499,d_moy#500,d_dom#501,d_qoy#502,d_fy_year#503,d_fy_quarter_seq#504,d_fy_week_seq#505,d_day_name#506,d_quarter_name#507,d_holiday#508,d_weekend#509,d_following_holiday#510,d_first_dom#511,d_last_dom#512,d_same_day_ly#513,d_same_day_lq#514,d_current_day#515,... 4 more fields] parquet
 
      : benchmark
-19/09/08 19:02:53 INFO Query: 
+19/09/08 19:02:53 INFO Query:
 == Query: q14a-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -2336,7 +2336,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 258.786406474s
 Running execution q14b-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:07:19 INFO Query: 
+19/09/08 19:07:19 INFO Query:
 == Query: q14b-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -2526,7 +2526,7 @@ GlobalLimit 100
                                     +- Relation[d_date_sk#492,d_date_id#493,d_date#494,d_month_seq#495,d_week_seq#496,d_quarter_seq#497,d_year#498,d_dow#499,d_moy#500,d_dom#501,d_qoy#502,d_fy_year#503,d_fy_quarter_seq#504,d_fy_week_seq#505,d_day_name#506,d_quarter_name#507,d_holiday#508,d_weekend#509,d_following_holiday#510,d_first_dom#511,d_last_dom#512,d_same_day_ly#513,d_same_day_lq#514,d_current_day#515,... 4 more fields] parquet
 
      : benchmark
-19/09/08 19:07:19 INFO Query: 
+19/09/08 19:07:19 INFO Query:
 == Query: q14b-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -2718,7 +2718,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 220.800127259s
 Running execution q15-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:11:03 INFO Query: 
+19/09/08 19:11:03 INFO Query:
 == Query: q15-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -2739,7 +2739,7 @@ GlobalLimit 100
                      +- Relation[d_date_sk#492,d_date_id#493,d_date#494,d_month_seq#495,d_week_seq#496,d_quarter_seq#497,d_year#498,d_dow#499,d_moy#500,d_dom#501,d_qoy#502,d_fy_year#503,d_fy_quarter_seq#504,d_fy_week_seq#505,d_day_name#506,d_quarter_name#507,d_holiday#508,d_weekend#509,d_following_holiday#510,d_first_dom#511,d_last_dom#512,d_same_day_ly#513,d_same_day_lq#514,d_current_day#515,... 4 more fields] parquet
 
      : benchmark
-19/09/08 19:11:03 INFO Query: 
+19/09/08 19:11:03 INFO Query:
 == Query: q15-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -2762,7 +2762,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 42.183746129s
 Running execution q16-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:11:47 INFO Query: 
+19/09/08 19:11:47 INFO Query:
 == Query: q16-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -2794,7 +2794,7 @@ GlobalLimit 100
                      +- Relation[cc_call_center_sk#332,cc_call_center_id#333,cc_rec_start_date#334,cc_rec_end_date#335,cc_closed_date_sk#336,cc_open_date_sk#337,cc_name#338,cc_class#339,cc_employees#340,cc_sq_ft#341,cc_hours#342,cc_manager#343,cc_mkt_id#344,cc_mkt_class#345,cc_mkt_desc#346,cc_market_manager#347,cc_division#348,cc_division_name#349,cc_company#350,cc_company_name#351,cc_street_number#352,cc_street_name#353,cc_street_type#354,cc_suite_number#355,... 7 more fields] parquet
 
      : benchmark
-19/09/08 19:11:47 INFO Query: 
+19/09/08 19:11:47 INFO Query:
 == Query: q16-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -2828,7 +2828,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 58.827638955000005s
 Running execution q17-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:12:47 INFO Query: 
+19/09/08 19:12:47 INFO Query:
 == Query: q17-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -2863,7 +2863,7 @@ GlobalLimit 100
                   +- Relation[i_item_sk#564,i_item_id#565,i_rec_start_date#566,i_rec_end_date#567,i_item_desc#568,i_current_price#569,i_wholesale_cost#570,i_brand_id#571,i_brand#572,i_class_id#573,i_class#574,i_category_id#575,i_category#576,i_manufact_id#577,i_manufact#578,i_size#579,i_formulation#580,i_color#581,i_units#582,i_container#583,i_manager_id#584,i_product_name#585] parquet
 
      : benchmark
-19/09/08 19:12:47 INFO Query: 
+19/09/08 19:12:47 INFO Query:
 == Query: q17-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -2900,7 +2900,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 123.863407076s
 Running execution q18-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:14:52 INFO Query: 
+19/09/08 19:14:52 INFO Query:
 == Query: q18-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -2933,7 +2933,7 @@ GlobalLimit 100
                         +- Relation[i_item_sk#564,i_item_id#565,i_rec_start_date#566,i_rec_end_date#567,i_item_desc#568,i_current_price#569,i_wholesale_cost#570,i_brand_id#571,i_brand#572,i_class_id#573,i_class#574,i_category_id#575,i_category#576,i_manufact_id#577,i_manufact#578,i_size#579,i_formulation#580,i_color#581,i_units#582,i_container#583,i_manager_id#584,i_product_name#585] parquet
 
      : benchmark
-19/09/08 19:14:52 INFO Query: 
+19/09/08 19:14:52 INFO Query:
 == Query: q18-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -2968,7 +2968,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 24.178040590000002s
 Running execution q19-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:15:18 INFO Query: 
+19/09/08 19:15:18 INFO Query:
 == Query: q19-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -2994,7 +2994,7 @@ GlobalLimit 100
                   +- Relation[s_store_sk#664,s_store_id#665,s_rec_start_date#666,s_rec_end_date#667,s_closed_date_sk#668,s_store_name#669,s_number_employees#670,s_floor_space#671,s_hours#672,s_manager#673,s_market_id#674,s_geography_class#675,s_market_desc#676,s_market_manager#677,s_division_id#678,s_division_name#679,s_company_id#680,s_company_name#681,s_street_number#682,s_street_name#683,s_street_type#684,s_suite_number#685,s_city#686,s_county#687,... 5 more fields] parquet
 
      : benchmark
-19/09/08 19:15:18 INFO Query: 
+19/09/08 19:15:18 INFO Query:
 == Query: q19-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -3022,7 +3022,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 15.92696997s
 Running execution q20-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:15:35 INFO Query: 
+19/09/08 19:15:35 INFO Query:
 == Query: q20-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -3042,7 +3042,7 @@ GlobalLimit 100
                            +- Relation[d_date_sk#492,d_date_id#493,d_date#494,d_month_seq#495,d_week_seq#496,d_quarter_seq#497,d_year#498,d_dow#499,d_moy#500,d_dom#501,d_qoy#502,d_fy_year#503,d_fy_quarter_seq#504,d_fy_week_seq#505,d_day_name#506,d_quarter_name#507,d_holiday#508,d_weekend#509,d_following_holiday#510,d_first_dom#511,d_last_dom#512,d_same_day_ly#513,d_same_day_lq#514,d_current_day#515,... 4 more fields] parquet
 
      : benchmark
-19/09/08 19:15:35 INFO Query: 
+19/09/08 19:15:35 INFO Query:
 == Query: q20-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -3064,7 +3064,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 7.63015824s
 Running execution q21-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:15:44 INFO Query: 
+19/09/08 19:15:44 INFO Query:
 == Query: q21-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -3087,7 +3087,7 @@ GlobalLimit 100
                            +- Relation[d_date_sk#492,d_date_id#493,d_date#494,d_month_seq#495,d_week_seq#496,d_quarter_seq#497,d_year#498,d_dow#499,d_moy#500,d_dom#501,d_qoy#502,d_fy_year#503,d_fy_quarter_seq#504,d_fy_week_seq#505,d_day_name#506,d_quarter_name#507,d_holiday#508,d_weekend#509,d_following_holiday#510,d_first_dom#511,d_last_dom#512,d_same_day_ly#513,d_same_day_lq#514,d_current_day#515,... 4 more fields] parquet
 
      : benchmark
-19/09/08 19:15:44 INFO Query: 
+19/09/08 19:15:44 INFO Query:
 == Query: q21-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -3112,7 +3112,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 5.87263106s
 Running execution q22-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:15:51 INFO Query: 
+19/09/08 19:15:51 INFO Query:
 == Query: q22-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -3134,7 +3134,7 @@ GlobalLimit 100
                         +- Relation[w_warehouse_sk#742,w_warehouse_id#743,w_warehouse_name#744,w_warehouse_sq_ft#745,w_street_number#746,w_street_name#747,w_street_type#748,w_suite_number#749,w_city#750,w_county#751,w_state#752,w_zip#753,w_country#754,w_gmt_offset#755] parquet
 
      : benchmark
-19/09/08 19:15:51 INFO Query: 
+19/09/08 19:15:51 INFO Query:
 == Query: q22-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -3158,7 +3158,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 18.75074137s
 Running execution q23a-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:16:11 INFO Query: 
+19/09/08 19:16:11 INFO Query:
 == Query: q23a-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -3259,7 +3259,7 @@ GlobalLimit 100
                         +- Relation[d_date_sk#492,d_date_id#493,d_date#494,d_month_seq#495,d_week_seq#496,d_quarter_seq#497,d_year#498,d_dow#499,d_moy#500,d_dom#501,d_qoy#502,d_fy_year#503,d_fy_quarter_seq#504,d_fy_week_seq#505,d_day_name#506,d_quarter_name#507,d_holiday#508,d_weekend#509,d_following_holiday#510,d_first_dom#511,d_last_dom#512,d_same_day_ly#513,d_same_day_lq#514,d_current_day#515,... 4 more fields] parquet
 
      : benchmark
-19/09/08 19:16:11 INFO Query: 
+19/09/08 19:16:11 INFO Query:
 == Query: q23a-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -3362,7 +3362,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 356.048664282s
 Running execution q23b-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:22:10 INFO Query: 
+19/09/08 19:22:10 INFO Query:
 == Query: q23b-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -3470,7 +3470,7 @@ GlobalLimit 100
                            +- Relation[d_date_sk#492,d_date_id#493,d_date#494,d_month_seq#495,d_week_seq#496,d_quarter_seq#497,d_year#498,d_dow#499,d_moy#500,d_dom#501,d_qoy#502,d_fy_year#503,d_fy_quarter_seq#504,d_fy_week_seq#505,d_day_name#506,d_quarter_name#507,d_holiday#508,d_weekend#509,d_following_holiday#510,d_first_dom#511,d_last_dom#512,d_same_day_ly#513,d_same_day_lq#514,d_current_day#515,... 4 more fields] parquet
 
      : benchmark
-19/09/08 19:22:10 INFO Query: 
+19/09/08 19:22:10 INFO Query:
 == Query: q23b-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -3580,7 +3580,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 271.29222407400005s
 Running execution q24a-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:26:45 INFO Query: 
+19/09/08 19:26:45 INFO Query:
 == Query: q24a-v2.4 ==
 Project [c_last_name#421, c_first_name#420, s_store_name#669, paid#15201]
 +- Filter (cast(sum(netpaid#15203)#15210 as decimal(33,8)) > cast(scalar-subquery#15202 [] as decimal(33,8)))
@@ -3629,7 +3629,7 @@ Project [c_last_name#421, c_first_name#420, s_store_name#669, paid#15201]
                         +- Relation[ca_address_sk#448,ca_address_id#449,ca_street_number#450,ca_street_name#451,ca_street_type#452,ca_suite_number#453,ca_city#454,ca_county#455,ca_state#456,ca_zip#457,ca_country#458,ca_gmt_offset#459,ca_location_type#460] parquet
 
      : benchmark
-19/09/08 19:26:45 INFO Query: 
+19/09/08 19:26:45 INFO Query:
 == Query: q24a-v2.4 ==
 Project [c_last_name#421, c_first_name#420, s_store_name#669, paid#15216]
 +- Filter (cast(sum(netpaid#15218)#15225 as decimal(33,8)) > cast(scalar-subquery#15217 [] as decimal(33,8)))
@@ -3680,7 +3680,7 @@ Project [c_last_name#421, c_first_name#420, s_store_name#669, paid#15216]
       running Thread[benchmark runner,5,main]
 Execution time: 146.92622378299998s
 Running execution q24b-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:29:14 INFO Query: 
+19/09/08 19:29:14 INFO Query:
 == Query: q24b-v2.4 ==
 Project [c_last_name#421, c_first_name#420, s_store_name#669, paid#15297]
 +- Filter (cast(sum(netpaid#15299)#15306 as decimal(33,8)) > cast(scalar-subquery#15298 [] as decimal(33,8)))
@@ -3729,7 +3729,7 @@ Project [c_last_name#421, c_first_name#420, s_store_name#669, paid#15297]
                         +- Relation[ca_address_sk#448,ca_address_id#449,ca_street_number#450,ca_street_name#451,ca_street_type#452,ca_suite_number#453,ca_city#454,ca_county#455,ca_state#456,ca_zip#457,ca_country#458,ca_gmt_offset#459,ca_location_type#460] parquet
 
      : benchmark
-19/09/08 19:29:14 INFO Query: 
+19/09/08 19:29:14 INFO Query:
 == Query: q24b-v2.4 ==
 Project [c_last_name#421, c_first_name#420, s_store_name#669, paid#15312]
 +- Filter (cast(sum(netpaid#15314)#15321 as decimal(33,8)) > cast(scalar-subquery#15313 [] as decimal(33,8)))
@@ -3780,7 +3780,7 @@ Project [c_last_name#421, c_first_name#420, s_store_name#669, paid#15312]
       running Thread[benchmark runner,5,main]
 Execution time: 134.64600397200002s
 Running execution q25-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:31:31 INFO Query: 
+19/09/08 19:31:31 INFO Query:
 == Query: q25-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -3816,7 +3816,7 @@ GlobalLimit 100
                      +- Relation[i_item_sk#564,i_item_id#565,i_rec_start_date#566,i_rec_end_date#567,i_item_desc#568,i_current_price#569,i_wholesale_cost#570,i_brand_id#571,i_brand#572,i_class_id#573,i_class#574,i_category_id#575,i_category#576,i_manufact_id#577,i_manufact#578,i_size#579,i_formulation#580,i_color#581,i_units#582,i_container#583,i_manager_id#584,i_product_name#585] parquet
 
      : benchmark
-19/09/08 19:31:31 INFO Query: 
+19/09/08 19:31:31 INFO Query:
 == Query: q25-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -3854,7 +3854,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 423.747177679s
 Running execution q26-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:38:36 INFO Query: 
+19/09/08 19:38:36 INFO Query:
 == Query: q26-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -3878,7 +3878,7 @@ GlobalLimit 100
                      +- Relation[p_promo_sk#608,p_promo_id#609,p_start_date_sk#610,p_end_date_sk#611,p_item_sk#612,p_cost#613,p_response_target#614,p_promo_name#615,p_channel_dmail#616,p_channel_email#617,p_channel_catalog#618,p_channel_tv#619,p_channel_radio#620,p_channel_press#621,p_channel_event#622,p_channel_demo#623,p_channel_details#624,p_purpose#625,p_discount_active#626] parquet
 
      : benchmark
-19/09/08 19:38:36 INFO Query: 
+19/09/08 19:38:36 INFO Query:
 == Query: q26-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -3904,7 +3904,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 13.516916837999998s
 Running execution q27-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:38:51 INFO Query: 
+19/09/08 19:38:51 INFO Query:
 == Query: q27-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -3929,7 +3929,7 @@ GlobalLimit 100
                         +- Relation[i_item_sk#564,i_item_id#565,i_rec_start_date#566,i_rec_end_date#567,i_item_desc#568,i_current_price#569,i_wholesale_cost#570,i_brand_id#571,i_brand#572,i_class_id#573,i_class#574,i_category_id#575,i_category#576,i_manufact_id#577,i_manufact#578,i_size#579,i_formulation#580,i_color#581,i_units#582,i_container#583,i_manager_id#584,i_product_name#585] parquet
 
      : benchmark
-19/09/08 19:38:51 INFO Query: 
+19/09/08 19:38:51 INFO Query:
 == Query: q27-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -3956,7 +3956,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 18.047947381s
 Running execution q28-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:39:11 INFO Query: 
+19/09/08 19:39:11 INFO Query:
 == Query: q28-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -3998,7 +3998,7 @@ GlobalLimit 100
                      +- Relation[ss_sold_date_sk#130,ss_sold_time_sk#131,ss_item_sk#132,ss_customer_sk#133,ss_cdemo_sk#134,ss_hdemo_sk#135,ss_addr_sk#136,ss_store_sk#137,ss_promo_sk#138,ss_ticket_number#139L,ss_quantity#140,ss_wholesale_cost#141,ss_list_price#142,ss_sales_price#143,ss_ext_discount_amt#144,ss_ext_sales_price#145,ss_ext_wholesale_cost#146,ss_ext_list_price#147,ss_ext_tax#148,ss_coupon_amt#149,ss_net_paid#150,ss_net_paid_inc_tax#151,ss_net_profit#152] parquet
 
      : benchmark
-19/09/08 19:39:11 INFO Query: 
+19/09/08 19:39:11 INFO Query:
 == Query: q28-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -4042,7 +4042,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 52.297144851s
 Running execution q29-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:40:04 INFO Query: 
+19/09/08 19:40:04 INFO Query:
 == Query: q29-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -4078,7 +4078,7 @@ GlobalLimit 100
                      +- Relation[i_item_sk#564,i_item_id#565,i_rec_start_date#566,i_rec_end_date#567,i_item_desc#568,i_current_price#569,i_wholesale_cost#570,i_brand_id#571,i_brand#572,i_class_id#573,i_class#574,i_category_id#575,i_category#576,i_manufact_id#577,i_manufact#578,i_size#579,i_formulation#580,i_color#581,i_units#582,i_container#583,i_manager_id#584,i_product_name#585] parquet
 
      : benchmark
-19/09/08 19:40:04 INFO Query: 
+19/09/08 19:40:04 INFO Query:
 == Query: q29-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -4116,7 +4116,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 114.90023106400001s
 Running execution q30-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:42:01 INFO Query: 
+19/09/08 19:42:01 INFO Query:
 == Query: q30-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -4157,7 +4157,7 @@ GlobalLimit 100
                   +- Relation[c_customer_sk#412,c_customer_id#413,c_current_cdemo_sk#414,c_current_hdemo_sk#415,c_current_addr_sk#416,c_first_shipto_date_sk#417,c_first_sales_date_sk#418,c_salutation#419,c_first_name#420,c_last_name#421,c_preferred_cust_flag#422,c_birth_day#423,c_birth_month#424,c_birth_year#425,c_birth_country#426,c_login#427,c_email_address#428,c_last_review_date#429] parquet
 
      : benchmark
-19/09/08 19:42:01 INFO Query: 
+19/09/08 19:42:01 INFO Query:
 == Query: q30-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -4200,7 +4200,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 18.270043031s
 Running execution q31-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:42:21 INFO Query: 
+19/09/08 19:42:21 INFO Query:
 == Query: q31-v2.4 ==
 Sort [ca_county#455 ASC NULLS FIRST], true
 +- Project [ca_county#455, d_year#498, CheckOverflow((promote_precision(cast(web_sales#17743 as decimal(17,2))) / promote_precision(cast(web_sales#17494 as decimal(17,2)))), DecimalType(37,20)) AS web_q1_q2_increase#17489, CheckOverflow((promote_precision(cast(store_sales#17497 as decimal(17,2))) / promote_precision(cast(store_sales#17493 as decimal(17,2)))), DecimalType(37,20)) AS store_q1_q2_increase#17490, CheckOverflow((promote_precision(cast(web_sales#17839 as decimal(17,2))) / promote_precision(cast(web_sales#17743 as decimal(17,2)))), DecimalType(37,20)) AS web_q2_q3_increase#17491, CheckOverflow((promote_precision(cast(store_sales#17593 as decimal(17,2))) / promote_precision(cast(store_sales#17497 as decimal(17,2)))), DecimalType(37,20)) AS store_q2_q3_increase#17492]
@@ -4284,7 +4284,7 @@ Sort [ca_county#455 ASC NULLS FIRST], true
                            +- Relation[ca_address_sk#17922,ca_address_id#17923,ca_street_number#17924,ca_street_name#17925,ca_street_type#17926,ca_suite_number#17927,ca_city#17928,ca_county#17929,ca_state#17930,ca_zip#17931,ca_country#17932,ca_gmt_offset#17933,ca_location_type#17934] parquet
 
      : benchmark
-19/09/08 19:42:22 INFO Query: 
+19/09/08 19:42:22 INFO Query:
 == Query: q31-v2.4 ==
 Sort [ca_county#455 ASC NULLS FIRST], true
 +- Project [ca_county#455, d_year#498, CheckOverflow((promote_precision(cast(web_sales#18195 as decimal(17,2))) / promote_precision(cast(web_sales#17946 as decimal(17,2)))), DecimalType(37,20)) AS web_q1_q2_increase#17941, CheckOverflow((promote_precision(cast(store_sales#17949 as decimal(17,2))) / promote_precision(cast(store_sales#17945 as decimal(17,2)))), DecimalType(37,20)) AS store_q1_q2_increase#17942, CheckOverflow((promote_precision(cast(web_sales#18291 as decimal(17,2))) / promote_precision(cast(web_sales#18195 as decimal(17,2)))), DecimalType(37,20)) AS web_q2_q3_increase#17943, CheckOverflow((promote_precision(cast(store_sales#18045 as decimal(17,2))) / promote_precision(cast(store_sales#17949 as decimal(17,2)))), DecimalType(37,20)) AS store_q2_q3_increase#17944]
@@ -4370,7 +4370,7 @@ Sort [ca_county#455 ASC NULLS FIRST], true
       running Thread[benchmark runner,5,main]
 Execution time: 44.579343376s
 Running execution q32-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:43:09 INFO Query: 
+19/09/08 19:43:09 INFO Query:
 == Query: q32-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -4393,7 +4393,7 @@ GlobalLimit 100
                +- Relation[d_date_sk#492,d_date_id#493,d_date#494,d_month_seq#495,d_week_seq#496,d_quarter_seq#497,d_year#498,d_dow#499,d_moy#500,d_dom#501,d_qoy#502,d_fy_year#503,d_fy_quarter_seq#504,d_fy_week_seq#505,d_day_name#506,d_quarter_name#507,d_holiday#508,d_weekend#509,d_following_holiday#510,d_first_dom#511,d_last_dom#512,d_same_day_ly#513,d_same_day_lq#514,d_current_day#515,... 4 more fields] parquet
 
      : benchmark
-19/09/08 19:43:09 INFO Query: 
+19/09/08 19:43:09 INFO Query:
 == Query: q32-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -4418,7 +4418,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 12.645047194s
 Running execution q33-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:43:23 INFO Query: 
+19/09/08 19:43:23 INFO Query:
 == Query: q33-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -4486,7 +4486,7 @@ GlobalLimit 100
                                  +- Relation[i_item_sk#564,i_item_id#565,i_rec_start_date#566,i_rec_end_date#567,i_item_desc#568,i_current_price#569,i_wholesale_cost#570,i_brand_id#571,i_brand#572,i_class_id#573,i_class#574,i_category_id#575,i_category#576,i_manufact_id#577,i_manufact#578,i_size#579,i_formulation#580,i_color#581,i_units#582,i_container#583,i_manager_id#584,i_product_name#585] parquet
 
      : benchmark
-19/09/08 19:43:23 INFO Query: 
+19/09/08 19:43:23 INFO Query:
 == Query: q33-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -4556,7 +4556,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 23.424295879000002s
 Running execution q34-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:43:48 INFO Query: 
+19/09/08 19:43:48 INFO Query:
 == Query: q34-v2.4 ==
 Sort [c_last_name#421 ASC NULLS FIRST, c_first_name#420 ASC NULLS FIRST, c_salutation#419 ASC NULLS FIRST, c_preferred_cust_flag#422 DESC NULLS LAST, ss_ticket_number#139L ASC NULLS FIRST], true
 +- Project [c_last_name#421, c_first_name#420, c_salutation#419, c_preferred_cust_flag#422, ss_ticket_number#139L, cnt#19475L]
@@ -4580,7 +4580,7 @@ Sort [c_last_name#421 ASC NULLS FIRST, c_first_name#420 ASC NULLS FIRST, c_salut
             +- Relation[c_customer_sk#412,c_customer_id#413,c_current_cdemo_sk#414,c_current_hdemo_sk#415,c_current_addr_sk#416,c_first_shipto_date_sk#417,c_first_sales_date_sk#418,c_salutation#419,c_first_name#420,c_last_name#421,c_preferred_cust_flag#422,c_birth_day#423,c_birth_month#424,c_birth_year#425,c_birth_country#426,c_login#427,c_email_address#428,c_last_review_date#429] parquet
 
      : benchmark
-19/09/08 19:43:48 INFO Query: 
+19/09/08 19:43:48 INFO Query:
 == Query: q34-v2.4 ==
 Sort [c_last_name#421 ASC NULLS FIRST, c_first_name#420 ASC NULLS FIRST, c_salutation#419 ASC NULLS FIRST, c_preferred_cust_flag#422 DESC NULLS LAST, ss_ticket_number#139L ASC NULLS FIRST], true
 +- Project [c_last_name#421, c_first_name#420, c_salutation#419, c_preferred_cust_flag#422, ss_ticket_number#139L, cnt#19483L]
@@ -4606,7 +4606,7 @@ Sort [c_last_name#421 ASC NULLS FIRST, c_first_name#420 ASC NULLS FIRST, c_salut
       running Thread[benchmark runner,5,main]
 Execution time: 10.782171854s
 Running execution q35-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:44:00 INFO Query: 
+19/09/08 19:44:00 INFO Query:
 == Query: q35-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -4647,7 +4647,7 @@ GlobalLimit 100
                      +- Relation[cd_demo_sk#474,cd_gender#475,cd_marital_status#476,cd_education_status#477,cd_purchase_estimate#478,cd_credit_rating#479,cd_dep_count#480,cd_dep_employed_count#481,cd_dep_college_count#482] parquet
 
      : benchmark
-19/09/08 19:44:00 INFO Query: 
+19/09/08 19:44:00 INFO Query:
 == Query: q35-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -4690,7 +4690,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 24.310923612s
 Running execution q36-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:44:26 INFO Query: 
+19/09/08 19:44:26 INFO Query:
 == Query: q36-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -4716,7 +4716,7 @@ GlobalLimit 100
                                  +- Relation[s_store_sk#664,s_store_id#665,s_rec_start_date#666,s_rec_end_date#667,s_closed_date_sk#668,s_store_name#669,s_number_employees#670,s_floor_space#671,s_hours#672,s_manager#673,s_market_id#674,s_geography_class#675,s_market_desc#676,s_market_manager#677,s_division_id#678,s_division_name#679,s_company_id#680,s_company_name#681,s_street_number#682,s_street_name#683,s_street_type#684,s_suite_number#685,s_city#686,s_county#687,... 5 more fields] parquet
 
      : benchmark
-19/09/08 19:44:26 INFO Query: 
+19/09/08 19:44:26 INFO Query:
 == Query: q36-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -4744,7 +4744,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 13.991212363s
 Running execution q37-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:44:41 INFO Query: 
+19/09/08 19:44:41 INFO Query:
 == Query: q37-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -4764,7 +4764,7 @@ GlobalLimit 100
                   +- Relation[cs_sold_date_sk#0,cs_sold_time_sk#1,cs_ship_date_sk#2,cs_bill_customer_sk#3,cs_bill_cdemo_sk#4,cs_bill_hdemo_sk#5,cs_bill_addr_sk#6,cs_ship_customer_sk#7,cs_ship_cdemo_sk#8,cs_ship_hdemo_sk#9,cs_ship_addr_sk#10,cs_call_center_sk#11,cs_catalog_page_sk#12,cs_ship_mode_sk#13,cs_warehouse_sk#14,cs_item_sk#15,cs_promo_sk#16,cs_order_number#17L,cs_quantity#18,cs_wholesale_cost#19,cs_list_price#20,cs_sales_price#21,cs_ext_discount_amt#22,cs_ext_sales_price#23,... 10 more fields] parquet
 
      : benchmark
-19/09/08 19:44:41 INFO Query: 
+19/09/08 19:44:41 INFO Query:
 == Query: q37-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -4786,7 +4786,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 15.607845964000001s
 Running execution q38-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:44:58 INFO Query: 
+19/09/08 19:44:58 INFO Query:
 == Query: q38-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -4833,7 +4833,7 @@ GlobalLimit 100
                               +- Relation[c_customer_sk#20306,c_customer_id#20307,c_current_cdemo_sk#20308,c_current_hdemo_sk#20309,c_current_addr_sk#20310,c_first_shipto_date_sk#20311,c_first_sales_date_sk#20312,c_salutation#20313,c_first_name#20314,c_last_name#20315,c_preferred_cust_flag#20316,c_birth_day#20317,c_birth_month#20318,c_birth_year#20319,c_birth_country#20320,c_login#20321,c_email_address#20322,c_last_review_date#20323] parquet
 
      : benchmark
-19/09/08 19:44:58 INFO Query: 
+19/09/08 19:44:58 INFO Query:
 == Query: q38-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -4882,7 +4882,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 31.884605569999998s
 Running execution q39a-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:45:31 INFO Query: 
+19/09/08 19:45:31 INFO Query:
 == Query: q39a-v2.4 ==
 Sort [w_warehouse_sk#742 ASC NULLS FIRST, i_item_sk#564 ASC NULLS FIRST, d_moy#500 ASC NULLS FIRST, mean#21097 ASC NULLS FIRST, cov#21098 ASC NULLS FIRST, d_moy#21372 ASC NULLS FIRST, mean#21193 ASC NULLS FIRST, cov#21125 ASC NULLS FIRST], true
 +- Project [w_warehouse_sk#742, i_item_sk#564, d_moy#500, mean#21097, cov#21098, w_warehouse_sk#21322, i_item_sk#21258, d_moy#21372, mean#21193, cov#21125]
@@ -4926,7 +4926,7 @@ Sort [w_warehouse_sk#742 ASC NULLS FIRST, i_item_sk#564 ASC NULLS FIRST, d_moy#5
                                     +- Relation[d_date_sk#21364,d_date_id#21365,d_date#21366,d_month_seq#21367,d_week_seq#21368,d_quarter_seq#21369,d_year#21370,d_dow#21371,d_moy#21372,d_dom#21373,d_qoy#21374,d_fy_year#21375,d_fy_quarter_seq#21376,d_fy_week_seq#21377,d_day_name#21378,d_quarter_name#21379,d_holiday#21380,d_weekend#21381,d_following_holiday#21382,d_first_dom#21383,d_last_dom#21384,d_same_day_ly#21385,d_same_day_lq#21386,d_current_day#21387,... 4 more fields] parquet
 
      : benchmark
-19/09/08 19:45:31 INFO Query: 
+19/09/08 19:45:31 INFO Query:
 == Query: q39a-v2.4 ==
 Sort [w_warehouse_sk#742 ASC NULLS FIRST, i_item_sk#564 ASC NULLS FIRST, d_moy#500 ASC NULLS FIRST, mean#21403 ASC NULLS FIRST, cov#21404 ASC NULLS FIRST, d_moy#21678 ASC NULLS FIRST, mean#21499 ASC NULLS FIRST, cov#21431 ASC NULLS FIRST], true
 +- Project [w_warehouse_sk#742, i_item_sk#564, d_moy#500, mean#21403, cov#21404, w_warehouse_sk#21628, i_item_sk#21564, d_moy#21678, mean#21499, cov#21431]
@@ -4972,7 +4972,7 @@ Sort [w_warehouse_sk#742 ASC NULLS FIRST, i_item_sk#564 ASC NULLS FIRST, d_moy#5
       running Thread[benchmark runner,5,main]
 Execution time: 9.152519593000001s
 Running execution q39b-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:45:42 INFO Query: 
+19/09/08 19:45:42 INFO Query:
 == Query: q39b-v2.4 ==
 Sort [w_warehouse_sk#742 ASC NULLS FIRST, i_item_sk#564 ASC NULLS FIRST, d_moy#500 ASC NULLS FIRST, mean#22764 ASC NULLS FIRST, cov#22765 ASC NULLS FIRST, d_moy#23039 ASC NULLS FIRST, mean#22860 ASC NULLS FIRST, cov#22792 ASC NULLS FIRST], true
 +- Project [w_warehouse_sk#742, i_item_sk#564, d_moy#500, mean#22764, cov#22765, w_warehouse_sk#22989, i_item_sk#22925, d_moy#23039, mean#22860, cov#22792]
@@ -5016,7 +5016,7 @@ Sort [w_warehouse_sk#742 ASC NULLS FIRST, i_item_sk#564 ASC NULLS FIRST, d_moy#5
                                     +- Relation[d_date_sk#23031,d_date_id#23032,d_date#23033,d_month_seq#23034,d_week_seq#23035,d_quarter_seq#23036,d_year#23037,d_dow#23038,d_moy#23039,d_dom#23040,d_qoy#23041,d_fy_year#23042,d_fy_quarter_seq#23043,d_fy_week_seq#23044,d_day_name#23045,d_quarter_name#23046,d_holiday#23047,d_weekend#23048,d_following_holiday#23049,d_first_dom#23050,d_last_dom#23051,d_same_day_ly#23052,d_same_day_lq#23053,d_current_day#23054,... 4 more fields] parquet
 
      : benchmark
-19/09/08 19:45:42 INFO Query: 
+19/09/08 19:45:42 INFO Query:
 == Query: q39b-v2.4 ==
 Sort [w_warehouse_sk#742 ASC NULLS FIRST, i_item_sk#564 ASC NULLS FIRST, d_moy#500 ASC NULLS FIRST, mean#23070 ASC NULLS FIRST, cov#23071 ASC NULLS FIRST, d_moy#23345 ASC NULLS FIRST, mean#23166 ASC NULLS FIRST, cov#23098 ASC NULLS FIRST], true
 +- Project [w_warehouse_sk#742, i_item_sk#564, d_moy#500, mean#23070, cov#23071, w_warehouse_sk#23295, i_item_sk#23231, d_moy#23345, mean#23166, cov#23098]
@@ -5062,7 +5062,7 @@ Sort [w_warehouse_sk#742 ASC NULLS FIRST, i_item_sk#564 ASC NULLS FIRST, d_moy#5
       running Thread[benchmark runner,5,main]
 Execution time: 8.035343152000001s
 Running execution q40-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:45:51 INFO Query: 
+19/09/08 19:45:51 INFO Query:
 == Query: q40-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -5086,7 +5086,7 @@ GlobalLimit 100
                      +- Relation[d_date_sk#492,d_date_id#493,d_date#494,d_month_seq#495,d_week_seq#496,d_quarter_seq#497,d_year#498,d_dow#499,d_moy#500,d_dom#501,d_qoy#502,d_fy_year#503,d_fy_quarter_seq#504,d_fy_week_seq#505,d_day_name#506,d_quarter_name#507,d_holiday#508,d_weekend#509,d_following_holiday#510,d_first_dom#511,d_last_dom#512,d_same_day_ly#513,d_same_day_lq#514,d_current_day#515,... 4 more fields] parquet
 
      : benchmark
-19/09/08 19:45:52 INFO Query: 
+19/09/08 19:45:52 INFO Query:
 == Query: q40-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -5112,7 +5112,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 35.187362717999996s
 Running execution q41-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:46:28 INFO Query: 
+19/09/08 19:46:28 INFO Query:
 == Query: q41-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -5129,7 +5129,7 @@ GlobalLimit 100
                      +- Relation[i_item_sk#564,i_item_id#565,i_rec_start_date#566,i_rec_end_date#567,i_item_desc#568,i_current_price#569,i_wholesale_cost#570,i_brand_id#571,i_brand#572,i_class_id#573,i_class#574,i_category_id#575,i_category#576,i_manufact_id#577,i_manufact#578,i_size#579,i_formulation#580,i_color#581,i_units#582,i_container#583,i_manager_id#584,i_product_name#585] parquet
 
      : benchmark
-19/09/08 19:46:28 INFO Query: 
+19/09/08 19:46:28 INFO Query:
 == Query: q41-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -5148,7 +5148,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 2.184788301s
 Running execution q42-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:46:31 INFO Query: 
+19/09/08 19:46:31 INFO Query:
 == Query: q42-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -5167,7 +5167,7 @@ GlobalLimit 100
                      +- Relation[i_item_sk#564,i_item_id#565,i_rec_start_date#566,i_rec_end_date#567,i_item_desc#568,i_current_price#569,i_wholesale_cost#570,i_brand_id#571,i_brand#572,i_class_id#573,i_class#574,i_category_id#575,i_category#576,i_manufact_id#577,i_manufact#578,i_size#579,i_formulation#580,i_color#581,i_units#582,i_container#583,i_manager_id#584,i_product_name#585] parquet
 
      : benchmark
-19/09/08 19:46:31 INFO Query: 
+19/09/08 19:46:31 INFO Query:
 == Query: q42-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -5188,7 +5188,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 9.244635066999999s
 Running execution q43-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:46:41 INFO Query: 
+19/09/08 19:46:41 INFO Query:
 == Query: q43-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -5205,7 +5205,7 @@ GlobalLimit 100
                   +- Relation[s_store_sk#664,s_store_id#665,s_rec_start_date#666,s_rec_end_date#667,s_closed_date_sk#668,s_store_name#669,s_number_employees#670,s_floor_space#671,s_hours#672,s_manager#673,s_market_id#674,s_geography_class#675,s_market_desc#676,s_market_manager#677,s_division_id#678,s_division_name#679,s_company_id#680,s_company_name#681,s_street_number#682,s_street_name#683,s_street_type#684,s_suite_number#685,s_city#686,s_county#687,... 5 more fields] parquet
 
      : benchmark
-19/09/08 19:46:41 INFO Query: 
+19/09/08 19:46:41 INFO Query:
 == Query: q43-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -5226,7 +5226,7 @@ Execution time: 9.19588049s
 Running execution q44-v2.4 iteration: 1, StandardRun=true
 19/09/08 19:46:51 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
 19/09/08 19:46:51 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
-19/09/08 19:46:51 INFO Query: 
+19/09/08 19:46:51 INFO Query:
 == Query: q44-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -5284,7 +5284,7 @@ GlobalLimit 100
                      +- Relation[i_item_sk#24534,i_item_id#24535,i_rec_start_date#24536,i_rec_end_date#24537,i_item_desc#24538,i_current_price#24539,i_wholesale_cost#24540,i_brand_id#24541,i_brand#24542,i_class_id#24543,i_class#24544,i_category_id#24545,i_category#24546,i_manufact_id#24547,i_manufact#24548,i_size#24549,i_formulation#24550,i_color#24551,i_units#24552,i_container#24553,i_manager_id#24554,i_product_name#24555] parquet
 
      : benchmark
-19/09/08 19:46:51 INFO Query: 
+19/09/08 19:46:51 INFO Query:
 == Query: q44-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -5346,7 +5346,7 @@ GlobalLimit 100
 19/09/08 19:46:52 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
 Execution time: 21.9705783s
 Running execution q45-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:47:15 INFO Query: 
+19/09/08 19:47:15 INFO Query:
 == Query: q45-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -5374,7 +5374,7 @@ GlobalLimit 100
                      +- Relation[i_item_sk#564,i_item_id#565,i_rec_start_date#566,i_rec_end_date#567,i_item_desc#568,i_current_price#569,i_wholesale_cost#570,i_brand_id#571,i_brand#572,i_class_id#573,i_class#574,i_category_id#575,i_category#576,i_manufact_id#577,i_manufact#578,i_size#579,i_formulation#580,i_color#581,i_units#582,i_container#583,i_manager_id#584,i_product_name#585] parquet
 
      : benchmark
-19/09/08 19:47:15 INFO Query: 
+19/09/08 19:47:15 INFO Query:
 == Query: q45-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -5404,7 +5404,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 23.333574693s
 Running execution q46-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:47:39 INFO Query: 
+19/09/08 19:47:39 INFO Query:
 == Query: q46-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -5437,7 +5437,7 @@ GlobalLimit 100
                      +- Relation[ca_address_sk#448,ca_address_id#449,ca_street_number#450,ca_street_name#451,ca_street_type#452,ca_suite_number#453,ca_city#454,ca_county#455,ca_state#456,ca_zip#457,ca_country#458,ca_gmt_offset#459,ca_location_type#460] parquet
 
      : benchmark
-19/09/08 19:47:39 INFO Query: 
+19/09/08 19:47:39 INFO Query:
 == Query: q46-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -5472,7 +5472,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 17.924774891000002s
 Running execution q47-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:48:00 INFO Query: 
+19/09/08 19:48:00 INFO Query:
 == Query: q47-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -5542,7 +5542,7 @@ GlobalLimit 100
                                                       +- Relation[s_store_sk#26985,s_store_id#26986,s_rec_start_date#26987,s_rec_end_date#26988,s_closed_date_sk#26989,s_store_name#26990,s_number_employees#26991,s_floor_space#26992,s_hours#26993,s_manager#26994,s_market_id#26995,s_geography_class#26996,s_market_desc#26997,s_market_manager#26998,s_division_id#26999,s_division_name#27000,s_company_id#27001,s_company_name#27002,s_street_number#27003,s_street_name#27004,s_street_type#27005,s_suite_number#27006,s_city#27007,s_county#27008,... 5 more fields] parquet
 
      : benchmark
-19/09/08 19:48:00 INFO Query: 
+19/09/08 19:48:00 INFO Query:
 == Query: q47-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -5614,7 +5614,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 27.913619764s
 Running execution q48-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:48:30 INFO Query: 
+19/09/08 19:48:30 INFO Query:
 == Query: q48-v2.4 ==
 Aggregate [sum(cast(ss_quantity#140 as bigint)) AS sum(ss_quantity)#30371L]
 +- Filter ((((s_store_sk#664 = ss_store_sk#137) && (ss_sold_date_sk#130 = d_date_sk#492)) && (d_year#498 = 2000)) && ((((((cd_demo_sk#474 = ss_cdemo_sk#134) && (cd_marital_status#476 = M)) && ((cd_education_status#477 = 4 yr Degree) && ((cast(ss_sales_price#143 as decimal(7,2)) >= cast(100.00 as decimal(7,2))) && (cast(ss_sales_price#143 as decimal(7,2)) <= cast(150.00 as decimal(7,2)))))) || (((cd_demo_sk#474 = ss_cdemo_sk#134) && (cd_marital_status#476 = D)) && ((cd_education_status#477 = 2 yr Degree) && ((cast(ss_sales_price#143 as decimal(7,2)) >= cast(50.00 as decimal(7,2))) && (cast(ss_sales_price#143 as decimal(7,2)) <= cast(100.00 as decimal(7,2))))))) || (((cd_demo_sk#474 = ss_cdemo_sk#134) && (cd_marital_status#476 = S)) && ((cd_education_status#477 = College) && ((cast(ss_sales_price#143 as decimal(7,2)) >= cast(150.00 as decimal(7,2))) && (cast(ss_sales_price#143 as decimal(7,2)) <= cast(200.00 as decimal(7,2))))))) && (((((ss_addr_sk#136 = ca_address_sk#448) && (ca_country#458 = United States)) && (ca_state#456 IN (CO,OH,TX) && ((cast(ss_net_profit#152 as decimal(7,2)) >= cast(cast(0 as decimal(1,0)) as decimal(7,2))) && (cast(ss_net_profit#152 as decimal(7,2)) <= cast(cast(2000 as decimal(4,0)) as decimal(7,2)))))) || (((ss_addr_sk#136 = ca_address_sk#448) && (ca_country#458 = United States)) && (ca_state#456 IN (OR,MN,KY) && ((cast(ss_net_profit#152 as decimal(7,2)) >= cast(cast(150 as decimal(3,0)) as decimal(7,2))) && (cast(ss_net_profit#152 as decimal(7,2)) <= cast(cast(3000 as decimal(4,0)) as decimal(7,2))))))) || (((ss_addr_sk#136 = ca_address_sk#448) && (ca_country#458 = United States)) && (ca_state#456 IN (VA,CA,MS) && ((cast(ss_net_profit#152 as decimal(7,2)) >= cast(cast(50 as decimal(2,0)) as decimal(7,2))) && (cast(ss_net_profit#152 as decimal(7,2)) <= cast(cast(25000 as decimal(5,0)) as decimal(7,2)))))))))
@@ -5634,7 +5634,7 @@ Aggregate [sum(cast(ss_quantity#140 as bigint)) AS sum(ss_quantity)#30371L]
          +- Relation[d_date_sk#492,d_date_id#493,d_date#494,d_month_seq#495,d_week_seq#496,d_quarter_seq#497,d_year#498,d_dow#499,d_moy#500,d_dom#501,d_qoy#502,d_fy_year#503,d_fy_quarter_seq#504,d_fy_week_seq#505,d_day_name#506,d_quarter_name#507,d_holiday#508,d_weekend#509,d_following_holiday#510,d_first_dom#511,d_last_dom#512,d_same_day_ly#513,d_same_day_lq#514,d_current_day#515,... 4 more fields] parquet
 
      : benchmark
-19/09/08 19:48:30 INFO Query: 
+19/09/08 19:48:30 INFO Query:
 == Query: q48-v2.4 ==
 Aggregate [sum(cast(ss_quantity#140 as bigint)) AS sum(ss_quantity)#30374L]
 +- Filter ((((s_store_sk#664 = ss_store_sk#137) && (ss_sold_date_sk#130 = d_date_sk#492)) && (d_year#498 = 2000)) && ((((((cd_demo_sk#474 = ss_cdemo_sk#134) && (cd_marital_status#476 = M)) && ((cd_education_status#477 = 4 yr Degree) && ((cast(ss_sales_price#143 as decimal(7,2)) >= cast(100.00 as decimal(7,2))) && (cast(ss_sales_price#143 as decimal(7,2)) <= cast(150.00 as decimal(7,2)))))) || (((cd_demo_sk#474 = ss_cdemo_sk#134) && (cd_marital_status#476 = D)) && ((cd_education_status#477 = 2 yr Degree) && ((cast(ss_sales_price#143 as decimal(7,2)) >= cast(50.00 as decimal(7,2))) && (cast(ss_sales_price#143 as decimal(7,2)) <= cast(100.00 as decimal(7,2))))))) || (((cd_demo_sk#474 = ss_cdemo_sk#134) && (cd_marital_status#476 = S)) && ((cd_education_status#477 = College) && ((cast(ss_sales_price#143 as decimal(7,2)) >= cast(150.00 as decimal(7,2))) && (cast(ss_sales_price#143 as decimal(7,2)) <= cast(200.00 as decimal(7,2))))))) && (((((ss_addr_sk#136 = ca_address_sk#448) && (ca_country#458 = United States)) && (ca_state#456 IN (CO,OH,TX) && ((cast(ss_net_profit#152 as decimal(7,2)) >= cast(cast(0 as decimal(1,0)) as decimal(7,2))) && (cast(ss_net_profit#152 as decimal(7,2)) <= cast(cast(2000 as decimal(4,0)) as decimal(7,2)))))) || (((ss_addr_sk#136 = ca_address_sk#448) && (ca_country#458 = United States)) && (ca_state#456 IN (OR,MN,KY) && ((cast(ss_net_profit#152 as decimal(7,2)) >= cast(cast(150 as decimal(3,0)) as decimal(7,2))) && (cast(ss_net_profit#152 as decimal(7,2)) <= cast(cast(3000 as decimal(4,0)) as decimal(7,2))))))) || (((ss_addr_sk#136 = ca_address_sk#448) && (ca_country#458 = United States)) && (ca_state#456 IN (VA,CA,MS) && ((cast(ss_net_profit#152 as decimal(7,2)) >= cast(cast(50 as decimal(2,0)) as decimal(7,2))) && (cast(ss_net_profit#152 as decimal(7,2)) <= cast(cast(25000 as decimal(5,0)) as decimal(7,2)))))))))
@@ -5662,7 +5662,7 @@ Running execution q49-v2.4 iteration: 1, StandardRun=true
 19/09/08 19:48:53 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
 19/09/08 19:48:53 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
 19/09/08 19:48:53 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
-19/09/08 19:48:54 INFO Query: 
+19/09/08 19:48:54 INFO Query:
 == Query: q49-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -5736,7 +5736,7 @@ GlobalLimit 100
                                                    +- Relation[d_date_sk#492,d_date_id#493,d_date#494,d_month_seq#495,d_week_seq#496,d_quarter_seq#497,d_year#498,d_dow#499,d_moy#500,d_dom#501,d_qoy#502,d_fy_year#503,d_fy_quarter_seq#504,d_fy_week_seq#505,d_day_name#506,d_quarter_name#507,d_holiday#508,d_weekend#509,d_following_holiday#510,d_first_dom#511,d_last_dom#512,d_same_day_ly#513,d_same_day_lq#514,d_current_day#515,... 4 more fields] parquet
 
      : benchmark
-19/09/08 19:48:54 INFO Query: 
+19/09/08 19:48:54 INFO Query:
 == Query: q49-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -5818,7 +5818,7 @@ GlobalLimit 100
 19/09/08 19:48:54 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
 Execution time: 51.084603331s
 Running execution q50-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:49:46 INFO Query: 
+19/09/08 19:49:46 INFO Query:
 == Query: q50-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -5844,7 +5844,7 @@ GlobalLimit 100
                         +- Relation[d_date_sk#31065,d_date_id#31066,d_date#31067,d_month_seq#31068,d_week_seq#31069,d_quarter_seq#31070,d_year#31071,d_dow#31072,d_moy#31073,d_dom#31074,d_qoy#31075,d_fy_year#31076,d_fy_quarter_seq#31077,d_fy_week_seq#31078,d_day_name#31079,d_quarter_name#31080,d_holiday#31081,d_weekend#31082,d_following_holiday#31083,d_first_dom#31084,d_last_dom#31085,d_same_day_ly#31086,d_same_day_lq#31087,d_current_day#31088,... 4 more fields] parquet
 
      : benchmark
-19/09/08 19:49:46 INFO Query: 
+19/09/08 19:49:46 INFO Query:
 == Query: q50-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -5872,7 +5872,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 46.569571237999995s
 Running execution q51-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:50:34 INFO Query: 
+19/09/08 19:50:34 INFO Query:
 == Query: q51-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -5913,7 +5913,7 @@ GlobalLimit 100
                                                                +- Relation[d_date_sk#31399,d_date_id#31400,d_date#31401,d_month_seq#31402,d_week_seq#31403,d_quarter_seq#31404,d_year#31405,d_dow#31406,d_moy#31407,d_dom#31408,d_qoy#31409,d_fy_year#31410,d_fy_quarter_seq#31411,d_fy_week_seq#31412,d_day_name#31413,d_quarter_name#31414,d_holiday#31415,d_weekend#31416,d_following_holiday#31417,d_first_dom#31418,d_last_dom#31419,d_same_day_ly#31420,d_same_day_lq#31421,d_current_day#31422,... 4 more fields] parquet
 
      : benchmark
-19/09/08 19:50:34 INFO Query: 
+19/09/08 19:50:34 INFO Query:
 == Query: q51-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -5956,7 +5956,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 32.533508212s
 Running execution q52-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:51:08 INFO Query: 
+19/09/08 19:51:08 INFO Query:
 == Query: q52-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -5974,7 +5974,7 @@ GlobalLimit 100
                   +- Relation[i_item_sk#564,i_item_id#565,i_rec_start_date#566,i_rec_end_date#567,i_item_desc#568,i_current_price#569,i_wholesale_cost#570,i_brand_id#571,i_brand#572,i_class_id#573,i_class#574,i_category_id#575,i_category#576,i_manufact_id#577,i_manufact#578,i_size#579,i_formulation#580,i_color#581,i_units#582,i_container#583,i_manager_id#584,i_product_name#585] parquet
 
      : benchmark
-19/09/08 19:51:08 INFO Query: 
+19/09/08 19:51:08 INFO Query:
 == Query: q52-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -5994,7 +5994,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 10.25866691s
 Running execution q53-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:51:19 INFO Query: 
+19/09/08 19:51:19 INFO Query:
 == Query: q53-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -6020,7 +6020,7 @@ GlobalLimit 100
                                     +- Relation[s_store_sk#664,s_store_id#665,s_rec_start_date#666,s_rec_end_date#667,s_closed_date_sk#668,s_store_name#669,s_number_employees#670,s_floor_space#671,s_hours#672,s_manager#673,s_market_id#674,s_geography_class#675,s_market_desc#676,s_market_manager#677,s_division_id#678,s_division_name#679,s_company_id#680,s_company_name#681,s_street_number#682,s_street_name#683,s_street_type#684,s_suite_number#685,s_city#686,s_county#687,... 5 more fields] parquet
 
      : benchmark
-19/09/08 19:51:19 INFO Query: 
+19/09/08 19:51:19 INFO Query:
 == Query: q53-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -6048,7 +6048,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 12.560822632999999s
 Running execution q54-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:51:33 INFO Query: 
+19/09/08 19:51:33 INFO Query:
 == Query: q54-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -6104,7 +6104,7 @@ GlobalLimit 100
                               +- Relation[d_date_sk#492,d_date_id#493,d_date#494,d_month_seq#495,d_week_seq#496,d_quarter_seq#497,d_year#498,d_dow#499,d_moy#500,d_dom#501,d_qoy#502,d_fy_year#503,d_fy_quarter_seq#504,d_fy_week_seq#505,d_day_name#506,d_quarter_name#507,d_holiday#508,d_weekend#509,d_following_holiday#510,d_first_dom#511,d_last_dom#512,d_same_day_ly#513,d_same_day_lq#514,d_current_day#515,... 4 more fields] parquet
 
      : benchmark
-19/09/08 19:51:33 INFO Query: 
+19/09/08 19:51:33 INFO Query:
 == Query: q54-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -6162,7 +6162,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 51.559114391s
 Running execution q55-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:52:26 INFO Query: 
+19/09/08 19:52:26 INFO Query:
 == Query: q55-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -6179,7 +6179,7 @@ GlobalLimit 100
                   +- Relation[i_item_sk#564,i_item_id#565,i_rec_start_date#566,i_rec_end_date#567,i_item_desc#568,i_current_price#569,i_wholesale_cost#570,i_brand_id#571,i_brand#572,i_class_id#573,i_class#574,i_category_id#575,i_category#576,i_manufact_id#577,i_manufact#578,i_size#579,i_formulation#580,i_color#581,i_units#582,i_container#583,i_manager_id#584,i_product_name#585] parquet
 
      : benchmark
-19/09/08 19:52:26 INFO Query: 
+19/09/08 19:52:26 INFO Query:
 == Query: q55-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -6198,7 +6198,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 10.055349685s
 Running execution q56-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:52:37 INFO Query: 
+19/09/08 19:52:37 INFO Query:
 == Query: q56-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -6266,7 +6266,7 @@ GlobalLimit 100
                                  +- Relation[i_item_sk#564,i_item_id#565,i_rec_start_date#566,i_rec_end_date#567,i_item_desc#568,i_current_price#569,i_wholesale_cost#570,i_brand_id#571,i_brand#572,i_class_id#573,i_class#574,i_category_id#575,i_category#576,i_manufact_id#577,i_manufact#578,i_size#579,i_formulation#580,i_color#581,i_units#582,i_container#583,i_manager_id#584,i_product_name#585] parquet
 
      : benchmark
-19/09/08 19:52:38 INFO Query: 
+19/09/08 19:52:38 INFO Query:
 == Query: q56-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -6336,7 +6336,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 23.158085404s
 Running execution q57-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:53:04 INFO Query: 
+19/09/08 19:53:04 INFO Query:
 == Query: q57-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -6406,7 +6406,7 @@ GlobalLimit 100
                                                       +- Relation[cc_call_center_sk#34052,cc_call_center_id#34053,cc_rec_start_date#34054,cc_rec_end_date#34055,cc_closed_date_sk#34056,cc_open_date_sk#34057,cc_name#34058,cc_class#34059,cc_employees#34060,cc_sq_ft#34061,cc_hours#34062,cc_manager#34063,cc_mkt_id#34064,cc_mkt_class#34065,cc_mkt_desc#34066,cc_market_manager#34067,cc_division#34068,cc_division_name#34069,cc_company#34070,cc_company_name#34071,cc_street_number#34072,cc_street_name#34073,cc_street_type#34074,cc_suite_number#34075,... 7 more fields] parquet
 
      : benchmark
-19/09/08 19:53:04 INFO Query: 
+19/09/08 19:53:04 INFO Query:
 == Query: q57-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -6478,7 +6478,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 14.584598666s
 Running execution q58-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:53:21 INFO Query: 
+19/09/08 19:53:21 INFO Query:
 == Query: q58-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -6546,7 +6546,7 @@ GlobalLimit 100
                               +- Relation[d_date_sk#492,d_date_id#493,d_date#494,d_month_seq#495,d_week_seq#496,d_quarter_seq#497,d_year#498,d_dow#499,d_moy#500,d_dom#501,d_qoy#502,d_fy_year#503,d_fy_quarter_seq#504,d_fy_week_seq#505,d_day_name#506,d_quarter_name#507,d_holiday#508,d_weekend#509,d_following_holiday#510,d_first_dom#511,d_last_dom#512,d_same_day_ly#513,d_same_day_lq#514,d_current_day#515,... 4 more fields] parquet
 
      : benchmark
-19/09/08 19:53:21 INFO Query: 
+19/09/08 19:53:21 INFO Query:
 == Query: q58-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -6616,7 +6616,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 20.282178006s
 Running execution q59-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:53:44 INFO Query: 
+19/09/08 19:53:44 INFO Query:
 == Query: q59-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -6662,7 +6662,7 @@ GlobalLimit 100
                                  +- Relation[d_date_sk#37873,d_date_id#37874,d_date#37875,d_month_seq#37876,d_week_seq#37877,d_quarter_seq#37878,d_year#37879,d_dow#37880,d_moy#37881,d_dom#37882,d_qoy#37883,d_fy_year#37884,d_fy_quarter_seq#37885,d_fy_week_seq#37886,d_day_name#37887,d_quarter_name#37888,d_holiday#37889,d_weekend#37890,d_following_holiday#37891,d_first_dom#37892,d_last_dom#37893,d_same_day_ly#37894,d_same_day_lq#37895,d_current_day#37896,... 4 more fields] parquet
 
      : benchmark
-19/09/08 19:53:44 INFO Query: 
+19/09/08 19:53:44 INFO Query:
 == Query: q59-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -6710,7 +6710,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 22.314730942999997s
 Running execution q60-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:54:08 INFO Query: 
+19/09/08 19:54:08 INFO Query:
 == Query: q60-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -6778,7 +6778,7 @@ GlobalLimit 100
                                  +- Relation[i_item_sk#564,i_item_id#565,i_rec_start_date#566,i_rec_end_date#567,i_item_desc#568,i_current_price#569,i_wholesale_cost#570,i_brand_id#571,i_brand#572,i_class_id#573,i_class#574,i_category_id#575,i_category#576,i_manufact_id#577,i_manufact#578,i_size#579,i_formulation#580,i_color#581,i_units#582,i_container#583,i_manager_id#584,i_product_name#585] parquet
 
      : benchmark
-19/09/08 19:54:08 INFO Query: 
+19/09/08 19:54:08 INFO Query:
 == Query: q60-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -6848,7 +6848,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 22.896330279999997s
 Running execution q61-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:54:33 INFO Query: 
+19/09/08 19:54:33 INFO Query:
 == Query: q61-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -6900,7 +6900,7 @@ GlobalLimit 100
                            +- Relation[i_item_sk#564,i_item_id#565,i_rec_start_date#566,i_rec_end_date#567,i_item_desc#568,i_current_price#569,i_wholesale_cost#570,i_brand_id#571,i_brand#572,i_class_id#573,i_class#574,i_category_id#575,i_category#576,i_manufact_id#577,i_manufact#578,i_size#579,i_formulation#580,i_color#581,i_units#582,i_container#583,i_manager_id#584,i_product_name#585] parquet
 
      : benchmark
-19/09/08 19:54:33 INFO Query: 
+19/09/08 19:54:33 INFO Query:
 == Query: q61-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -6954,7 +6954,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 31.13008249s
 Running execution q62-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:55:06 INFO Query: 
+19/09/08 19:55:06 INFO Query:
 == Query: q62-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -6978,7 +6978,7 @@ GlobalLimit 100
                      +- Relation[d_date_sk#492,d_date_id#493,d_date#494,d_month_seq#495,d_week_seq#496,d_quarter_seq#497,d_year#498,d_dow#499,d_moy#500,d_dom#501,d_qoy#502,d_fy_year#503,d_fy_quarter_seq#504,d_fy_week_seq#505,d_day_name#506,d_quarter_name#507,d_holiday#508,d_weekend#509,d_following_holiday#510,d_first_dom#511,d_last_dom#512,d_same_day_ly#513,d_same_day_lq#514,d_current_day#515,... 4 more fields] parquet
 
      : benchmark
-19/09/08 19:55:06 INFO Query: 
+19/09/08 19:55:06 INFO Query:
 == Query: q62-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -7004,7 +7004,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 6.232561967s
 Running execution q63-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:55:13 INFO Query: 
+19/09/08 19:55:13 INFO Query:
 == Query: q63-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -7030,7 +7030,7 @@ GlobalLimit 100
                                     +- Relation[s_store_sk#664,s_store_id#665,s_rec_start_date#666,s_rec_end_date#667,s_closed_date_sk#668,s_store_name#669,s_number_employees#670,s_floor_space#671,s_hours#672,s_manager#673,s_market_id#674,s_geography_class#675,s_market_desc#676,s_market_manager#677,s_division_id#678,s_division_name#679,s_company_id#680,s_company_name#681,s_street_number#682,s_street_name#683,s_street_type#684,s_suite_number#685,s_city#686,s_county#687,... 5 more fields] parquet
 
      : benchmark
-19/09/08 19:55:13 INFO Query: 
+19/09/08 19:55:13 INFO Query:
 == Query: q63-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -7058,7 +7058,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 10.779687615999999s
 Running execution q64-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:55:33 INFO Query: 
+19/09/08 19:55:33 INFO Query:
 == Query: q64-v2.4 ==
 Sort [product_name#38826 ASC NULLS FIRST, store_name#38828 ASC NULLS FIRST, cnt#38963L ASC NULLS FIRST], true
 +- Project [product_name#38826, store_name#38828, store_zip#38829, b_street_number#38830, b_streen_name#38831, b_city#38832, b_zip#38833, c_street_number#38834, c_street_name#38835, c_city#38836, c_zip#38837, syear#38838, cnt#38841L, s1#38842, s2#38843, s3#38844, s1#38964, s2#38965, s3#38966, syear#38960, cnt#38963L]
@@ -7218,7 +7218,7 @@ Sort [product_name#38826 ASC NULLS FIRST, store_name#38828 ASC NULLS FIRST, cnt#
                            +- Relation[i_item_sk#564,i_item_id#565,i_rec_start_date#566,i_rec_end_date#567,i_item_desc#568,i_current_price#569,i_wholesale_cost#570,i_brand_id#571,i_brand#572,i_class_id#573,i_class#574,i_category_id#575,i_category#576,i_manufact_id#577,i_manufact#578,i_size#579,i_formulation#580,i_color#581,i_units#582,i_container#583,i_manager_id#584,i_product_name#585] parquet
 
      : benchmark
-19/09/08 19:55:33 INFO Query: 
+19/09/08 19:55:33 INFO Query:
 == Query: q64-v2.4 ==
 Sort [product_name#38994 ASC NULLS FIRST, store_name#38996 ASC NULLS FIRST, cnt#39131L ASC NULLS FIRST], true
 +- Project [product_name#38994, store_name#38996, store_zip#38997, b_street_number#38998, b_streen_name#38999, b_city#39000, b_zip#39001, c_street_number#39002, c_street_name#39003, c_city#39004, c_zip#39005, syear#39006, cnt#39009L, s1#39010, s2#39011, s3#39012, s1#39132, s2#39133, s3#39134, syear#39128, cnt#39131L]
@@ -7380,7 +7380,7 @@ Sort [product_name#38994 ASC NULLS FIRST, store_name#38996 ASC NULLS FIRST, cnt#
       running Thread[benchmark runner,5,main]
 Execution time: 245.426133703s
 Running execution q65-v2.4 iteration: 1, StandardRun=true
-19/09/08 19:59:48 INFO Query: 
+19/09/08 19:59:48 INFO Query:
 == Query: q65-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -7414,7 +7414,7 @@ GlobalLimit 100
                               +- Relation[d_date_sk#492,d_date_id#493,d_date#494,d_month_seq#495,d_week_seq#496,d_quarter_seq#497,d_year#498,d_dow#499,d_moy#500,d_dom#501,d_qoy#502,d_fy_year#503,d_fy_quarter_seq#504,d_fy_week_seq#505,d_day_name#506,d_quarter_name#507,d_holiday#508,d_weekend#509,d_following_holiday#510,d_first_dom#511,d_last_dom#512,d_same_day_ly#513,d_same_day_lq#514,d_current_day#515,... 4 more fields] parquet
 
      : benchmark
-19/09/08 19:59:48 INFO Query: 
+19/09/08 19:59:48 INFO Query:
 == Query: q65-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -7450,7 +7450,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 42.688935275999995s
 Running execution q66-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:00:32 INFO Query: 
+19/09/08 20:00:32 INFO Query:
 == Query: q66-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -7493,7 +7493,7 @@ GlobalLimit 100
                               +- Relation[sm_ship_mode_sk#652,sm_ship_mode_id#653,sm_type#654,sm_code#655,sm_carrier#656,sm_contract#657] parquet
 
      : benchmark
-19/09/08 20:00:33 INFO Query: 
+19/09/08 20:00:33 INFO Query:
 == Query: q66-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -7538,7 +7538,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 18.295136364s
 Running execution q67-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:00:53 INFO Query: 
+19/09/08 20:00:53 INFO Query:
 == Query: q67-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -7568,7 +7568,7 @@ GlobalLimit 100
                                                 +- Relation[i_item_sk#564,i_item_id#565,i_rec_start_date#566,i_rec_end_date#567,i_item_desc#568,i_current_price#569,i_wholesale_cost#570,i_brand_id#571,i_brand#572,i_class_id#573,i_class#574,i_category_id#575,i_category#576,i_manufact_id#577,i_manufact#578,i_size#579,i_formulation#580,i_color#581,i_units#582,i_container#583,i_manager_id#584,i_product_name#585] parquet
 
      : benchmark
-19/09/08 20:00:53 INFO Query: 
+19/09/08 20:00:53 INFO Query:
 == Query: q67-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -7598,22 +7598,22 @@ GlobalLimit 100
                                                 +- Relation[i_item_sk#564,i_item_id#565,i_rec_start_date#566,i_rec_end_date#567,i_item_desc#568,i_current_price#569,i_wholesale_cost#570,i_brand_id#571,i_brand#572,i_class_id#573,i_class#574,i_category_id#575,i_category#576,i_manufact_id#577,i_manufact#578,i_size#579,i_formulation#580,i_color#581,i_units#582,i_container#583,i_manager_id#584,i_product_name#585] parquet
 
       running Thread[benchmark runner,5,main]
-19/09/08 20:09:39 ERROR TaskSchedulerImpl: Lost executor 63 on 192.168.35.237: 
+19/09/08 20:09:39 ERROR TaskSchedulerImpl: Lost executor 63 on 192.168.35.237:
 The executor with id 63 exited with exit code -1.
 The API gave the following brief reason: Evicted
-The API gave the following message: The node was low on resource: ephemeral-storage. Container executor was using 8164Ki, which exceeds its request of 0. 
+The API gave the following message: The node was low on resource: ephemeral-storage. Container executor was using 8164Ki, which exceeds its request of 0.
 The API gave the following container statuses:
 
 
-      
-19/09/08 20:09:39 WARN TaskSetManager: Lost task 103.0 in stage 884.0 (TID 212570, 192.168.35.237, executor 63): ExecutorLostFailure (executor 63 exited caused by one of the running tasks) Reason: 
+
+19/09/08 20:09:39 WARN TaskSetManager: Lost task 103.0 in stage 884.0 (TID 212570, 192.168.35.237, executor 63): ExecutorLostFailure (executor 63 exited caused by one of the running tasks) Reason:
 The executor with id 63 exited with exit code -1.
 The API gave the following brief reason: Evicted
-The API gave the following message: The node was low on resource: ephemeral-storage. Container executor was using 8164Ki, which exceeds its request of 0. 
+The API gave the following message: The node was low on resource: ephemeral-storage. Container executor was using 8164Ki, which exceeds its request of 0.
 The API gave the following container statuses:
 
 
-      
+
 19/09/08 20:09:48 WARN TransportChannelHandler: Exception in connection from /192.168.35.237:60686
 java.io.IOException: Connection reset by peer
 	at sun.nio.ch.FileDispatcherImpl.read0(Native Method)
@@ -7702,7 +7702,7 @@ Caused by: java.net.NoRouteToHostException: Host is unreachable
 )
 Execution time: 1120.3789339149998s
 Running execution q68-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:19:35 INFO Query: 
+19/09/08 20:19:35 INFO Query:
 == Query: q68-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -7735,7 +7735,7 @@ GlobalLimit 100
                      +- Relation[ca_address_sk#448,ca_address_id#449,ca_street_number#450,ca_street_name#451,ca_street_type#452,ca_suite_number#453,ca_city#454,ca_county#455,ca_state#456,ca_zip#457,ca_country#458,ca_gmt_offset#459,ca_location_type#460] parquet
 
      : benchmark
-19/09/08 20:19:35 INFO Query: 
+19/09/08 20:19:35 INFO Query:
 == Query: q68-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -7770,7 +7770,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 24.226195135999998s
 Running execution q69-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:20:01 INFO Query: 
+19/09/08 20:20:01 INFO Query:
 == Query: q69-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -7810,7 +7810,7 @@ GlobalLimit 100
                   +- Relation[cd_demo_sk#474,cd_gender#475,cd_marital_status#476,cd_education_status#477,cd_purchase_estimate#478,cd_credit_rating#479,cd_dep_count#480,cd_dep_employed_count#481,cd_dep_college_count#482] parquet
 
      : benchmark
-19/09/08 20:20:01 INFO Query: 
+19/09/08 20:20:01 INFO Query:
 == Query: q69-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -7852,7 +7852,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 21.43007834s
 Running execution q70-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:20:24 INFO Query: 
+19/09/08 20:20:24 INFO Query:
 == Query: q70-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -7891,7 +7891,7 @@ GlobalLimit 100
                                  +- Relation[s_store_sk#664,s_store_id#665,s_rec_start_date#666,s_rec_end_date#667,s_closed_date_sk#668,s_store_name#669,s_number_employees#670,s_floor_space#671,s_hours#672,s_manager#673,s_market_id#674,s_geography_class#675,s_market_desc#676,s_market_manager#677,s_division_id#678,s_division_name#679,s_company_id#680,s_company_name#681,s_street_number#682,s_street_name#683,s_street_type#684,s_suite_number#685,s_city#686,s_county#687,... 5 more fields] parquet
 
      : benchmark
-19/09/08 20:20:24 INFO Query: 
+19/09/08 20:20:24 INFO Query:
 == Query: q70-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -7932,7 +7932,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 18.634678622s
 Running execution q71-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:20:44 INFO Query: 
+19/09/08 20:20:44 INFO Query:
 == Query: q71-v2.4 ==
 Project [brand_id#41966, brand#41967, t_hour#725, t_minute#726, ext_price#41968]
 +- Sort [ext_price#41968 DESC NULLS LAST, brand_id#41966 ASC NULLS FIRST], true
@@ -7970,7 +7970,7 @@ Project [brand_id#41966, brand#41967, t_hour#725, t_minute#726, ext_price#41968]
                +- Relation[t_time_sk#722,t_time_id#723,t_time#724,t_hour#725,t_minute#726,t_second#727,t_am_pm#728,t_shift#729,t_sub_shift#730,t_meal_time#731] parquet
 
      : benchmark
-19/09/08 20:20:44 INFO Query: 
+19/09/08 20:20:44 INFO Query:
 == Query: q71-v2.4 ==
 Project [brand_id#41990, brand#41991, t_hour#725, t_minute#726, ext_price#41992]
 +- Sort [ext_price#41992 DESC NULLS LAST, brand_id#41990 ASC NULLS FIRST], true
@@ -8010,7 +8010,7 @@ Project [brand_id#41990, brand#41991, t_hour#725, t_minute#726, ext_price#41992]
       running Thread[benchmark runner,5,main]
 Execution time: 21.102209701s
 Running execution q72-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:21:07 INFO Query: 
+19/09/08 20:21:07 INFO Query:
 == Query: q72-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -8054,7 +8054,7 @@ GlobalLimit 100
                   +- Relation[cr_returned_date_sk#68,cr_returned_time_sk#69,cr_item_sk#70,cr_refunded_customer_sk#71,cr_refunded_cdemo_sk#72,cr_refunded_hdemo_sk#73,cr_refunded_addr_sk#74,cr_returning_customer_sk#75,cr_returning_cdemo_sk#76,cr_returning_hdemo_sk#77,cr_returning_addr_sk#78,cr_call_center_sk#79,cr_catalog_page_sk#80,cr_ship_mode_sk#81,cr_warehouse_sk#82,cr_reason_sk#83,cr_order_number#84L,cr_return_quantity#85,cr_return_amount#86,cr_return_tax#87,cr_return_amt_inc_tax#88,cr_fee#89,cr_return_ship_cost#90,cr_refunded_cash#91,... 3 more fields] parquet
 
      : benchmark
-19/09/08 20:21:07 INFO Query: 
+19/09/08 20:21:07 INFO Query:
 == Query: q72-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -8100,7 +8100,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 862.3219775059999s
 Running execution q73-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:35:32 INFO Query: 
+19/09/08 20:35:32 INFO Query:
 == Query: q73-v2.4 ==
 Sort [cnt#42436L DESC NULLS LAST, c_last_name#421 ASC NULLS FIRST], true
 +- Project [c_last_name#421, c_first_name#420, c_salutation#419, c_preferred_cust_flag#422, ss_ticket_number#139L, cnt#42436L]
@@ -8124,7 +8124,7 @@ Sort [cnt#42436L DESC NULLS LAST, c_last_name#421 ASC NULLS FIRST], true
             +- Relation[c_customer_sk#412,c_customer_id#413,c_current_cdemo_sk#414,c_current_hdemo_sk#415,c_current_addr_sk#416,c_first_shipto_date_sk#417,c_first_sales_date_sk#418,c_salutation#419,c_first_name#420,c_last_name#421,c_preferred_cust_flag#422,c_birth_day#423,c_birth_month#424,c_birth_year#425,c_birth_country#426,c_login#427,c_email_address#428,c_last_review_date#429] parquet
 
      : benchmark
-19/09/08 20:35:32 INFO Query: 
+19/09/08 20:35:32 INFO Query:
 == Query: q73-v2.4 ==
 Sort [cnt#42444L DESC NULLS LAST, c_last_name#421 ASC NULLS FIRST], true
 +- Project [c_last_name#421, c_first_name#420, c_salutation#419, c_preferred_cust_flag#422, ss_ticket_number#139L, cnt#42444L]
@@ -8150,7 +8150,7 @@ Sort [cnt#42444L DESC NULLS LAST, c_last_name#421 ASC NULLS FIRST], true
       running Thread[benchmark runner,5,main]
 Execution time: 11.641086328s
 Running execution q74-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:35:45 INFO Query: 
+19/09/08 20:35:45 INFO Query:
 == Query: q74-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -8254,7 +8254,7 @@ GlobalLimit 100
                                     +- Relation[d_date_sk#492,d_date_id#493,d_date#494,d_month_seq#495,d_week_seq#496,d_quarter_seq#497,d_year#498,d_dow#499,d_moy#500,d_dom#501,d_qoy#502,d_fy_year#503,d_fy_quarter_seq#504,d_fy_week_seq#505,d_day_name#506,d_quarter_name#507,d_holiday#508,d_weekend#509,d_following_holiday#510,d_first_dom#511,d_last_dom#512,d_same_day_ly#513,d_same_day_lq#514,d_current_day#515,... 4 more fields] parquet
 
      : benchmark
-19/09/08 20:35:45 INFO Query: 
+19/09/08 20:35:45 INFO Query:
 == Query: q74-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -8360,7 +8360,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 76.107969952s
 Running execution q75-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:37:05 INFO Query: 
+19/09/08 20:37:05 INFO Query:
 == Query: q75-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -8464,7 +8464,7 @@ GlobalLimit 100
                                              +- Relation[wr_returned_date_sk#284,wr_returned_time_sk#285,wr_item_sk#286,wr_refunded_customer_sk#287,wr_refunded_cdemo_sk#288,wr_refunded_hdemo_sk#289,wr_refunded_addr_sk#290,wr_returning_customer_sk#291,wr_returning_cdemo_sk#292,wr_returning_hdemo_sk#293,wr_returning_addr_sk#294,wr_web_page_sk#295,wr_reason_sk#296,wr_order_number#297L,wr_return_quantity#298,wr_return_amt#299,wr_return_tax#300,wr_return_amt_inc_tax#301,wr_fee#302,wr_return_ship_cost#303,wr_refunded_cash#304,wr_reversed_charge#305,wr_account_credit#306,wr_net_loss#307] parquet
 
      : benchmark
-19/09/08 20:37:05 INFO Query: 
+19/09/08 20:37:05 INFO Query:
 == Query: q75-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -8570,7 +8570,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 79.18383936s
 Running execution q76-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:38:27 INFO Query: 
+19/09/08 20:38:27 INFO Query:
 == Query: q76-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -8612,7 +8612,7 @@ GlobalLimit 100
                               +- Relation[d_date_sk#492,d_date_id#493,d_date#494,d_month_seq#495,d_week_seq#496,d_quarter_seq#497,d_year#498,d_dow#499,d_moy#500,d_dom#501,d_qoy#502,d_fy_year#503,d_fy_quarter_seq#504,d_fy_week_seq#505,d_day_name#506,d_quarter_name#507,d_holiday#508,d_weekend#509,d_following_holiday#510,d_first_dom#511,d_last_dom#512,d_same_day_ly#513,d_same_day_lq#514,d_current_day#515,... 4 more fields] parquet
 
      : benchmark
-19/09/08 20:38:27 INFO Query: 
+19/09/08 20:38:27 INFO Query:
 == Query: q76-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -8656,7 +8656,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 19.311681229999998s
 Running execution q77-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:38:48 INFO Query: 
+19/09/08 20:38:48 INFO Query:
 == Query: q77-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -8739,7 +8739,7 @@ GlobalLimit 100
                                              +- Relation[wp_web_page_sk#45105,wp_web_page_id#45106,wp_rec_start_date#45107,wp_rec_end_date#45108,wp_creation_date_sk#45109,wp_access_date_sk#45110,wp_autogen_flag#45111,wp_customer_sk#45112,wp_url#45113,wp_type#45114,wp_char_count#45115,wp_link_count#45116,wp_image_count#45117,wp_max_ad_count#45118] parquet
 
      : benchmark
-19/09/08 20:38:48 INFO Query: 
+19/09/08 20:38:48 INFO Query:
 == Query: q77-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -8826,7 +8826,7 @@ GlobalLimit 100
 19/09/08 20:39:19 WARN AsyncEventQueue: Dropped 1 events from appStatus since Thu Jan 01 00:00:00 GMT 1970.
 Execution time: 43.143638419000006s
 Running execution q78-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:39:34 INFO Query: 
+19/09/08 20:39:34 INFO Query:
 == Query: q78-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -8871,7 +8871,7 @@ GlobalLimit 100
                                  +- Relation[d_date_sk#492,d_date_id#493,d_date#494,d_month_seq#495,d_week_seq#496,d_quarter_seq#497,d_year#498,d_dow#499,d_moy#500,d_dom#501,d_qoy#502,d_fy_year#503,d_fy_quarter_seq#504,d_fy_week_seq#505,d_day_name#506,d_quarter_name#507,d_holiday#508,d_weekend#509,d_following_holiday#510,d_first_dom#511,d_last_dom#512,d_same_day_ly#513,d_same_day_lq#514,d_current_day#515,... 4 more fields] parquet
 
      : benchmark
-19/09/08 20:39:34 INFO Query: 
+19/09/08 20:39:34 INFO Query:
 == Query: q78-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -8918,7 +8918,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 199.241106548s
 Running execution q79-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:42:56 INFO Query: 
+19/09/08 20:42:56 INFO Query:
 == Query: q79-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -8945,7 +8945,7 @@ GlobalLimit 100
                      +- Relation[c_customer_sk#412,c_customer_id#413,c_current_cdemo_sk#414,c_current_hdemo_sk#415,c_current_addr_sk#416,c_first_shipto_date_sk#417,c_first_sales_date_sk#418,c_salutation#419,c_first_name#420,c_last_name#421,c_preferred_cust_flag#422,c_birth_day#423,c_birth_month#424,c_birth_year#425,c_birth_country#426,c_login#427,c_email_address#428,c_last_review_date#429] parquet
 
      : benchmark
-19/09/08 20:42:56 INFO Query: 
+19/09/08 20:42:56 INFO Query:
 == Query: q79-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -8974,7 +8974,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 17.668151162999997s
 Running execution q80-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:43:16 INFO Query: 
+19/09/08 20:43:16 INFO Query:
 == Query: q80-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -9050,7 +9050,7 @@ GlobalLimit 100
                                        +- Relation[p_promo_sk#608,p_promo_id#609,p_start_date_sk#610,p_end_date_sk#611,p_item_sk#612,p_cost#613,p_response_target#614,p_promo_name#615,p_channel_dmail#616,p_channel_email#617,p_channel_catalog#618,p_channel_tv#619,p_channel_radio#620,p_channel_press#621,p_channel_event#622,p_channel_demo#623,p_channel_details#624,p_purpose#625,p_discount_active#626] parquet
 
      : benchmark
-19/09/08 20:43:16 INFO Query: 
+19/09/08 20:43:16 INFO Query:
 == Query: q80-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -9128,7 +9128,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 238.896095973s
 Running execution q81-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:47:18 INFO Query: 
+19/09/08 20:47:18 INFO Query:
 == Query: q81-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -9169,7 +9169,7 @@ GlobalLimit 100
                   +- Relation[c_customer_sk#412,c_customer_id#413,c_current_cdemo_sk#414,c_current_hdemo_sk#415,c_current_addr_sk#416,c_first_shipto_date_sk#417,c_first_sales_date_sk#418,c_salutation#419,c_first_name#420,c_last_name#421,c_preferred_cust_flag#422,c_birth_day#423,c_birth_month#424,c_birth_year#425,c_birth_country#426,c_login#427,c_email_address#428,c_last_review_date#429] parquet
 
      : benchmark
-19/09/08 20:47:18 INFO Query: 
+19/09/08 20:47:18 INFO Query:
 == Query: q81-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -9212,7 +9212,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 15.710097449000001s
 Running execution q82-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:47:35 INFO Query: 
+19/09/08 20:47:35 INFO Query:
 == Query: q82-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -9232,7 +9232,7 @@ GlobalLimit 100
                   +- Relation[ss_sold_date_sk#130,ss_sold_time_sk#131,ss_item_sk#132,ss_customer_sk#133,ss_cdemo_sk#134,ss_hdemo_sk#135,ss_addr_sk#136,ss_store_sk#137,ss_promo_sk#138,ss_ticket_number#139L,ss_quantity#140,ss_wholesale_cost#141,ss_list_price#142,ss_sales_price#143,ss_ext_discount_amt#144,ss_ext_sales_price#145,ss_ext_wholesale_cost#146,ss_ext_list_price#147,ss_ext_tax#148,ss_coupon_amt#149,ss_net_paid#150,ss_net_paid_inc_tax#151,ss_net_profit#152] parquet
 
      : benchmark
-19/09/08 20:47:35 INFO Query: 
+19/09/08 20:47:35 INFO Query:
 == Query: q82-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -9254,7 +9254,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 22.478024752s
 Running execution q83-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:47:59 INFO Query: 
+19/09/08 20:47:59 INFO Query:
 == Query: q83-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -9322,7 +9322,7 @@ GlobalLimit 100
                               +- Relation[d_date_sk#492,d_date_id#493,d_date#494,d_month_seq#495,d_week_seq#496,d_quarter_seq#497,d_year#498,d_dow#499,d_moy#500,d_dom#501,d_qoy#502,d_fy_year#503,d_fy_quarter_seq#504,d_fy_week_seq#505,d_day_name#506,d_quarter_name#507,d_holiday#508,d_weekend#509,d_following_holiday#510,d_first_dom#511,d_last_dom#512,d_same_day_ly#513,d_same_day_lq#514,d_current_day#515,... 4 more fields] parquet
 
      : benchmark
-19/09/08 20:47:59 INFO Query: 
+19/09/08 20:47:59 INFO Query:
 == Query: q83-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -9392,7 +9392,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 7.117994879s
 Running execution q84-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:48:08 INFO Query: 
+19/09/08 20:48:08 INFO Query:
 == Query: q84-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -9419,7 +9419,7 @@ GlobalLimit 100
                      +- Relation[sr_returned_date_sk#176,sr_return_time_sk#177,sr_item_sk#178,sr_customer_sk#179,sr_cdemo_sk#180,sr_hdemo_sk#181,sr_addr_sk#182,sr_store_sk#183,sr_reason_sk#184,sr_ticket_number#185L,sr_return_quantity#186,sr_return_amt#187,sr_return_tax#188,sr_return_amt_inc_tax#189,sr_fee#190,sr_return_ship_cost#191,sr_refunded_cash#192,sr_reversed_charge#193,sr_store_credit#194,sr_net_loss#195] parquet
 
      : benchmark
-19/09/08 20:48:08 INFO Query: 
+19/09/08 20:48:08 INFO Query:
 == Query: q84-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -9448,7 +9448,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 9.047903872000001s
 Running execution q85-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:48:19 INFO Query: 
+19/09/08 20:48:19 INFO Query:
 == Query: q85-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -9483,7 +9483,7 @@ GlobalLimit 100
                      +- Relation[r_reason_sk#646,r_reason_id#647,r_reason_desc#648] parquet
 
      : benchmark
-19/09/08 20:48:19 INFO Query: 
+19/09/08 20:48:19 INFO Query:
 == Query: q85-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -9520,7 +9520,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 38.842938280000006s
 Running execution q86-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:49:00 INFO Query: 
+19/09/08 20:49:00 INFO Query:
 == Query: q86-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -9543,7 +9543,7 @@ GlobalLimit 100
                                  +- Relation[i_item_sk#564,i_item_id#565,i_rec_start_date#566,i_rec_end_date#567,i_item_desc#568,i_current_price#569,i_wholesale_cost#570,i_brand_id#571,i_brand#572,i_class_id#573,i_class#574,i_category_id#575,i_category#576,i_manufact_id#577,i_manufact#578,i_size#579,i_formulation#580,i_color#581,i_units#582,i_container#583,i_manager_id#584,i_product_name#585] parquet
 
      : benchmark
-19/09/08 20:49:00 INFO Query: 
+19/09/08 20:49:00 INFO Query:
 == Query: q86-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -9568,7 +9568,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 6.456901987999999s
 Running execution q87-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:49:08 INFO Query: 
+19/09/08 20:49:08 INFO Query:
 == Query: q87-v2.4 ==
 Aggregate [count(1) AS count(1)#47022L]
 +- SubqueryAlias `cool_cust`
@@ -9613,7 +9613,7 @@ Aggregate [count(1) AS count(1)#47022L]
                         +- Relation[c_customer_sk#47004,c_customer_id#47005,c_current_cdemo_sk#47006,c_current_hdemo_sk#47007,c_current_addr_sk#47008,c_first_shipto_date_sk#47009,c_first_sales_date_sk#47010,c_salutation#47011,c_first_name#47012,c_last_name#47013,c_preferred_cust_flag#47014,c_birth_day#47015,c_birth_month#47016,c_birth_year#47017,c_birth_country#47018,c_login#47019,c_email_address#47020,c_last_review_date#47021] parquet
 
      : benchmark
-19/09/08 20:49:08 INFO Query: 
+19/09/08 20:49:08 INFO Query:
 == Query: q87-v2.4 ==
 Aggregate [count(1) AS count(1)#47153L]
 +- SubqueryAlias `cool_cust`
@@ -9660,7 +9660,7 @@ Aggregate [count(1) AS count(1)#47153L]
       running Thread[benchmark runner,5,main]
 Execution time: 34.824497576s
 Running execution q88-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:49:45 INFO Query: 
+19/09/08 20:49:45 INFO Query:
 == Query: q88-v2.4 ==
 Project [h8_30_to_9#47460L, h9_to_9_30#47461L, h9_30_to_10#47462L, h10_to_10_30#47463L, h10_30_to_11#47464L, h11_to_11_30#47465L, h11_30_to_12#47466L, h12_to_12_30#47467L]
 +- Join Cross
@@ -9784,7 +9784,7 @@ Project [h8_30_to_9#47460L, h9_to_9_30#47461L, h9_30_to_10#47462L, h10_to_10_30#
                   +- Relation[s_store_sk#664,s_store_id#665,s_rec_start_date#666,s_rec_end_date#667,s_closed_date_sk#668,s_store_name#669,s_number_employees#670,s_floor_space#671,s_hours#672,s_manager#673,s_market_id#674,s_geography_class#675,s_market_desc#676,s_market_manager#677,s_division_id#678,s_division_name#679,s_company_id#680,s_company_name#681,s_street_number#682,s_street_name#683,s_street_type#684,s_suite_number#685,s_city#686,s_county#687,... 5 more fields] parquet
 
      : benchmark
-19/09/08 20:49:45 INFO Query: 
+19/09/08 20:49:45 INFO Query:
 == Query: q88-v2.4 ==
 Project [h8_30_to_9#47484L, h9_to_9_30#47485L, h9_30_to_10#47486L, h10_to_10_30#47487L, h10_30_to_11#47488L, h11_to_11_30#47489L, h11_30_to_12#47490L, h12_to_12_30#47491L]
 +- Join Cross
@@ -9910,7 +9910,7 @@ Project [h8_30_to_9#47484L, h9_to_9_30#47485L, h9_30_to_10#47486L, h10_to_10_30#
       running Thread[benchmark runner,5,main]
 Execution time: 43.210822316s
 Running execution q89-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:50:31 INFO Query: 
+19/09/08 20:50:31 INFO Query:
 == Query: q89-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -9936,7 +9936,7 @@ GlobalLimit 100
                                     +- Relation[s_store_sk#664,s_store_id#665,s_rec_start_date#666,s_rec_end_date#667,s_closed_date_sk#668,s_store_name#669,s_number_employees#670,s_floor_space#671,s_hours#672,s_manager#673,s_market_id#674,s_geography_class#675,s_market_desc#676,s_market_manager#677,s_division_id#678,s_division_name#679,s_company_id#680,s_company_name#681,s_street_number#682,s_street_name#683,s_street_type#684,s_suite_number#685,s_city#686,s_county#687,... 5 more fields] parquet
 
      : benchmark
-19/09/08 20:50:31 INFO Query: 
+19/09/08 20:50:31 INFO Query:
 == Query: q89-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -9964,7 +9964,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 12.734765627s
 Running execution q90-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:50:45 INFO Query: 
+19/09/08 20:50:45 INFO Query:
 == Query: q90-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -10001,7 +10001,7 @@ GlobalLimit 100
                            +- Relation[wp_web_page_sk#770,wp_web_page_id#771,wp_rec_start_date#772,wp_rec_end_date#773,wp_creation_date_sk#774,wp_access_date_sk#775,wp_autogen_flag#776,wp_customer_sk#777,wp_url#778,wp_type#779,wp_char_count#780,wp_link_count#781,wp_image_count#782,wp_max_ad_count#783] parquet
 
      : benchmark
-19/09/08 20:50:45 INFO Query: 
+19/09/08 20:50:45 INFO Query:
 == Query: q90-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -10040,7 +10040,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 4.897564604s
 Running execution q91-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:50:51 INFO Query: 
+19/09/08 20:50:51 INFO Query:
 == Query: q91-v2.4 ==
 Project [Call_Center#47700, Call_Center_Name#47701, Manager#47702, Returns_Loss#47703]
 +- Sort [Returns_Loss#47703 DESC NULLS LAST], true
@@ -10068,7 +10068,7 @@ Project [Call_Center#47700, Call_Center_Name#47701, Manager#47702, Returns_Loss#
                +- Relation[hd_demo_sk#548,hd_income_band_sk#549,hd_buy_potential#550,hd_dep_count#551,hd_vehicle_count#552] parquet
 
      : benchmark
-19/09/08 20:50:51 INFO Query: 
+19/09/08 20:50:51 INFO Query:
 == Query: q91-v2.4 ==
 Project [Call_Center#47711, Call_Center_Name#47712, Manager#47713, Returns_Loss#47714]
 +- Sort [Returns_Loss#47714 DESC NULLS LAST], true
@@ -10098,7 +10098,7 @@ Project [Call_Center#47711, Call_Center_Name#47712, Manager#47713, Returns_Loss#
       running Thread[benchmark runner,5,main]
 Execution time: 6.420881388s
 Running execution q92-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:50:59 INFO Query: 
+19/09/08 20:50:59 INFO Query:
 == Query: q92-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -10123,7 +10123,7 @@ GlobalLimit 100
                      +- Relation[d_date_sk#492,d_date_id#493,d_date#494,d_month_seq#495,d_week_seq#496,d_quarter_seq#497,d_year#498,d_dow#499,d_moy#500,d_dom#501,d_qoy#502,d_fy_year#503,d_fy_quarter_seq#504,d_fy_week_seq#505,d_day_name#506,d_quarter_name#507,d_holiday#508,d_weekend#509,d_following_holiday#510,d_first_dom#511,d_last_dom#512,d_same_day_ly#513,d_same_day_lq#514,d_current_day#515,... 4 more fields] parquet
 
      : benchmark
-19/09/08 20:50:59 INFO Query: 
+19/09/08 20:50:59 INFO Query:
 == Query: q92-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -10150,7 +10150,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 7.124258986s
 Running execution q93-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:51:07 INFO Query: 
+19/09/08 20:51:07 INFO Query:
 == Query: q93-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -10169,7 +10169,7 @@ GlobalLimit 100
                         +- Relation[r_reason_sk#646,r_reason_id#647,r_reason_desc#648] parquet
 
      : benchmark
-19/09/08 20:51:07 INFO Query: 
+19/09/08 20:51:07 INFO Query:
 == Query: q93-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -10190,7 +10190,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 117.77743446800001s
 Running execution q94-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:53:06 INFO Query: 
+19/09/08 20:53:06 INFO Query:
 == Query: q94-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -10222,7 +10222,7 @@ GlobalLimit 100
                      +- Relation[web_site_sk#798,web_site_id#799,web_rec_start_date#800,web_rec_end_date#801,web_name#802,web_open_date_sk#803,web_close_date_sk#804,web_class#805,web_manager#806,web_mkt_id#807,web_mkt_class#808,web_mkt_desc#809,web_market_manager#810,web_company_id#811,web_company_name#812,web_street_number#813,web_street_name#814,web_street_type#815,web_suite_number#816,web_city#817,web_county#818,web_state#819,web_zip#820,web_country#821,... 2 more fields] parquet
 
      : benchmark
-19/09/08 20:53:06 INFO Query: 
+19/09/08 20:53:06 INFO Query:
 == Query: q94-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -10256,7 +10256,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 31.436898175s
 Running execution q95-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:53:38 INFO Query: 
+19/09/08 20:53:38 INFO Query:
 == Query: q95-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -10304,7 +10304,7 @@ GlobalLimit 100
                      +- Relation[web_site_sk#798,web_site_id#799,web_rec_start_date#800,web_rec_end_date#801,web_name#802,web_open_date_sk#803,web_close_date_sk#804,web_class#805,web_manager#806,web_mkt_id#807,web_mkt_class#808,web_mkt_desc#809,web_market_manager#810,web_company_id#811,web_company_name#812,web_street_number#813,web_street_name#814,web_street_type#815,web_suite_number#816,web_city#817,web_county#818,web_state#819,web_zip#820,web_country#821,... 2 more fields] parquet
 
      : benchmark
-19/09/08 20:53:39 INFO Query: 
+19/09/08 20:53:39 INFO Query:
 == Query: q95-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -10354,7 +10354,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 150.939738029s
 Running execution q96-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:56:11 INFO Query: 
+19/09/08 20:56:11 INFO Query:
 == Query: q96-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -10375,7 +10375,7 @@ GlobalLimit 100
                      +- Relation[s_store_sk#664,s_store_id#665,s_rec_start_date#666,s_rec_end_date#667,s_closed_date_sk#668,s_store_name#669,s_number_employees#670,s_floor_space#671,s_hours#672,s_manager#673,s_market_id#674,s_geography_class#675,s_market_desc#676,s_market_manager#677,s_division_id#678,s_division_name#679,s_company_id#680,s_company_name#681,s_street_number#682,s_street_name#683,s_street_type#684,s_suite_number#685,s_city#686,s_county#687,... 5 more fields] parquet
 
      : benchmark
-19/09/08 20:56:11 INFO Query: 
+19/09/08 20:56:11 INFO Query:
 == Query: q96-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -10398,7 +10398,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 5.382990978s
 Running execution q97-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:56:17 INFO Query: 
+19/09/08 20:56:17 INFO Query:
 == Query: q97-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -10422,7 +10422,7 @@ GlobalLimit 100
                         +- Relation[d_date_sk#492,d_date_id#493,d_date#494,d_month_seq#495,d_week_seq#496,d_quarter_seq#497,d_year#498,d_dow#499,d_moy#500,d_dom#501,d_qoy#502,d_fy_year#503,d_fy_quarter_seq#504,d_fy_week_seq#505,d_day_name#506,d_quarter_name#507,d_holiday#508,d_weekend#509,d_following_holiday#510,d_first_dom#511,d_last_dom#512,d_same_day_ly#513,d_same_day_lq#514,d_current_day#515,... 4 more fields] parquet
 
      : benchmark
-19/09/08 20:56:17 INFO Query: 
+19/09/08 20:56:17 INFO Query:
 == Query: q97-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -10448,7 +10448,7 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 47.189862098s
 Running execution q98-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:57:05 INFO Query: 
+19/09/08 20:57:05 INFO Query:
 == Query: q98-v2.4 ==
 Project [i_item_desc#568, i_category#576, i_class#574, i_current_price#569, itemrevenue#48381, revenueratio#48382]
 +- Sort [i_category#576 ASC NULLS FIRST, i_class#574 ASC NULLS FIRST, i_item_id#565 ASC NULLS FIRST, i_item_desc#568 ASC NULLS FIRST, revenueratio#48382 ASC NULLS FIRST], true
@@ -10467,7 +10467,7 @@ Project [i_item_desc#568, i_category#576, i_class#574, i_current_price#569, item
                         +- Relation[d_date_sk#492,d_date_id#493,d_date#494,d_month_seq#495,d_week_seq#496,d_quarter_seq#497,d_year#498,d_dow#499,d_moy#500,d_dom#501,d_qoy#502,d_fy_year#503,d_fy_quarter_seq#504,d_fy_week_seq#505,d_day_name#506,d_quarter_name#507,d_holiday#508,d_weekend#509,d_following_holiday#510,d_first_dom#511,d_last_dom#512,d_same_day_ly#513,d_same_day_lq#514,d_current_day#515,... 4 more fields] parquet
 
      : benchmark
-19/09/08 20:57:05 INFO Query: 
+19/09/08 20:57:05 INFO Query:
 == Query: q98-v2.4 ==
 Project [i_item_desc#568, i_category#576, i_class#574, i_current_price#569, itemrevenue#48396, revenueratio#48397]
 +- Sort [i_category#576 ASC NULLS FIRST, i_class#574 ASC NULLS FIRST, i_item_id#565 ASC NULLS FIRST, i_item_desc#568 ASC NULLS FIRST, revenueratio#48397 ASC NULLS FIRST], true
@@ -10488,7 +10488,7 @@ Project [i_item_desc#568, i_category#576, i_class#574, i_current_price#569, item
       running Thread[benchmark runner,5,main]
 Execution time: 12.94930334s
 Running execution q99-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:57:19 INFO Query: 
+19/09/08 20:57:19 INFO Query:
 == Query: q99-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -10512,7 +10512,7 @@ GlobalLimit 100
                      +- Relation[d_date_sk#492,d_date_id#493,d_date#494,d_month_seq#495,d_week_seq#496,d_quarter_seq#497,d_year#498,d_dow#499,d_moy#500,d_dom#501,d_qoy#502,d_fy_year#503,d_fy_quarter_seq#504,d_fy_week_seq#505,d_day_name#506,d_quarter_name#507,d_holiday#508,d_weekend#509,d_following_holiday#510,d_first_dom#511,d_last_dom#512,d_same_day_ly#513,d_same_day_lq#514,d_current_day#515,... 4 more fields] parquet
 
      : benchmark
-19/09/08 20:57:19 INFO Query: 
+19/09/08 20:57:19 INFO Query:
 == Query: q99-v2.4 ==
 GlobalLimit 100
 +- LocalLimit 100
@@ -10538,14 +10538,14 @@ GlobalLimit 100
       running Thread[benchmark runner,5,main]
 Execution time: 9.276328302s
 Running execution ss_max-v2.4 iteration: 1, StandardRun=true
-19/09/08 20:57:29 INFO Query: 
+19/09/08 20:57:29 INFO Query:
 == Query: ss_max-v2.4 ==
 Aggregate [count(1) AS total#48639L, count(ss_sold_date_sk#130) AS not_null_total#48640L, count(distinct ss_sold_date_sk#130) AS unique_days#48641L, max(ss_sold_date_sk#130) AS max_ss_sold_date_sk#48642, max(ss_sold_time_sk#131) AS max_ss_sold_time_sk#48643, max(ss_item_sk#132) AS max_ss_item_sk#48644, max(ss_customer_sk#133) AS max_ss_customer_sk#48645, max(ss_cdemo_sk#134) AS max_ss_cdemo_sk#48646, max(ss_hdemo_sk#135) AS max_ss_hdemo_sk#48647, max(ss_addr_sk#136) AS max_ss_addr_sk#48648, max(ss_store_sk#137) AS max_ss_store_sk#48649, max(ss_promo_sk#138) AS max_ss_promo_sk#48650]
 +- SubqueryAlias `store_sales`
    +- Relation[ss_sold_date_sk#130,ss_sold_time_sk#131,ss_item_sk#132,ss_customer_sk#133,ss_cdemo_sk#134,ss_hdemo_sk#135,ss_addr_sk#136,ss_store_sk#137,ss_promo_sk#138,ss_ticket_number#139L,ss_quantity#140,ss_wholesale_cost#141,ss_list_price#142,ss_sales_price#143,ss_ext_discount_amt#144,ss_ext_sales_price#145,ss_ext_wholesale_cost#146,ss_ext_list_price#147,ss_ext_tax#148,ss_coupon_amt#149,ss_net_paid#150,ss_net_paid_inc_tax#151,ss_net_profit#152] parquet
 
      : benchmark
-19/09/08 20:57:29 INFO Query: 
+19/09/08 20:57:29 INFO Query:
 == Query: ss_max-v2.4 ==
 Aggregate [count(1) AS total#48675L, count(ss_sold_date_sk#130) AS not_null_total#48676L, count(distinct ss_sold_date_sk#130) AS unique_days#48677L, max(ss_sold_date_sk#130) AS max_ss_sold_date_sk#48678, max(ss_sold_time_sk#131) AS max_ss_sold_time_sk#48679, max(ss_item_sk#132) AS max_ss_item_sk#48680, max(ss_customer_sk#133) AS max_ss_customer_sk#48681, max(ss_cdemo_sk#134) AS max_ss_cdemo_sk#48682, max(ss_hdemo_sk#135) AS max_ss_hdemo_sk#48683, max(ss_addr_sk#136) AS max_ss_addr_sk#48684, max(ss_store_sk#137) AS max_ss_store_sk#48685, max(ss_promo_sk#138) AS max_ss_promo_sk#48686]
 +- SubqueryAlias `store_sales`

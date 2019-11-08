@@ -6,11 +6,10 @@ metadata:
 spec:
   type: Scala
   mode: cluster
-  image: seedjeffwan/spark:2.4.5-SNAPSHOT-examples
   sparkVersion: 2.4.5-SNAPSHOT
+  image: seedjeffwan/spark:2.4.5-SNAPSHOT-examples
   mainClass: com.amazonaws.eks.tpcds.BenchmarkSparkSQL
   mainApplicationFile: local:///opt/spark/examples/jars/eks-spark-examples-assembly-1.0.jar
-  mode: cluster
   arguments:
   # working directory where data table reside (must exists and have tables directly)
     - "s3a://spark-k8s-data/TPCDS-TEST-1T"
@@ -46,13 +45,19 @@ spec:
     "spark.hadoop.fs.s3a.path.style.access": "true"
     "spark.hadoop.fs.s3a.connection.maximum": "200"
     "spark.hadoop.fs.s3a.fast.upload": "true"
-    # S3A Committer
+    # S3A Committer bridge
+    "spark.hadoop.mapreduce.outputcommitter.factory.scheme.s3a": "org.apache.hadoop.fs.s3a.commit.S3ACommitterFactory"
+    # "spark.sql.sources.commitProtocolClass": "org.apache.spark.internal.io.cloud.PathOutputCommitProtocol"
+    # "spark.sql.parquet.output.committer.class": "org.apache.hadoop.mapreduce.lib.output.BindingPathOutputCommitter"
+    # Magic Committer
+    # "spark.hadoop.fs.s3a.committer.name": "magic"
+    # "spark.hadoop.fs.s3a.committer.magic.enabled": "true"
+    # "spark.hadoop.fs.s3a.metadatastore.impl": "org.apache.hadoop.fs.s3a.s3guard.DynamoDBMetadataStore"
+    # "spark.hadoop.fs.s3a.s3guard.ddb.region": "us-west-2"
+    # "spark.hadoop.fs.s3a.s3guard.ddb.table.create": "true"
+    # Staging Committer
     "spark.hadoop.fs.s3a.committer.name": "directory"
     "spark.hadoop.fs.s3a.committer.staging.conflict-mode": "append"
-    "spark.hadoop.mapreduce.outputcommitter.factory.scheme.s3a": "org.apache.hadoop.fs.s3a.commit.S3ACommitterFactory"
-    # History Server
-    "spark.eventLog.enabled": "true"
-    "spark.eventLog.dir": "s3a://spark-k8s-data/spark-history-server/" 
   driver:
     cores: 6
     coreLimit: "6144m"

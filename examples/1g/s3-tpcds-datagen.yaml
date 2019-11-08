@@ -1,4 +1,4 @@
-apiVersion: "sparkoperator.k8s.io/v1beta1"
+apiVersion: "sparkoperator.k8s.io/v1beta2"
 kind: SparkApplication
 metadata:
   name: tpcds-datagen-1g
@@ -6,11 +6,10 @@ metadata:
 spec:
   type: Scala
   mode: cluster
-  image: seedjeffwan/spark:2.4.5-SNAPSHOT-examples
   sparkVersion: 2.4.5-SNAPSHOT
+  image: seedjeffwan/spark:2.4.5-SNAPSHOT-examples
   mainClass: com.amazonaws.eks.tpcds.DataGenTPCDS
   mainApplicationFile: local:///opt/spark/examples/jars/eks-spark-examples-assembly-1.0.jar
-  mode: cluster
   arguments:
   # working directory to write data
     - "s3a://spark-k8s-data/TPCDS-TEST-1G"
@@ -38,22 +37,20 @@ spec:
     "spark.hadoop.fs.s3a.connection.maximum": "200"
     "spark.hadoop.fs.s3a.fast.upload": "true"
     # S3A Committer
+    "spark.hadoop.mapreduce.outputcommitter.factory.scheme.s3a": "org.apache.hadoop.fs.s3a.commit.S3ACommitterFactory"
     "spark.hadoop.fs.s3a.committer.name": "directory"
     "spark.hadoop.fs.s3a.committer.staging.conflict-mode": "append"
-    "spark.hadoop.mapreduce.outputcommitter.factory.scheme.s3a": "org.apache.hadoop.fs.s3a.commit.S3ACommitterFactory"
+    # Shuffle performance
+    "spark.kubernetes.local.dirs.tmpfs": "true"
   driver:
-    cores: 2
-    coreLimit: "2096m"
-    memory: "8000m"
-    labels:
-      version: 2.4.5-SNAPSHOT
+    cores: 4
+    coreLimit: "4096m"
+    memory: "4000m"
     serviceAccount: spark
   executor:
-    instances: 50
-    cores: 1
+    instances: 10
+    cores: 2
     memory: "8000m"
     memoryOverhead: 2g
-    labels:
-      version: 2.4.5-SNAPSHOT
   restartPolicy:
     type: Never

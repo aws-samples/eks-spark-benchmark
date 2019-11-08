@@ -4,12 +4,9 @@
 + mygid=0
 + set +e
 ++ getent passwd 0
-+ uidentry=root:x:0:0:root:/root:/bin/ash
++ uidentry=root:x:0:0:root:/root:/bin/bash
 + set -e
-+ '[' -z root:x:0:0:root:/root:/bin/ash ']'
-+ SPARK_K8S_CMD=driver
-+ case "$SPARK_K8S_CMD" in
-+ shift 1
++ '[' -z root:x:0:0:root:/root:/bin/bash ']'
 + SPARK_CLASSPATH=':/opt/spark/jars/*'
 + env
 + grep SPARK_JAVA_OPT_
@@ -17,321 +14,189 @@
 + sed 's/[^=]*=\(.*\)/\1/g'
 + readarray -t SPARK_EXECUTOR_JAVA_OPTS
 + '[' -n '' ']'
-+ '[' -n '' ']'
-+ PYSPARK_ARGS=
-+ '[' -n '' ']'
-+ R_ARGS=
-+ '[' -n '' ']'
 + '[' '' == 2 ']'
 + '[' '' == 3 ']'
-+ case "$SPARK_K8S_CMD" in
++ '[' -z ']'
++ case "$1" in
++ shift 1
 + CMD=("$SPARK_HOME/bin/spark-submit" --conf "spark.driver.bindAddress=$SPARK_DRIVER_BIND_ADDRESS" --deploy-mode client "$@")
-+ exec /sbin/tini -s -- /opt/spark/bin/spark-submit --conf spark.driver.bindAddress=192.168.50.210 --deploy-mode client --properties-file /opt/spark/conf/spark.properties --class com.amazonaws.eks.tpcds.DataGenTPCDS spark-internal s3a://spark-k8s-data/TPCDS-TEST-1T /opt/tpcds-kit/tools 1000 500 false false true
-19/09/07 23:47:54 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
++ exec /usr/bin/tini -s -- /opt/spark/bin/spark-submit --conf spark.driver.bindAddress=192.168.5.125 --deploy-mode client --properties-file /opt/spark/conf/spark.properties --class com.amazonaws.eks.tpcds.DataGenTPCDS spark-internal s3a://spark-k8s-data/TPCDS-TEST-1T /opt/tpcds-kit/tools 1000 500 false false true
+19/11/08 01:08:41 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
 DATA DIR is s3a://spark-k8s-data/TPCDS-TEST-1T
 Tools dsdgen executable located in /opt/tpcds-kit/tools
 Scale factor is 1000 GB
 Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
-19/09/07 23:47:54 INFO SparkContext: Running Spark version 2.4.5-SNAPSHOT
-19/09/07 23:47:54 INFO SparkContext: Submitted application: TPCDS DataGen 1000 GB
-19/09/07 23:47:54 INFO SecurityManager: Changing view acls to: root
-19/09/07 23:47:54 INFO SecurityManager: Changing modify acls to: root
-19/09/07 23:47:54 INFO SecurityManager: Changing view acls groups to: 
-19/09/07 23:47:54 INFO SecurityManager: Changing modify acls groups to: 
-19/09/07 23:47:54 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(root); groups with view permissions: Set(); users  with modify permissions: Set(root); groups with modify permissions: Set()
-19/09/07 23:47:55 INFO Utils: Successfully started service 'sparkDriver' on port 7078.
-19/09/07 23:47:55 INFO SparkEnv: Registering MapOutputTracker
-19/09/07 23:47:55 INFO SparkEnv: Registering BlockManagerMaster
-19/09/07 23:47:55 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
-19/09/07 23:47:55 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
-19/09/07 23:47:55 INFO DiskBlockManager: Created local directory at /var/data/spark-71afb42e-e4cb-4926-8bdb-b878c75b7225/blockmgr-e9b95e2a-9141-4773-afd7-4613aec38624
-19/09/07 23:47:55 INFO MemoryStore: MemoryStore started with capacity 4.0 GB
-19/09/07 23:47:55 INFO SparkEnv: Registering OutputCommitCoordinator
-19/09/07 23:47:55 INFO Utils: Successfully started service 'SparkUI' on port 4040.
-19/09/07 23:47:55 INFO SparkUI: Bound SparkUI to 0.0.0.0, and started at http://tpcds-datagen-1t-1567900069893-driver-svc.default.svc:4040
-19/09/07 23:47:55 INFO SparkContext: Added JAR file:///opt/spark/examples/jars/eks-spark-examples-assembly-1.0.jar at spark://tpcds-datagen-1t-1567900069893-driver-svc.default.svc:7078/jars/eks-spark-examples-assembly-1.0.jar with timestamp 1567900075501
-19/09/07 23:47:56 INFO ExecutorPodsAllocator: Going to request 5 executors from Kubernetes.
-19/09/07 23:47:56 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 7079.
-19/09/07 23:47:56 INFO NettyBlockTransferService: Server created on tpcds-datagen-1t-1567900069893-driver-svc.default.svc:7079
-19/09/07 23:47:56 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
-19/09/07 23:47:56 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, tpcds-datagen-1t-1567900069893-driver-svc.default.svc, 7079, None)
-19/09/07 23:47:56 INFO BlockManagerMasterEndpoint: Registering block manager tpcds-datagen-1t-1567900069893-driver-svc.default.svc:7079 with 4.0 GB RAM, BlockManagerId(driver, tpcds-datagen-1t-1567900069893-driver-svc.default.svc, 7079, None)
-19/09/07 23:47:56 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, tpcds-datagen-1t-1567900069893-driver-svc.default.svc, 7079, None)
-19/09/07 23:47:56 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, tpcds-datagen-1t-1567900069893-driver-svc.default.svc, 7079, None)
-19/09/07 23:47:59 INFO ExecutorPodsAllocator: Going to request 5 executors from Kubernetes.
-19/09/07 23:48:00 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.60.245:34502) with ID 3
-19/09/07 23:48:00 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.12.106:54662) with ID 2
-19/09/07 23:48:00 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.22.62:39702) with ID 4
-19/09/07 23:48:00 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.54.37:57954) with ID 1
-19/09/07 23:48:00 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.60.245:40143 with 4.3 GB RAM, BlockManagerId(3, 192.168.60.245, 40143, None)
-19/09/07 23:48:00 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.12.106:36561 with 4.3 GB RAM, BlockManagerId(2, 192.168.12.106, 36561, None)
-19/09/07 23:48:00 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.60.169:48140) with ID 5
-19/09/07 23:48:00 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.22.62:38889 with 4.3 GB RAM, BlockManagerId(4, 192.168.22.62, 38889, None)
-19/09/07 23:48:00 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.54.37:33521 with 4.3 GB RAM, BlockManagerId(1, 192.168.54.37, 33521, None)
-19/09/07 23:48:00 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.60.169:43907 with 4.3 GB RAM, BlockManagerId(5, 192.168.60.169, 43907, None)
-19/09/07 23:48:02 INFO ExecutorPodsAllocator: Going to request 5 executors from Kubernetes.
-19/09/07 23:48:02 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.56.202:43800) with ID 9
-19/09/07 23:48:02 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.13.164:54210) with ID 6
-19/09/07 23:48:02 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.10.107:34080) with ID 8
-19/09/07 23:48:02 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.35.237:58584) with ID 10
-19/09/07 23:48:02 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.10.107:44303 with 4.3 GB RAM, BlockManagerId(8, 192.168.10.107, 44303, None)
-19/09/07 23:48:02 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.13.164:45435 with 4.3 GB RAM, BlockManagerId(6, 192.168.13.164, 45435, None)
-19/09/07 23:48:02 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.56.202:42779 with 4.3 GB RAM, BlockManagerId(9, 192.168.56.202, 42779, None)
-19/09/07 23:48:02 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.35.237:45949 with 4.3 GB RAM, BlockManagerId(10, 192.168.35.237, 45949, None)
-19/09/07 23:48:02 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.8.56:56578) with ID 7
-19/09/07 23:48:02 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.8.56:40071 with 4.3 GB RAM, BlockManagerId(7, 192.168.8.56, 40071, None)
-19/09/07 23:48:05 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.31.109:39790) with ID 11
-19/09/07 23:48:05 INFO ExecutorPodsAllocator: Going to request 5 executors from Kubernetes.
-19/09/07 23:48:05 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.23.44:43156) with ID 12
-19/09/07 23:48:05 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.31.109:39365 with 4.3 GB RAM, BlockManagerId(11, 192.168.31.109, 39365, None)
-19/09/07 23:48:05 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.38.119:43894) with ID 13
-19/09/07 23:48:05 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.18.65:44314) with ID 14
-19/09/07 23:48:05 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.23.44:42689 with 4.3 GB RAM, BlockManagerId(12, 192.168.23.44, 42689, None)
-19/09/07 23:48:05 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.40.194:49942) with ID 15
-19/09/07 23:48:05 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.38.119:37901 with 4.3 GB RAM, BlockManagerId(13, 192.168.38.119, 37901, None)
-19/09/07 23:48:05 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.18.65:41217 with 4.3 GB RAM, BlockManagerId(14, 192.168.18.65, 41217, None)
-19/09/07 23:48:05 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.40.194:37619 with 4.3 GB RAM, BlockManagerId(15, 192.168.40.194, 37619, None)
-19/09/07 23:48:08 INFO ExecutorPodsAllocator: Going to request 5 executors from Kubernetes.
-19/09/07 23:48:08 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.4.243:34340) with ID 18
-19/09/07 23:48:08 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.49.98:33516) with ID 17
-19/09/07 23:48:08 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.17.58:56808) with ID 16
-19/09/07 23:48:08 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.43.229:47276) with ID 19
-19/09/07 23:48:08 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.4.243:36659 with 4.3 GB RAM, BlockManagerId(18, 192.168.4.243, 36659, None)
-19/09/07 23:48:08 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.49.98:32769 with 4.3 GB RAM, BlockManagerId(17, 192.168.49.98, 32769, None)
-19/09/07 23:48:08 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.17.58:36433 with 4.3 GB RAM, BlockManagerId(16, 192.168.17.58, 36433, None)
-19/09/07 23:48:08 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.43.229:43533 with 4.3 GB RAM, BlockManagerId(19, 192.168.43.229, 43533, None)
-19/09/07 23:48:08 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.25.84:46324) with ID 20
-19/09/07 23:48:09 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.25.84:46231 with 4.3 GB RAM, BlockManagerId(20, 192.168.25.84, 46231, None)
-19/09/07 23:48:11 INFO ExecutorPodsAllocator: Going to request 5 executors from Kubernetes.
-19/09/07 23:48:11 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.51.52:55888) with ID 22
-19/09/07 23:48:11 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.8.152:43958) with ID 23
-19/09/07 23:48:11 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.33.93:51860) with ID 21
-19/09/07 23:48:11 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.51.52:44119 with 4.3 GB RAM, BlockManagerId(22, 192.168.51.52, 44119, None)
-19/09/07 23:48:11 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.35.149:56168) with ID 25
-19/09/07 23:48:11 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.33.93:40015 with 4.3 GB RAM, BlockManagerId(21, 192.168.33.93, 40015, None)
-19/09/07 23:48:11 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.8.152:36679 with 4.3 GB RAM, BlockManagerId(23, 192.168.8.152, 36679, None)
-19/09/07 23:48:12 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.37.143:42608) with ID 24
-19/09/07 23:48:12 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.35.149:32803 with 4.3 GB RAM, BlockManagerId(25, 192.168.35.149, 32803, None)
-19/09/07 23:48:12 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.37.143:44011 with 4.3 GB RAM, BlockManagerId(24, 192.168.37.143, 44011, None)
-19/09/07 23:48:14 INFO ExecutorPodsAllocator: Going to request 5 executors from Kubernetes.
-19/09/07 23:48:14 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.59.117:35148) with ID 26
-19/09/07 23:48:14 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.27.158:50172) with ID 29
-19/09/07 23:48:14 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.2.135:56760) with ID 28
-19/09/07 23:48:15 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.59.117:37513 with 4.3 GB RAM, BlockManagerId(26, 192.168.59.117, 37513, None)
-19/09/07 23:48:15 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.19.158:52770) with ID 27
-19/09/07 23:48:15 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.12.97:38044) with ID 30
-19/09/07 23:48:15 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.27.158:44423 with 4.3 GB RAM, BlockManagerId(29, 192.168.27.158, 44423, None)
-19/09/07 23:48:15 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.2.135:33791 with 4.3 GB RAM, BlockManagerId(28, 192.168.2.135, 33791, None)
-19/09/07 23:48:15 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.12.97:36079 with 4.3 GB RAM, BlockManagerId(30, 192.168.12.97, 36079, None)
-19/09/07 23:48:15 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.19.158:41931 with 4.3 GB RAM, BlockManagerId(27, 192.168.19.158, 41931, None)
-19/09/07 23:48:16 INFO ExecutorPodsAllocator: Going to request 5 executors from Kubernetes.
-19/09/07 23:48:18 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.52.42:35658) with ID 31
-19/09/07 23:48:18 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.51.198:47174) with ID 32
-19/09/07 23:48:18 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.9.16:41560) with ID 33
-19/09/07 23:48:18 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.23.206:40800) with ID 35
-19/09/07 23:48:18 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.60.168:38712) with ID 34
-19/09/07 23:48:18 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.52.42:44955 with 4.3 GB RAM, BlockManagerId(31, 192.168.52.42, 44955, None)
-19/09/07 23:48:18 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.51.198:44451 with 4.3 GB RAM, BlockManagerId(32, 192.168.51.198, 44451, None)
-19/09/07 23:48:18 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.9.16:42489 with 4.3 GB RAM, BlockManagerId(33, 192.168.9.16, 42489, None)
-19/09/07 23:48:18 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.23.206:37281 with 4.3 GB RAM, BlockManagerId(35, 192.168.23.206, 37281, None)
-19/09/07 23:48:18 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.60.168:46155 with 4.3 GB RAM, BlockManagerId(34, 192.168.60.168, 46155, None)
-19/09/07 23:48:20 INFO ExecutorPodsAllocator: Going to request 5 executors from Kubernetes.
-19/09/07 23:48:20 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.19.85:52216) with ID 37
-19/09/07 23:48:20 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.4.207:32938) with ID 38
-19/09/07 23:48:20 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.50.8:54190) with ID 39
-19/09/07 23:48:20 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.19.85:37709 with 4.3 GB RAM, BlockManagerId(37, 192.168.19.85, 37709, None)
-19/09/07 23:48:20 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.4.207:42315 with 4.3 GB RAM, BlockManagerId(38, 192.168.4.207, 42315, None)
-19/09/07 23:48:20 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.44.111:58092) with ID 36
-19/09/07 23:48:20 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.50.8:39431 with 4.3 GB RAM, BlockManagerId(39, 192.168.50.8, 39431, None)
-19/09/07 23:48:20 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.44.111:44483 with 4.3 GB RAM, BlockManagerId(36, 192.168.44.111, 44483, None)
-19/09/07 23:48:20 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.60.161:57410) with ID 40
-19/09/07 23:48:20 INFO KubernetesClusterSchedulerBackend: SchedulerBackend is ready for scheduling beginning after reached minRegisteredResourcesRatio: 0.8
+19/11/08 01:08:42 INFO SparkContext: Running Spark version 3.0.0-SNAPSHOT
+19/11/08 01:08:42 INFO ResourceUtils: ==============================================================
+19/11/08 01:08:42 INFO ResourceUtils: Resources for spark.driver:
+
+19/11/08 01:08:42 INFO ResourceUtils: ==============================================================
+19/11/08 01:08:42 INFO SparkContext: Submitted application: TPCDS DataGen 1000 GB
+19/11/08 01:08:42 INFO SecurityManager: Changing view acls to: root
+19/11/08 01:08:42 INFO SecurityManager: Changing modify acls to: root
+19/11/08 01:08:42 INFO SecurityManager: Changing view acls groups to:
+19/11/08 01:08:42 INFO SecurityManager: Changing modify acls groups to:
+19/11/08 01:08:42 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(root); groups with view permissions: Set(); users  with modify permissions: Set(root); groups with modify permissions: Set()
+19/11/08 01:08:42 INFO Utils: Successfully started service 'sparkDriver' on port 7078.
+19/11/08 01:08:42 INFO SparkEnv: Registering MapOutputTracker
+19/11/08 01:08:42 INFO SparkEnv: Registering BlockManagerMaster
+19/11/08 01:08:42 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+19/11/08 01:08:42 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+19/11/08 01:08:42 INFO DiskBlockManager: Created local directory at /var/data/spark-f3fa75b1-7129-4226-b7ee-a5f966849374/blockmgr-97e17bf3-3280-43ae-89ef-a257c406b214
+19/11/08 01:08:42 INFO MemoryStore: MemoryStore started with capacity 1953.6 MiB
+19/11/08 01:08:42 INFO SparkEnv: Registering OutputCommitCoordinator
+19/11/08 01:08:43 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+19/11/08 01:08:43 INFO SparkUI: Bound SparkUI to 0.0.0.0, and started at http://tpcds-datagen-1t-1573175317503-driver-svc.default.svc:4040
+19/11/08 01:08:43 INFO SparkContext: Added JAR file:///opt/spark/examples/jars/eks-spark-examples-assembly-1.0.jar at spark://tpcds-datagen-1t-1573175317503-driver-svc.default.svc:7078/jars/eks-spark-examples-assembly-1.0.jar with timestamp 1573175323163
+19/11/08 01:08:43 INFO SparkKubernetesClientFactory: Auto-configuring K8S client using current context from users K8S config file
+19/11/08 01:08:44 INFO ExecutorPodsAllocator: Going to request 5 executors from Kubernetes.
+19/11/08 01:08:44 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 7079.
+19/11/08 01:08:44 INFO NettyBlockTransferService: Server created on tpcds-datagen-1t-1573175317503-driver-svc.default.svc:7079
+19/11/08 01:08:44 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+19/11/08 01:08:44 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, tpcds-datagen-1t-1573175317503-driver-svc.default.svc, 7079, None)
+19/11/08 01:08:44 INFO BlockManagerMasterEndpoint: Registering block manager tpcds-datagen-1t-1573175317503-driver-svc.default.svc:7079 with 1953.6 MiB RAM, BlockManagerId(driver, tpcds-datagen-1t-1573175317503-driver-svc.default.svc, 7079, None)
+19/11/08 01:08:44 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, tpcds-datagen-1t-1573175317503-driver-svc.default.svc, 7079, None)
+19/11/08 01:08:44 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, tpcds-datagen-1t-1573175317503-driver-svc.default.svc, 7079, None)
+19/11/08 01:08:47 INFO ExecutorPodsAllocator: Going to request 5 executors from Kubernetes.
+19/11/08 01:08:47 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.9.66:36550) with ID 4
+19/11/08 01:08:47 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.12.63:38444) with ID 5
+19/11/08 01:08:48 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.61.76:54814) with ID 1
+19/11/08 01:08:48 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.9.66:38711 with 4.3 GiB RAM, BlockManagerId(4, 192.168.9.66, 38711, None)
+19/11/08 01:08:48 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.12.63:38679 with 4.3 GiB RAM, BlockManagerId(5, 192.168.12.63, 38679, None)
+19/11/08 01:08:48 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.1.12:46292) with ID 2
+19/11/08 01:08:48 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.61.76:40157 with 4.3 GiB RAM, BlockManagerId(1, 192.168.61.76, 40157, None)
+19/11/08 01:08:48 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.1.12:38465 with 4.3 GiB RAM, BlockManagerId(2, 192.168.1.12, 38465, None)
+19/11/08 01:08:48 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.26.51:47042) with ID 3
+19/11/08 01:08:48 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.26.51:32985 with 4.3 GiB RAM, BlockManagerId(3, 192.168.26.51, 32985, None)
+19/11/08 01:08:49 INFO ExecutorPodsAllocator: Going to request 5 executors from Kubernetes.
+19/11/08 01:08:51 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.3.47:57154) with ID 9
+19/11/08 01:08:51 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.42.217:39622) with ID 7
+19/11/08 01:08:51 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.61.127:41756) with ID 8
+19/11/08 01:08:51 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.17.232:36904) with ID 6
+19/11/08 01:08:51 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.42.217:37541 with 4.3 GiB RAM, BlockManagerId(7, 192.168.42.217, 37541, None)
+19/11/08 01:08:51 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.3.47:41079 with 4.3 GiB RAM, BlockManagerId(9, 192.168.3.47, 41079, None)
+19/11/08 01:08:51 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.61.127:36631 with 4.3 GiB RAM, BlockManagerId(8, 192.168.61.127, 36631, None)
+19/11/08 01:08:51 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.17.232:45255 with 4.3 GiB RAM, BlockManagerId(6, 192.168.17.232, 45255, None)
+19/11/08 01:08:51 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.41.73:32918) with ID 10
+19/11/08 01:08:51 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.41.73:39939 with 4.3 GiB RAM, BlockManagerId(10, 192.168.41.73, 39939, None)
+19/11/08 01:08:51 INFO ExecutorPodsAllocator: Going to request 5 executors from Kubernetes.
+19/11/08 01:08:53 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.25.205:35606) with ID 14
+19/11/08 01:08:53 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.60.253:45830) with ID 11
+19/11/08 01:08:53 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.27.52:48736) with ID 12
+19/11/08 01:08:53 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.47.136:40102) with ID 13
+19/11/08 01:08:53 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.25.205:34099 with 4.3 GiB RAM, BlockManagerId(14, 192.168.25.205, 34099, None)
+19/11/08 01:08:53 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.60.253:46095 with 4.3 GiB RAM, BlockManagerId(11, 192.168.60.253, 46095, None)
+19/11/08 01:08:53 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.27.52:42525 with 4.3 GiB RAM, BlockManagerId(12, 192.168.27.52, 42525, None)
+19/11/08 01:08:53 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.54.107:50898) with ID 15
+19/11/08 01:08:53 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.47.136:43793 with 4.3 GiB RAM, BlockManagerId(13, 192.168.47.136, 43793, None)
+19/11/08 01:08:53 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.54.107:34223 with 4.3 GiB RAM, BlockManagerId(15, 192.168.54.107, 34223, None)
+19/11/08 01:08:53 INFO ExecutorPodsAllocator: Going to request 5 executors from Kubernetes.
+19/11/08 01:08:55 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.14.71:50496) with ID 19
+19/11/08 01:08:55 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.42.171:59032) with ID 17
+19/11/08 01:08:55 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.53.187:47518) with ID 16
+19/11/08 01:08:55 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.14.71:39401 with 4.3 GiB RAM, BlockManagerId(19, 192.168.14.71, 39401, None)
+19/11/08 01:08:55 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.45.104:36946) with ID 20
+19/11/08 01:08:55 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.13.168:49942) with ID 18
+19/11/08 01:08:55 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.42.171:46487 with 4.3 GiB RAM, BlockManagerId(17, 192.168.42.171, 46487, None)
+19/11/08 01:08:55 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.53.187:32983 with 4.3 GiB RAM, BlockManagerId(16, 192.168.53.187, 32983, None)
+19/11/08 01:08:55 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.45.104:36341 with 4.3 GiB RAM, BlockManagerId(20, 192.168.45.104, 36341, None)
+19/11/08 01:08:55 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.13.168:46731 with 4.3 GiB RAM, BlockManagerId(18, 192.168.13.168, 46731, None)
+19/11/08 01:08:56 INFO ExecutorPodsAllocator: Going to request 5 executors from Kubernetes.
+19/11/08 01:08:57 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.14.191:42324) with ID 21
+19/11/08 01:08:57 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.34.168:38834) with ID 23
+19/11/08 01:08:57 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.14.220:56654) with ID 25
+19/11/08 01:08:57 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.14.191:44647 with 4.3 GiB RAM, BlockManagerId(21, 192.168.14.191, 44647, None)
+19/11/08 01:08:57 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.48.110:35480) with ID 24
+19/11/08 01:08:57 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.34.168:45247 with 4.3 GiB RAM, BlockManagerId(23, 192.168.34.168, 45247, None)
+19/11/08 01:08:57 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.28.126:44994) with ID 22
+19/11/08 01:08:57 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.14.220:39623 with 4.3 GiB RAM, BlockManagerId(25, 192.168.14.220, 39623, None)
+19/11/08 01:08:57 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.48.110:46533 with 4.3 GiB RAM, BlockManagerId(24, 192.168.48.110, 46533, None)
+19/11/08 01:08:57 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.28.126:34847 with 4.3 GiB RAM, BlockManagerId(22, 192.168.28.126, 34847, None)
+19/11/08 01:08:59 INFO ExecutorPodsAllocator: Going to request 5 executors from Kubernetes.
+19/11/08 01:09:00 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.12.242:41756) with ID 27
+19/11/08 01:09:00 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.19.138:51296) with ID 26
+19/11/08 01:09:00 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.56.199:39998) with ID 28
+19/11/08 01:09:00 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.4.137:45906) with ID 29
+19/11/08 01:09:00 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.12.242:43025 with 4.3 GiB RAM, BlockManagerId(27, 192.168.12.242, 43025, None)
+19/11/08 01:09:00 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.19.138:34581 with 4.3 GiB RAM, BlockManagerId(26, 192.168.19.138, 34581, None)
+19/11/08 01:09:00 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.56.199:44961 with 4.3 GiB RAM, BlockManagerId(28, 192.168.56.199, 44961, None)
+19/11/08 01:09:00 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.34.64:35526) with ID 30
+19/11/08 01:09:00 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.4.137:42169 with 4.3 GiB RAM, BlockManagerId(29, 192.168.4.137, 42169, None)
+19/11/08 01:09:00 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.34.64:38767 with 4.3 GiB RAM, BlockManagerId(30, 192.168.34.64, 38767, None)
+19/11/08 01:09:02 INFO ExecutorPodsAllocator: Going to request 5 executors from Kubernetes.
+19/11/08 01:09:03 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.7.40:44166) with ID 35
+19/11/08 01:09:03 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.24.123:59100) with ID 31
+19/11/08 01:09:03 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.7.40:39981 with 4.3 GiB RAM, BlockManagerId(35, 192.168.7.40, 39981, None)
+19/11/08 01:09:03 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.53.146:48810) with ID 32
+19/11/08 01:09:03 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.24.123:38201 with 4.3 GiB RAM, BlockManagerId(31, 192.168.24.123, 38201, None)
+19/11/08 01:09:03 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.50.164:58500) with ID 34
+19/11/08 01:09:03 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.35.46:50744) with ID 33
+19/11/08 01:09:03 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.53.146:33561 with 4.3 GiB RAM, BlockManagerId(32, 192.168.53.146, 33561, None)
+19/11/08 01:09:03 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.50.164:37369 with 4.3 GiB RAM, BlockManagerId(34, 192.168.50.164, 37369, None)
+19/11/08 01:09:03 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.35.46:44893 with 4.3 GiB RAM, BlockManagerId(33, 192.168.35.46, 44893, None)
+19/11/08 01:09:04 INFO ExecutorPodsAllocator: Going to request 5 executors from Kubernetes.
+19/11/08 01:09:05 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.45.110:56020) with ID 40
+19/11/08 01:09:05 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.34.133:40108) with ID 37
+19/11/08 01:09:05 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.24.252:41018) with ID 38
+19/11/08 01:09:05 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.62.133:55038) with ID 36
+19/11/08 01:09:05 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.45.110:42231 with 4.3 GiB RAM, BlockManagerId(40, 192.168.45.110, 42231, None)
+19/11/08 01:09:05 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.34.133:37989 with 4.3 GiB RAM, BlockManagerId(37, 192.168.34.133, 37989, None)
+19/11/08 01:09:05 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.24.252:35261 with 4.3 GiB RAM, BlockManagerId(38, 192.168.24.252, 35261, None)
+19/11/08 01:09:05 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.62.133:33163 with 4.3 GiB RAM, BlockManagerId(36, 192.168.62.133, 33163, None)
+19/11/08 01:09:05 INFO KubernetesClusterSchedulerBackend$KubernetesDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.62.4:33268) with ID 39
+19/11/08 01:09:05 INFO KubernetesClusterSchedulerBackend: SchedulerBackend is ready for scheduling beginning after reached minRegisteredResourcesRatio: 0.8
+19/11/08 01:09:05 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.62.4:34917 with 4.3 GiB RAM, BlockManagerId(39, 192.168.62.4, 34917, None)
 Only WARN
 Generating TPCDS data
-19/09/07 23:48:23 WARN Utils: Truncated the string representation of a plan since it was too large. This behavior can be adjusted by setting 'spark.debug.maxToStringFields' in SparkEnv.conf.
+19/11/08 01:09:08 WARN package: Truncated the string representation of a plan since it was too large. This behavior can be adjusted by setting 'spark.sql.debug.maxToStringFields'.
 Generating table catalog_sales in database to s3a://spark-k8s-data/TPCDS-TEST-1T/catalog_sales with save mode Overwrite.
-19/09/07 23:48:23 INFO TPCDSTables: Generating table catalog_sales in database to s3a://spark-k8s-data/TPCDS-TEST-1T/catalog_sales with save mode Overwrite.
-19/09/07 23:48:23 WARN MetricsConfig: Cannot locate configuration: tried hadoop-metrics2-s3a-file-system.properties,hadoop-metrics2.properties
-19/09/07 23:55:01 WARN TaskSetManager: Lost task 156.0 in stage 0.0 (TID 156, 192.168.33.93, executor 21): org.apache.spark.SparkException: Task failed while writing rows.
-	at org.apache.spark.sql.execution.datasources.FileFormatWriter$.org$apache$spark$sql$execution$datasources$FileFormatWriter$$executeTask(FileFormatWriter.scala:257)
-	at org.apache.spark.sql.execution.datasources.FileFormatWriter$$anonfun$write$1.apply(FileFormatWriter.scala:170)
-	at org.apache.spark.sql.execution.datasources.FileFormatWriter$$anonfun$write$1.apply(FileFormatWriter.scala:169)
-	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:90)
-	at org.apache.spark.scheduler.Task.run(Task.scala:123)
-	at org.apache.spark.executor.Executor$TaskRunner$$anonfun$10.apply(Executor.scala:408)
-	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:1360)
-	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:414)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:748)
-Caused by: java.io.IOException: Failed to rename S3AFileStatus{path=s3a://spark-k8s-data/TPCDS-TEST-1T/catalog_sales/_temporary/0/_temporary/attempt_20190907234828_0000_m_000156_156/part-00156-d0774bf4-946f-4c0f-84de-d5e5ca5f9fd6-c000.snappy.parquet; isDirectory=false; length=205120522; replication=1; blocksize=33554432; modification_time=1567900466000; access_time=0; owner=root; group=root; permission=rw-rw-rw-; isSymlink=false; hasAcl=false; isEncrypted=false; isErasureCoded=false} isEmptyDirectory=FALSE to s3a://spark-k8s-data/TPCDS-TEST-1T/catalog_sales/part-00156-d0774bf4-946f-4c0f-84de-d5e5ca5f9fd6-c000.snappy.parquet
-	at org.apache.hadoop.mapreduce.lib.output.FileOutputCommitter.mergePaths(FileOutputCommitter.java:473)
-	at org.apache.hadoop.mapreduce.lib.output.FileOutputCommitter.mergePaths(FileOutputCommitter.java:486)
-	at org.apache.hadoop.mapreduce.lib.output.FileOutputCommitter.commitTask(FileOutputCommitter.java:597)
-	at org.apache.hadoop.mapreduce.lib.output.FileOutputCommitter.commitTask(FileOutputCommitter.java:560)
-	at org.apache.spark.mapred.SparkHadoopMapRedUtil$.performCommit$1(SparkHadoopMapRedUtil.scala:50)
-	at org.apache.spark.mapred.SparkHadoopMapRedUtil$.commitTask(SparkHadoopMapRedUtil.scala:77)
-	at org.apache.spark.internal.io.HadoopMapReduceCommitProtocol.commitTask(HadoopMapReduceCommitProtocol.scala:225)
-	at org.apache.spark.sql.execution.datasources.FileFormatDataWriter.commit(FileFormatDataWriter.scala:78)
-	at org.apache.spark.sql.execution.datasources.FileFormatWriter$$anonfun$org$apache$spark$sql$execution$datasources$FileFormatWriter$$executeTask$3.apply(FileFormatWriter.scala:247)
-	at org.apache.spark.sql.execution.datasources.FileFormatWriter$$anonfun$org$apache$spark$sql$execution$datasources$FileFormatWriter$$executeTask$3.apply(FileFormatWriter.scala:242)
-	at org.apache.spark.util.Utils$.tryWithSafeFinallyAndFailureCallbacks(Utils.scala:1394)
-	at org.apache.spark.sql.execution.datasources.FileFormatWriter$.org$apache$spark$sql$execution$datasources$FileFormatWriter$$executeTask(FileFormatWriter.scala:248)
-	... 10 more
-
+19/11/08 01:09:09 INFO TPCDSTables: Generating table catalog_sales in database to s3a://spark-k8s-data/TPCDS-TEST-1T/catalog_sales with save mode Overwrite.
+19/11/08 01:09:09 WARN MetricsConfig: Cannot locate configuration: tried hadoop-metrics2-s3a-file-system.properties,hadoop-metrics2.properties
 Generating table catalog_returns in database to s3a://spark-k8s-data/TPCDS-TEST-1T/catalog_returns with save mode Overwrite.
-19/09/08 00:07:01 INFO TPCDSTables: Generating table catalog_returns in database to s3a://spark-k8s-data/TPCDS-TEST-1T/catalog_returns with save mode Overwrite.
-19/09/08 00:08:09 WARN TaskSetManager: Lost task 334.0 in stage 1.0 (TID 835, 192.168.10.107, executor 8): org.apache.spark.SparkException: Task failed while writing rows.
-	at org.apache.spark.sql.execution.datasources.FileFormatWriter$.org$apache$spark$sql$execution$datasources$FileFormatWriter$$executeTask(FileFormatWriter.scala:257)
-	at org.apache.spark.sql.execution.datasources.FileFormatWriter$$anonfun$write$1.apply(FileFormatWriter.scala:170)
-	at org.apache.spark.sql.execution.datasources.FileFormatWriter$$anonfun$write$1.apply(FileFormatWriter.scala:169)
-	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:90)
-	at org.apache.spark.scheduler.Task.run(Task.scala:123)
-	at org.apache.spark.executor.Executor$TaskRunner$$anonfun$10.apply(Executor.scala:408)
-	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:1360)
-	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:414)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:748)
-Caused by: java.io.IOException: Failed to rename S3AFileStatus{path=s3a://spark-k8s-data/TPCDS-TEST-1T/catalog_returns/_temporary/0/_temporary/attempt_20190908000703_0001_m_000334_835/part-00334-5398f984-75e0-4d93-865c-8643e946e7b8-c000.snappy.parquet; isDirectory=false; length=20945272; replication=1; blocksize=33554432; modification_time=1567901289000; access_time=0; owner=root; group=root; permission=rw-rw-rw-; isSymlink=false; hasAcl=false; isEncrypted=false; isErasureCoded=false} isEmptyDirectory=FALSE to s3a://spark-k8s-data/TPCDS-TEST-1T/catalog_returns/part-00334-5398f984-75e0-4d93-865c-8643e946e7b8-c000.snappy.parquet
-	at org.apache.hadoop.mapreduce.lib.output.FileOutputCommitter.mergePaths(FileOutputCommitter.java:473)
-	at org.apache.hadoop.mapreduce.lib.output.FileOutputCommitter.mergePaths(FileOutputCommitter.java:486)
-	at org.apache.hadoop.mapreduce.lib.output.FileOutputCommitter.commitTask(FileOutputCommitter.java:597)
-	at org.apache.hadoop.mapreduce.lib.output.FileOutputCommitter.commitTask(FileOutputCommitter.java:560)
-	at org.apache.spark.mapred.SparkHadoopMapRedUtil$.performCommit$1(SparkHadoopMapRedUtil.scala:50)
-	at org.apache.spark.mapred.SparkHadoopMapRedUtil$.commitTask(SparkHadoopMapRedUtil.scala:77)
-	at org.apache.spark.internal.io.HadoopMapReduceCommitProtocol.commitTask(HadoopMapReduceCommitProtocol.scala:225)
-	at org.apache.spark.sql.execution.datasources.FileFormatDataWriter.commit(FileFormatDataWriter.scala:78)
-	at org.apache.spark.sql.execution.datasources.FileFormatWriter$$anonfun$org$apache$spark$sql$execution$datasources$FileFormatWriter$$executeTask$3.apply(FileFormatWriter.scala:247)
-	at org.apache.spark.sql.execution.datasources.FileFormatWriter$$anonfun$org$apache$spark$sql$execution$datasources$FileFormatWriter$$executeTask$3.apply(FileFormatWriter.scala:242)
-	at org.apache.spark.util.Utils$.tryWithSafeFinallyAndFailureCallbacks(Utils.scala:1394)
-	at org.apache.spark.sql.execution.datasources.FileFormatWriter$.org$apache$spark$sql$execution$datasources$FileFormatWriter$$executeTask(FileFormatWriter.scala:248)
-	... 10 more
-
+19/11/08 01:21:05 INFO TPCDSTables: Generating table catalog_returns in database to s3a://spark-k8s-data/TPCDS-TEST-1T/catalog_returns with save mode Overwrite.
 Generating table inventory in database to s3a://spark-k8s-data/TPCDS-TEST-1T/inventory with save mode Overwrite.
-19/09/08 00:08:39 INFO TPCDSTables: Generating table inventory in database to s3a://spark-k8s-data/TPCDS-TEST-1T/inventory with save mode Overwrite.
+19/11/08 01:22:31 INFO TPCDSTables: Generating table inventory in database to s3a://spark-k8s-data/TPCDS-TEST-1T/inventory with save mode Overwrite.
 Generating table store_sales in database to s3a://spark-k8s-data/TPCDS-TEST-1T/store_sales with save mode Overwrite.
-19/09/08 00:09:50 INFO TPCDSTables: Generating table store_sales in database to s3a://spark-k8s-data/TPCDS-TEST-1T/store_sales with save mode Overwrite.
-19/09/08 00:17:26 WARN TaskSetManager: Lost task 125.0 in stage 3.0 (TID 1627, 192.168.38.119, executor 13): org.apache.spark.SparkException: Task failed while writing rows.
-	at org.apache.spark.sql.execution.datasources.FileFormatWriter$.org$apache$spark$sql$execution$datasources$FileFormatWriter$$executeTask(FileFormatWriter.scala:257)
-	at org.apache.spark.sql.execution.datasources.FileFormatWriter$$anonfun$write$1.apply(FileFormatWriter.scala:170)
-	at org.apache.spark.sql.execution.datasources.FileFormatWriter$$anonfun$write$1.apply(FileFormatWriter.scala:169)
-	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:90)
-	at org.apache.spark.scheduler.Task.run(Task.scala:123)
-	at org.apache.spark.executor.Executor$TaskRunner$$anonfun$10.apply(Executor.scala:408)
-	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:1360)
-	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:414)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:748)
-Caused by: java.io.IOException: Failed to rename S3AFileStatus{path=s3a://spark-k8s-data/TPCDS-TEST-1T/store_sales/_temporary/0/_temporary/attempt_20190908000952_0003_m_000125_1627/part-00125-4c252fbd-c096-45d4-896e-5582fe070f15-c000.snappy.parquet; isDirectory=false; length=257055481; replication=1; blocksize=33554432; modification_time=1567901773000; access_time=0; owner=root; group=root; permission=rw-rw-rw-; isSymlink=false; hasAcl=false; isEncrypted=false; isErasureCoded=false} isEmptyDirectory=FALSE to s3a://spark-k8s-data/TPCDS-TEST-1T/store_sales/part-00125-4c252fbd-c096-45d4-896e-5582fe070f15-c000.snappy.parquet
-	at org.apache.hadoop.mapreduce.lib.output.FileOutputCommitter.mergePaths(FileOutputCommitter.java:473)
-	at org.apache.hadoop.mapreduce.lib.output.FileOutputCommitter.mergePaths(FileOutputCommitter.java:486)
-	at org.apache.hadoop.mapreduce.lib.output.FileOutputCommitter.commitTask(FileOutputCommitter.java:597)
-	at org.apache.hadoop.mapreduce.lib.output.FileOutputCommitter.commitTask(FileOutputCommitter.java:560)
-	at org.apache.spark.mapred.SparkHadoopMapRedUtil$.performCommit$1(SparkHadoopMapRedUtil.scala:50)
-	at org.apache.spark.mapred.SparkHadoopMapRedUtil$.commitTask(SparkHadoopMapRedUtil.scala:77)
-	at org.apache.spark.internal.io.HadoopMapReduceCommitProtocol.commitTask(HadoopMapReduceCommitProtocol.scala:225)
-	at org.apache.spark.sql.execution.datasources.FileFormatDataWriter.commit(FileFormatDataWriter.scala:78)
-	at org.apache.spark.sql.execution.datasources.FileFormatWriter$$anonfun$org$apache$spark$sql$execution$datasources$FileFormatWriter$$executeTask$3.apply(FileFormatWriter.scala:247)
-	at org.apache.spark.sql.execution.datasources.FileFormatWriter$$anonfun$org$apache$spark$sql$execution$datasources$FileFormatWriter$$executeTask$3.apply(FileFormatWriter.scala:242)
-	at org.apache.spark.util.Utils$.tryWithSafeFinallyAndFailureCallbacks(Utils.scala:1394)
-	at org.apache.spark.sql.execution.datasources.FileFormatWriter$.org$apache$spark$sql$execution$datasources$FileFormatWriter$$executeTask(FileFormatWriter.scala:248)
-	... 10 more
-
+19/11/08 01:23:35 INFO TPCDSTables: Generating table store_sales in database to s3a://spark-k8s-data/TPCDS-TEST-1T/store_sales with save mode Overwrite.
 Generating table store_returns in database to s3a://spark-k8s-data/TPCDS-TEST-1T/store_returns with save mode Overwrite.
-19/09/08 00:35:23 INFO TPCDSTables: Generating table store_returns in database to s3a://spark-k8s-data/TPCDS-TEST-1T/store_returns with save mode Overwrite.
+19/11/08 01:39:05 INFO TPCDSTables: Generating table store_returns in database to s3a://spark-k8s-data/TPCDS-TEST-1T/store_returns with save mode Overwrite.
 Generating table web_sales in database to s3a://spark-k8s-data/TPCDS-TEST-1T/web_sales with save mode Overwrite.
-19/09/08 00:37:57 INFO TPCDSTables: Generating table web_sales in database to s3a://spark-k8s-data/TPCDS-TEST-1T/web_sales with save mode Overwrite.
+19/11/08 01:41:02 INFO TPCDSTables: Generating table web_sales in database to s3a://spark-k8s-data/TPCDS-TEST-1T/web_sales with save mode Overwrite.
 Generating table web_returns in database to s3a://spark-k8s-data/TPCDS-TEST-1T/web_returns with save mode Overwrite.
-19/09/08 00:47:11 INFO TPCDSTables: Generating table web_returns in database to s3a://spark-k8s-data/TPCDS-TEST-1T/web_returns with save mode Overwrite.
-19/09/08 00:47:38 WARN TaskSetManager: Lost task 249.0 in stage 6.0 (TID 3252, 192.168.12.97, executor 30): org.apache.spark.SparkException: Task failed while writing rows.
-	at org.apache.spark.sql.execution.datasources.FileFormatWriter$.org$apache$spark$sql$execution$datasources$FileFormatWriter$$executeTask(FileFormatWriter.scala:257)
-	at org.apache.spark.sql.execution.datasources.FileFormatWriter$$anonfun$write$1.apply(FileFormatWriter.scala:170)
-	at org.apache.spark.sql.execution.datasources.FileFormatWriter$$anonfun$write$1.apply(FileFormatWriter.scala:169)
-	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:90)
-	at org.apache.spark.scheduler.Task.run(Task.scala:123)
-	at org.apache.spark.executor.Executor$TaskRunner$$anonfun$10.apply(Executor.scala:408)
-	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:1360)
-	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:414)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:748)
-Caused by: java.io.IOException: Failed to rename S3AFileStatus{path=s3a://spark-k8s-data/TPCDS-TEST-1T/web_returns/_temporary/0/_temporary/attempt_20190908004713_0006_m_000249_3252/part-00249-dae61d3f-1499-4d11-bac9-48508214272c-c000.snappy.parquet; isDirectory=false; length=10828470; replication=1; blocksize=33554432; modification_time=1567903658000; access_time=0; owner=root; group=root; permission=rw-rw-rw-; isSymlink=false; hasAcl=false; isEncrypted=false; isErasureCoded=false} isEmptyDirectory=FALSE to s3a://spark-k8s-data/TPCDS-TEST-1T/web_returns/part-00249-dae61d3f-1499-4d11-bac9-48508214272c-c000.snappy.parquet
-	at org.apache.hadoop.mapreduce.lib.output.FileOutputCommitter.mergePaths(FileOutputCommitter.java:473)
-	at org.apache.hadoop.mapreduce.lib.output.FileOutputCommitter.mergePaths(FileOutputCommitter.java:486)
-	at org.apache.hadoop.mapreduce.lib.output.FileOutputCommitter.commitTask(FileOutputCommitter.java:597)
-	at org.apache.hadoop.mapreduce.lib.output.FileOutputCommitter.commitTask(FileOutputCommitter.java:560)
-	at org.apache.spark.mapred.SparkHadoopMapRedUtil$.performCommit$1(SparkHadoopMapRedUtil.scala:50)
-	at org.apache.spark.mapred.SparkHadoopMapRedUtil$.commitTask(SparkHadoopMapRedUtil.scala:77)
-	at org.apache.spark.internal.io.HadoopMapReduceCommitProtocol.commitTask(HadoopMapReduceCommitProtocol.scala:225)
-	at org.apache.spark.sql.execution.datasources.FileFormatDataWriter.commit(FileFormatDataWriter.scala:78)
-	at org.apache.spark.sql.execution.datasources.FileFormatWriter$$anonfun$org$apache$spark$sql$execution$datasources$FileFormatWriter$$executeTask$3.apply(FileFormatWriter.scala:247)
-	at org.apache.spark.sql.execution.datasources.FileFormatWriter$$anonfun$org$apache$spark$sql$execution$datasources$FileFormatWriter$$executeTask$3.apply(FileFormatWriter.scala:242)
-	at org.apache.spark.util.Utils$.tryWithSafeFinallyAndFailureCallbacks(Utils.scala:1394)
-	at org.apache.spark.sql.execution.datasources.FileFormatWriter$.org$apache$spark$sql$execution$datasources$FileFormatWriter$$executeTask(FileFormatWriter.scala:248)
-	... 10 more
-
+19/11/08 01:47:21 INFO TPCDSTables: Generating table web_returns in database to s3a://spark-k8s-data/TPCDS-TEST-1T/web_returns with save mode Overwrite.
 Generating table call_center in database to s3a://spark-k8s-data/TPCDS-TEST-1T/call_center with save mode Overwrite.
-19/09/08 00:48:01 INFO TPCDSTables: Generating table call_center in database to s3a://spark-k8s-data/TPCDS-TEST-1T/call_center with save mode Overwrite.
+19/11/08 01:48:12 INFO TPCDSTables: Generating table call_center in database to s3a://spark-k8s-data/TPCDS-TEST-1T/call_center with save mode Overwrite.
 Generating table catalog_page in database to s3a://spark-k8s-data/TPCDS-TEST-1T/catalog_page with save mode Overwrite.
-19/09/08 00:48:02 INFO TPCDSTables: Generating table catalog_page in database to s3a://spark-k8s-data/TPCDS-TEST-1T/catalog_page with save mode Overwrite.
+19/11/08 01:48:31 INFO TPCDSTables: Generating table catalog_page in database to s3a://spark-k8s-data/TPCDS-TEST-1T/catalog_page with save mode Overwrite.
 Generating table customer in database to s3a://spark-k8s-data/TPCDS-TEST-1T/customer with save mode Overwrite.
-19/09/08 00:48:05 INFO TPCDSTables: Generating table customer in database to s3a://spark-k8s-data/TPCDS-TEST-1T/customer with save mode Overwrite.
-19/09/08 00:48:09 WARN TaskSetManager: Lost task 11.0 in stage 9.0 (TID 4515, 192.168.60.245, executor 3): org.apache.spark.SparkException: Task failed while writing rows.
-	at org.apache.spark.sql.execution.datasources.FileFormatWriter$.org$apache$spark$sql$execution$datasources$FileFormatWriter$$executeTask(FileFormatWriter.scala:257)
-	at org.apache.spark.sql.execution.datasources.FileFormatWriter$$anonfun$write$1.apply(FileFormatWriter.scala:170)
-	at org.apache.spark.sql.execution.datasources.FileFormatWriter$$anonfun$write$1.apply(FileFormatWriter.scala:169)
-	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:90)
-	at org.apache.spark.scheduler.Task.run(Task.scala:123)
-	at org.apache.spark.executor.Executor$TaskRunner$$anonfun$10.apply(Executor.scala:408)
-	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:1360)
-	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:414)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:748)
-Caused by: java.io.IOException: Failed to rename S3AFileStatus{path=s3a://spark-k8s-data/TPCDS-TEST-1T/customer/_temporary/0/_temporary/attempt_20190908004807_0009_m_000011_4515/part-00011-7d284893-2bdd-4d40-a5ea-a1e320f317a2-c000.snappy.parquet; isDirectory=false; length=1384489; replication=1; blocksize=33554432; modification_time=1567903689000; access_time=0; owner=root; group=root; permission=rw-rw-rw-; isSymlink=false; hasAcl=false; isEncrypted=false; isErasureCoded=false} isEmptyDirectory=FALSE to s3a://spark-k8s-data/TPCDS-TEST-1T/customer/part-00011-7d284893-2bdd-4d40-a5ea-a1e320f317a2-c000.snappy.parquet
-	at org.apache.hadoop.mapreduce.lib.output.FileOutputCommitter.mergePaths(FileOutputCommitter.java:473)
-	at org.apache.hadoop.mapreduce.lib.output.FileOutputCommitter.mergePaths(FileOutputCommitter.java:486)
-	at org.apache.hadoop.mapreduce.lib.output.FileOutputCommitter.commitTask(FileOutputCommitter.java:597)
-	at org.apache.hadoop.mapreduce.lib.output.FileOutputCommitter.commitTask(FileOutputCommitter.java:560)
-	at org.apache.spark.mapred.SparkHadoopMapRedUtil$.performCommit$1(SparkHadoopMapRedUtil.scala:50)
-	at org.apache.spark.mapred.SparkHadoopMapRedUtil$.commitTask(SparkHadoopMapRedUtil.scala:77)
-	at org.apache.spark.internal.io.HadoopMapReduceCommitProtocol.commitTask(HadoopMapReduceCommitProtocol.scala:225)
-	at org.apache.spark.sql.execution.datasources.FileFormatDataWriter.commit(FileFormatDataWriter.scala:78)
-	at org.apache.spark.sql.execution.datasources.FileFormatWriter$$anonfun$org$apache$spark$sql$execution$datasources$FileFormatWriter$$executeTask$3.apply(FileFormatWriter.scala:247)
-	at org.apache.spark.sql.execution.datasources.FileFormatWriter$$anonfun$org$apache$spark$sql$execution$datasources$FileFormatWriter$$executeTask$3.apply(FileFormatWriter.scala:242)
-	at org.apache.spark.util.Utils$.tryWithSafeFinallyAndFailureCallbacks(Utils.scala:1394)
-	at org.apache.spark.sql.execution.datasources.FileFormatWriter$.org$apache$spark$sql$execution$datasources$FileFormatWriter$$executeTask(FileFormatWriter.scala:248)
-	... 10 more
-
+19/11/08 01:49:44 INFO TPCDSTables: Generating table customer in database to s3a://spark-k8s-data/TPCDS-TEST-1T/customer with save mode Overwrite.
 Generating table customer_address in database to s3a://spark-k8s-data/TPCDS-TEST-1T/customer_address with save mode Overwrite.
-19/09/08 00:48:23 INFO TPCDSTables: Generating table customer_address in database to s3a://spark-k8s-data/TPCDS-TEST-1T/customer_address with save mode Overwrite.
+19/11/08 01:53:21 INFO TPCDSTables: Generating table customer_address in database to s3a://spark-k8s-data/TPCDS-TEST-1T/customer_address with save mode Overwrite.
 Generating table customer_demographics in database to s3a://spark-k8s-data/TPCDS-TEST-1T/customer_demographics with save mode Overwrite.
-19/09/08 00:48:38 INFO TPCDSTables: Generating table customer_demographics in database to s3a://spark-k8s-data/TPCDS-TEST-1T/customer_demographics with save mode Overwrite.
+19/11/08 01:56:49 INFO TPCDSTables: Generating table customer_demographics in database to s3a://spark-k8s-data/TPCDS-TEST-1T/customer_demographics with save mode Overwrite.
 Generating table date_dim in database to s3a://spark-k8s-data/TPCDS-TEST-1T/date_dim with save mode Overwrite.
-19/09/08 00:48:52 INFO TPCDSTables: Generating table date_dim in database to s3a://spark-k8s-data/TPCDS-TEST-1T/date_dim with save mode Overwrite.
+19/11/08 02:00:32 INFO TPCDSTables: Generating table date_dim in database to s3a://spark-k8s-data/TPCDS-TEST-1T/date_dim with save mode Overwrite.
 Generating table household_demographics in database to s3a://spark-k8s-data/TPCDS-TEST-1T/household_demographics with save mode Overwrite.
-19/09/08 00:48:55 INFO TPCDSTables: Generating table household_demographics in database to s3a://spark-k8s-data/TPCDS-TEST-1T/household_demographics with save mode Overwrite.
+19/11/08 02:02:13 INFO TPCDSTables: Generating table household_demographics in database to s3a://spark-k8s-data/TPCDS-TEST-1T/household_demographics with save mode Overwrite.
 Generating table income_band in database to s3a://spark-k8s-data/TPCDS-TEST-1T/income_band with save mode Overwrite.
-19/09/08 00:48:57 INFO TPCDSTables: Generating table income_band in database to s3a://spark-k8s-data/TPCDS-TEST-1T/income_band with save mode Overwrite.
+19/11/08 02:04:04 INFO TPCDSTables: Generating table income_band in database to s3a://spark-k8s-data/TPCDS-TEST-1T/income_band with save mode Overwrite.
 Generating table item in database to s3a://spark-k8s-data/TPCDS-TEST-1T/item with save mode Overwrite.
-19/09/08 00:48:58 INFO TPCDSTables: Generating table item in database to s3a://spark-k8s-data/TPCDS-TEST-1T/item with save mode Overwrite.
+19/11/08 02:05:47 INFO TPCDSTables: Generating table item in database to s3a://spark-k8s-data/TPCDS-TEST-1T/item with save mode Overwrite.
 Generating table promotion in database to s3a://spark-k8s-data/TPCDS-TEST-1T/promotion with save mode Overwrite.
-19/09/08 00:49:07 INFO TPCDSTables: Generating table promotion in database to s3a://spark-k8s-data/TPCDS-TEST-1T/promotion with save mode Overwrite.
+19/11/08 02:07:33 INFO TPCDSTables: Generating table promotion in database to s3a://spark-k8s-data/TPCDS-TEST-1T/promotion with save mode Overwrite.
 Generating table reason in database to s3a://spark-k8s-data/TPCDS-TEST-1T/reason with save mode Overwrite.
-19/09/08 00:49:09 INFO TPCDSTables: Generating table reason in database to s3a://spark-k8s-data/TPCDS-TEST-1T/reason with save mode Overwrite.
+19/11/08 02:09:18 INFO TPCDSTables: Generating table reason in database to s3a://spark-k8s-data/TPCDS-TEST-1T/reason with save mode Overwrite.
 Generating table ship_mode in database to s3a://spark-k8s-data/TPCDS-TEST-1T/ship_mode with save mode Overwrite.
-19/09/08 00:49:11 INFO TPCDSTables: Generating table ship_mode in database to s3a://spark-k8s-data/TPCDS-TEST-1T/ship_mode with save mode Overwrite.
+19/11/08 02:11:02 INFO TPCDSTables: Generating table ship_mode in database to s3a://spark-k8s-data/TPCDS-TEST-1T/ship_mode with save mode Overwrite.
 Generating table store in database to s3a://spark-k8s-data/TPCDS-TEST-1T/store with save mode Overwrite.
-19/09/08 00:49:12 INFO TPCDSTables: Generating table store in database to s3a://spark-k8s-data/TPCDS-TEST-1T/store with save mode Overwrite.
+19/11/08 02:12:51 INFO TPCDSTables: Generating table store in database to s3a://spark-k8s-data/TPCDS-TEST-1T/store with save mode Overwrite.
 Generating table time_dim in database to s3a://spark-k8s-data/TPCDS-TEST-1T/time_dim with save mode Overwrite.
-19/09/08 00:49:14 INFO TPCDSTables: Generating table time_dim in database to s3a://spark-k8s-data/TPCDS-TEST-1T/time_dim with save mode Overwrite.
+19/11/08 02:14:32 INFO TPCDSTables: Generating table time_dim in database to s3a://spark-k8s-data/TPCDS-TEST-1T/time_dim with save mode Overwrite.
 Generating table warehouse in database to s3a://spark-k8s-data/TPCDS-TEST-1T/warehouse with save mode Overwrite.
-19/09/08 00:49:17 INFO TPCDSTables: Generating table warehouse in database to s3a://spark-k8s-data/TPCDS-TEST-1T/warehouse with save mode Overwrite.
-19/09/08 00:49:18 INFO TPCDSTables: Generating table web_page in database to s3a://spark-k8s-data/TPCDS-TEST-1T/web_page with save mode Overwrite.
+19/11/08 02:16:26 INFO TPCDSTables: Generating table warehouse in database to s3a://spark-k8s-data/TPCDS-TEST-1T/warehouse with save mode Overwrite.
 Generating table web_page in database to s3a://spark-k8s-data/TPCDS-TEST-1T/web_page with save mode Overwrite.
+19/11/08 02:18:05 INFO TPCDSTables: Generating table web_page in database to s3a://spark-k8s-data/TPCDS-TEST-1T/web_page with save mode Overwrite.
 Generating table web_site in database to s3a://spark-k8s-data/TPCDS-TEST-1T/web_site with save mode Overwrite.
-19/09/08 00:49:20 INFO TPCDSTables: Generating table web_site in database to s3a://spark-k8s-data/TPCDS-TEST-1T/web_site with save mode Overwrite.
+19/11/08 02:19:50 INFO TPCDSTables: Generating table web_site in database to s3a://spark-k8s-data/TPCDS-TEST-1T/web_site with save mode Overwrite.
 Data generated at s3a://spark-k8s-data/TPCDS-TEST-1T
-19/09/08 00:49:22 WARN ExecutorPodsWatchSnapshotSource: Kubernetes client has been closed (this is expected if the application is shutting down.)
+19/11/08 02:21:38 WARN ExecutorPodsWatchSnapshotSource: Kubernetes client has been closed (this is expected if the application is shutting down.)

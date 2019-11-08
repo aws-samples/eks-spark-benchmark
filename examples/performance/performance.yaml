@@ -1,22 +1,20 @@
-apiVersion: "sparkoperator.k8s.io/v1beta1"
+apiVersion: "sparkoperator.k8s.io/v1beta2"
 kind: SparkApplication
 metadata:
-  name: tpcds-benchmark-1g-test
+  name: tpcds-benchmark-1t
   namespace: default
 spec:
   type: Scala
   mode: cluster
-  image: seedjeffwan/spark:2.4.5-SNAPSHOT-examples
   sparkVersion: 2.4.5-SNAPSHOT
+  image: seedjeffwan/spark:2.4.5-SNAPSHOT-examples
   mainClass: com.amazonaws.eks.tpcds.BenchmarkSparkSQL
-  # mainApplicationFile: local:///usr/hdp/spark/examples/jars/spark-k8s-examples-assembly-1.1.jar
   mainApplicationFile: local:///opt/spark/examples/jars/eks-spark-examples-assembly-1.0.jar
-  mode: cluster
   arguments:
   # working directory where data table reside (must exists and have tables directly)
     - "s3a://spark-k8s-data/TPCDS-TEST-1G"
   # location to store results
-    - "s3a://spark-k8s-data/TPCDS-TEST-1G-Test-RESULT"
+    - "s3a://spark-k8s-data/BENCHMARK-RESULT"
   # Path to kit in the docker image
     - "/opt/tpcds-kit/tools"
   # Scale factor (in GB)
@@ -26,40 +24,53 @@ spec:
   # Optimize queries
     - "false"
   # Filter queries, will run all if empty - "q23a-v2.4,q23b-v2.4"
-    - ""
+    - "q70a-v2.4,q82a-v2.4,q64-v2.4"
   # Logging set to WARN
     - "true"
+  volumes:
+    - name: "spark-local-dir-1"
+      hostPath:
+        path: "/tmp/spark-local-dir"
   sparkConf:
+    # Cloud specific - need to run with speculation to avoid strugglers
+    "spark.speculation": "true"
+    "spark.speculation.multiplier": "3"
+    "spark.speculation.quantile": "0.9"
     # TPCDs Specific
     "spark.sql.broadcastTimeout": "7200"
-    "spark.sql.crossJoin.enabled": "false"
+    "spark.sql.crossJoin.enabled": "true"
     "spark.sql.parquet.mergeSchema": "false"
     "spark.sql.parquet.filterPushdown": "true"
     # S3 credential
-    "spark.hadoop.fs.s3a.aws.credentials.provider": "org.apache.hadoop.fs.s3a.SharedInstanceProfileCredentialsProvider"
+    "spark.hadoop.fs.s3a.aws.credentials.provider": "com.amazonaws.auth.InstanceProfileCredentialsProvider"
     # S3 Specific config (remove if s3 not used)
     # We need it to speed up uploads, and outputcommiter/parquet to have consistent writes due to speculation
     "spark.hadoop.fs.s3a.connection.timeout": "1200000"
     "spark.hadoop.fs.s3a.path.style.access": "true"
     "spark.hadoop.fs.s3a.connection.maximum": "200"
     "spark.hadoop.fs.s3a.fast.upload": "true"
-    # S3A Committer
+    # S3 Committer
+    # Magic Committer
+    "spark.hadoop.mapreduce.outputcommitter.factory.scheme.s3a": "org.apache.hadoop.fs.s3a.commit.S3ACommitterFactory"
     "spark.hadoop.fs.s3a.committer.name": "directory"
     "spark.hadoop.fs.s3a.committer.staging.conflict-mode": "append"
-    "spark.hadoop.mapreduce.outputcommitter.factory.scheme.s3a": "org.apache.hadoop.fs.s3a.commit.S3ACommitterFactory"
+    # Shuffle performance
+    # "spark.kubernetes.local.dirs.tmpfs": "true"
   driver:
-    cores: 6
-    coreLimit: "6096m"
+    cores: 4
+    coreLimit: "4096m"
     memory: "8000m"
-    labels:
-      version: 2.4.5-SNAPSHOT
     serviceAccount: spark
+    volumeMounts:
+      - name: "spark-local-dir-1"
+        mountPath: "/tmp/spark-local-dir"
   executor:
-    instances: 10
-    cores: 1
-    memory: "4000m"
+    instances: 20
+    cores: 2
+    memory: "8000m"
     memoryOverhead: "2g"
-    labels:
-      version: 2.4.5-SNAPSHOT
+    volumeMounts:
+      - name: "spark-local-dir-1"
+        mountPath: "/tmp/spark-local-dir"
   restartPolicy:
     type: Never

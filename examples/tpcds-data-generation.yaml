@@ -1,21 +1,22 @@
-apiVersion: "sparkoperator.k8s.io/v1beta1"
+apiVersion: "sparkoperator.k8s.io/v1beta2"
 kind: SparkApplication
 metadata:
-  name: tpcds-datagen-1g-test
+  name: tpcds-data-generation
   namespace: default
 spec:
   type: Scala
-  mode: cluster
-  image: seedjeffwan/spark:2.4.5-SNAPSHOT-examples
+  image: seedjeffwan/spark:2.4.5-SNAPSHOT
   sparkVersion: 2.4.5-SNAPSHOT
-  mainClass: com.amazonaws.eks.tpcds.DataGenTPCDS
-  mainApplicationFile: local:///opt/spark/examples/jars/eks-spark-examples-assembly-1.0.jar
+  mainClass: com.amazonaws.eks.tpcds.DataGeneration
+  mainApplicationFile: local:///opt/spark/examples/jars/eks-spark-benchmark-assembly-1.0.jar
   mode: cluster
   arguments:
-  # working directory to write data
-    - "s3a://spark-k8s-data/TPCDS-TEST-10T"
+  # TPC-DS data localtion
+    - "s3a://spark-k8s-data/TPCDS-TEST-100G"
   # Path to kit in the docker image
     - "/opt/tpcds-kit/tools"
+  # Data Format
+    - "parquet"
   # Scale factor (in GB)
     - "1"
   # Generate data num partitions
@@ -27,33 +28,32 @@ spec:
   # Logging set to WARN
     - "true"
   sparkConf:
-    # For S3 writing, we need to disable speculation to have consistent writes
     "spark.speculation": "false"
     "spark.network.timeout": "2400"
     # S3 Credential
     "spark.hadoop.fs.s3a.aws.credentials.provider": "com.amazonaws.auth.InstanceProfileCredentialsProvider"
-    # S3 Specific config (remove if s3 not used)
+    # S3 Configs
     "spark.hadoop.fs.s3a.connection.timeout": "1200000"
     "spark.hadoop.fs.s3a.path.style.access": "true"
     "spark.hadoop.fs.s3a.connection.maximum": "200"
     "spark.hadoop.fs.s3a.fast.upload": "true"
+    "spark.hadoop.fs.s3a.readahead.range": "256K"
+    "spark.hadoop.fs.s3a.input.fadvise": "random"
     # S3A Committer
+    "spark.hadoop.mapreduce.outputcommitter.factory.scheme.s3a": "org.apache.hadoop.fs.s3a.commit.S3ACommitterFactory"
+    # "spark.sql.sources.commitProtocolClass": "org.apache.spark.internal.io.cloud.PathOutputCommitProtocol"
+    # "spark.sql.parquet.output.committer.class": "org.apache.hadoop.mapreduce.lib.output.BindingPathOutputCommitter"
     "spark.hadoop.fs.s3a.committer.name": "directory"
     "spark.hadoop.fs.s3a.committer.staging.conflict-mode": "append"
-    "spark.hadoop.mapreduce.outputcommitter.factory.scheme.s3a": "org.apache.hadoop.fs.s3a.commit.S3ACommitterFactory"
   driver:
-    cores: 6
-    coreLimit: "6096m"
+    cores: 2
+    coreLimit: "2096m"
     memory: "8000m"
-    labels:
-      version: 2.4.5-SNAPSHOT
     serviceAccount: spark
   executor:
-    instances: 90
+    instances: 50
     cores: 1
-    memory: "10000m"
+    memory: "8000m"
     memoryOverhead: 2g
-    labels:
-      version: 2.4.5-SNAPSHOT
   restartPolicy:
     type: Never

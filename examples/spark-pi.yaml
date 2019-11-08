@@ -6,10 +6,10 @@ metadata:
 spec:
   type: Scala
   mode: cluster
-  image: "seedjeffwan/spark:2.4.5-SNAPSHOT"
+  image: "seedjeffwan/spark:3.0.0-SNAPSHOT"
   imagePullPolicy: Always
   mainClass: org.apache.spark.examples.SparkPi
-  mainApplicationFile: "local:///opt/spark/examples/jars/spark-examples_2.11-2.4.5-SNAPSHOT.jar"
+  mainApplicationFile: "local:///opt/spark/examples/jars/spark-examples_2.12-3.0.0-SNAPSHOT.jar"
   arguments:
     - "10000"
   sparkConf:

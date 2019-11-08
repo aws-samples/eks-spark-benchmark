@@ -9,8 +9,7 @@ spec:
   image: "seedjeffwan/spark:2.4.5-SNAPSHOT-s3"
   imagePullPolicy: Always
   mainClass: org.apache.spark.examples.SparkPi
-  # mainApplicationFile: "local:///opt/spark/examples/jars/spark-examples_2.11-2.4.3.jar"
-  mainApplicationFile: "local:///opt/spark/examples/target/original-spark-examples_2.11-2.4.5-SNAPSHOT.jar"
+  mainApplicationFile: "local:///opt/spark/examples/jars/spark-examples_2.11-2.4.5-SNAPSHOT.jar"
   arguments:
     - "1000"
   sparkVersion: "2.4.5-SNAPSHOT"
