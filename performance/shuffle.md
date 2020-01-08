@@ -1,8 +1,10 @@
 ## Important Performance fix
+
 Most of the performance of Spark operations is mainly consumed in the shuffle phase, because it contains a large number of disk IO, serialization, network data transmission and other operations. There're a few performance improvement on the disk that spark scratch space uses.
 
 
 ### Migrate temporary storage for Spark jobs to EmptyDir
+
 https://github.com/apache-spark-on-k8s/spark/issues/439
 https://github.com/apache-spark-on-k8s/spark/pull/486
 
@@ -19,7 +21,8 @@ This might prove to be important for performance, especially in shuffle-heavy co
 
 Spark creates a Kubernetes emptyDir volume for each directory specified in `spark.local.dirs`. As noted in the Kubernetes documentation this will be backed by the node storage (https://kubernetes.io/docs/concepts/storage/volumes/#emptydir). In some compute environments this may be extremely undesirable. For example with diskless compute resources the node storage will likely be a non-performant remote mounted disk, often with limited capacity. For such environments it would likely be better to set medium: Memory on the volume per the K8S documentation to use a tmpfs volume instead.
 
-```
+```shell
+# spark-submit example
 ./bin/spark-submit \
 --master k8s://https://YOUR_EKS_MASTER_URI.sk1.us-west-2.eks.amazonaws.com \
 --deploy-mode cluster \
@@ -33,16 +36,24 @@ Spark creates a Kubernetes emptyDir volume for each directory specified in `spar
 ```
 
 
+```yaml
+# spark-operator example
+spec:
+  sparkConf:
+    "spark.kubernetes.local.dirs.tmpfs": "true"
+    ...
+```
+
+
 ### [SPARK-28042] [SPARK-27499] Support mapping spark.local.dir to hostPath volume
-https://github.com/apache/spark/pull/24879/files
 
 Currently, the k8s executor builder mount `spark.local.dir` as emptyDir or memory, it should satisfy some small workload, while in some heavily workload like TPCDS, both of them can have some problem, such as pods are evicted due to disk pressure when using emptyDir, and OOM when using tmpfs. This story expose hostPath volume to `spark.local.dir` and it can leverage local high performance disk for shuffle.
 
-
 > Note: Instances with SSD, NVMe are highly recommended.
 
+```shell
+# spark-submit example
 
-```
 ./bin/spark-submit \
 --master k8s://https://YOUR_EKS_MASTER_URI.sk1.us-west-2.eks.amazonaws.com \
 --deploy-mode cluster \
@@ -57,12 +68,33 @@ Currently, the k8s executor builder mount `spark.local.dir` as emptyDir or memor
 --conf spark.kubernetes.authenticate.driver.serviceAccountName=spark local:///opt/spark/examples/target/original-spark-examples_2.11-2.4.5-SNAPSHOT.jar
 ```
 
+
+```yaml
+# spark-operator example
+spec:
+  ...
+  mainApplicationFile: local:///opt/spark/examples/jars/eks-spark-examples-assembly-1.0.jar
+  volumes:
+    - name: "spark-local-dir-1"
+      hostPath:
+        path: "/tmp/spark-local-dir"
+  executor:
+    instances: 10
+    cores: 2
+    ....
+    volumeMounts:
+      - name: "spark-local-dir-1"
+        mountPath: "/tmp/spark-local-dir"
+```
+
 ### Use multiple disk for scratch space
 
 kubelet work directory can only be mounted on one disk, so that the spark scratch space only use ONE disk.
 Single disk I/O maybe the performance bottleneck and you can add more disks for scrach space.
 
 ```shell
+# spark-submit example
+
 ./bin/spark-submit \
 --master k8s://https://YOUR_EKS_MASTER_URI.sk1.us-west-2.eks.amazonaws.com \
 --deploy-mode cluster \
@@ -81,7 +113,32 @@ Single disk I/O maybe the performance bottleneck and you can add more disks for 
 --conf spark.kubernetes.authenticate.driver.serviceAccountName=spark local:///opt/spark/examples/target/original-spark-examples_2.11-2.4.5-SNAPSHOT.jar
 ```
 
+```yaml
+# spark-operator example
 
-## Debug
+spec:
+  ...
+  volumes:
+    - name: "spark-local-dir-1"
+      hostPath:
+        path: "/tmp/mnt-1"
+    - name: "spark-local-dir-2"
+      hostPath:
+        path: "/tmp/mnt-2"
+    - name: "spark-local-dir-3"
+      hostPath:
+        path: "/tmp/mnt-3"
+  driver:
+    ...
+  executor:
+    cores: 1
+    ...
+    volumeMounts:
+      - name: "spark-local-dir-1"
+        mountPath: "/tmp/mnt-1"
+      - name: "spark-local-dir-2"
+        mountPath: "/tmp/mnt-2"
+      - name: "spark-local-dir-3"
+        mountPath: "/tmp/mnt-3"
 
-Please describe executor pod if your `emptydir` rather than `hostPath`, that means you didn't successfully mount host path.
+```

@@ -319,7 +319,6 @@ The API gave the following message: The node was low on resource: ephemeral-stor
 The API gave the following container statuses:
 
 
-
 19/09/08 23:13:47 ERROR TaskSchedulerImpl: Lost executor 74 on 192.168.15.203:
 The executor with id 74 exited with exit code -1.
 The API gave the following brief reason: Evicted
