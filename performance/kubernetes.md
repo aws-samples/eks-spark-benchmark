@@ -47,3 +47,10 @@ Based on your tolenrance of lacking resources or failure, You can choose single-
 
 ### FSx for Lustre
 
+If user doesn't like to use S3 directly, we recommend to use [Amazon FSx for Lustre](https://aws.amazon.com/fsx/lustre/)
+
+Amazon FSx for Lustre provides a high-performance file system optimized for fast processing of workloads such as machine learning, high performance computing (HPC), video processing, financial modeling, and electronic design automation (EDA). These workloads commonly require data to be presented via a fast and scalable file system interface, and typically have data sets stored on long-term data stores like Amazon S3.
+
+Please check [Amazon FSx for Lustre CSI Driver](https://github.com/kubernetes-sigs/aws-fsx-csi-driver) to use FSx for Lustre on EKS.
+
+> Note: FSx for Lustre doesn't support multi-AZ at this moment.

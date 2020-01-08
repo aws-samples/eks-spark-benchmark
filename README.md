@@ -38,3 +38,7 @@ To replicate benchmark on EKS cluster, please follow [instructions](./benchmark/
 
 - [Customized Schedulers](./performance/scheduler.md)
 
+
+TODO:
+
+Benchmark 1TB results and screenshots. Scheduler results.

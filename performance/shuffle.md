@@ -2,7 +2,6 @@
 
 Most of the performance of Spark operations is mainly consumed in the shuffle phase, because it contains a large number of disk IO, serialization, network data transmission and other operations. There're a few performance improvement on the disk that spark scratch space uses.
 
-
 ### Migrate temporary storage for Spark jobs to EmptyDir
 
 https://github.com/apache-spark-on-k8s/spark/issues/439
@@ -35,7 +34,6 @@ Spark creates a Kubernetes emptyDir volume for each directory specified in `spar
 --conf spark.kubernetes.authenticate.driver.serviceAccountName=spark local:///opt/spark/examples/target/original-spark-examples_2.11-2.4.5-SNAPSHOT.jar
 ```
 
-
 ```yaml
 # spark-operator example
 spec:
@@ -43,7 +41,6 @@ spec:
     "spark.kubernetes.local.dirs.tmpfs": "true"
     ...
 ```
-
 
 ### [SPARK-28042] [SPARK-27499] Support mapping spark.local.dir to hostPath volume
 
@@ -67,7 +64,6 @@ Currently, the k8s executor builder mount `spark.local.dir` as emptyDir or memor
 --conf spark.kubernetes.driver.pod.name=spark-pi \
 --conf spark.kubernetes.authenticate.driver.serviceAccountName=spark local:///opt/spark/examples/target/original-spark-examples_2.11-2.4.5-SNAPSHOT.jar
 ```
-
 
 ```yaml
 # spark-operator example
@@ -140,5 +136,4 @@ spec:
         mountPath: "/tmp/mnt-2"
       - name: "spark-local-dir-3"
         mountPath: "/tmp/mnt-3"
-
 ```

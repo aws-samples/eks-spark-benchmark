@@ -1,4 +1,62 @@
-### EMR Cluster CLI export.
+## Benchmark Configuration
+
+### Cluster Spec
+
+|   Spec    |  EMR  |    EKS    |
+|-----------|-------|-----------|
+|   Master  |  1	  |     N/A   |
+|  Executor	|  3	  |     4     |
+| Committer	|  S3A  |    S3A    |
+|  TPC-DS   |  1T   |     1T    |
+
+
+| Instance 	  | vCPU 	| Mem (GiB) | Storage 	| Networking Performance (Gbps)	|
+|-----------	|-------|----------	|----------	|-------------------------------|
+| r4.2xlarge	|  8	  |     61   	|  EBS-Only |         Up to 10     	        |
+
+
+### Spark application configurations
+
+```shell
+--driver-cores 4
+--driver-memory 8G
+--executor-cores 2
+--executor-memory 8G
+--num-executors 10
+--conf spark.executor.memoryOverhead=2G
+```
+
+```
+# Cloud specific
+"spark.speculation": "true"
+"spark.speculation.multiplier": "3"
+"spark.speculation.quantile": "0.9"
+
+# TPCDs Specific
+"spark.sql.broadcastTimeout": "7200"
+"spark.sql.crossJoin.enabled": "true"
+"spark.sql.parquet.mergeSchema": "false"
+"spark.sql.parquet.filterPushdown": "true"
+
+# S3 credential
+"spark.hadoop.fs.s3a.aws.credentials.provider": "com.amazonaws.auth.InstanceProfileCredentialsProvider"
+
+# S3 Specific config
+# We need it to speed up uploads, and outputcommiter/parquet to have consistent writes due to speculation
+"spark.hadoop.fs.s3a.connection.timeout": "1200000"
+"spark.hadoop.fs.s3a.path.style.access": "true"
+"spark.hadoop.fs.s3a.connection.maximum": "200"
+"spark.hadoop.fs.s3a.fast.upload": "true"
+# S3 Committer
+# Magic Committer
+"spark.hadoop.mapreduce.outputcommitter.factory.scheme.s3a": "org.apache.hadoop.fs.s3a.commit.S3ACommitterFactory"
+"spark.hadoop.fs.s3a.committer.name": "directory"
+"spark.hadoop.fs.s3a.committer.staging.conflict-mode": "append"
+```
+
+## EMR
+
+### EMR Cluster CI Export
 
 ```
 aws emr create-cluster --termination-protected --applications Name=Hadoop Name=Hive Name=Pig Name=Hue Name=Spark --ec2-attributes '{"KeyName":"aws-key","InstanceProfile":"EMR_EC2_DefaultRole","SubnetId":"subnet-bc3xxxx","EmrManagedSlaveSecurityGroup":"sg-0da3dxxxx","EmrManagedMasterSecurityGroup":"sg-0fxxxx"}' --release-label emr-5.28.0 --log-uri 's3n://aws-logs-348134392524-us-west-2/elasticmapreduce/' --steps '' --auto-scaling-role EMR_AutoScaling_DefaultRole --ebs-root-volume-size 10 --service-role EMR_DefaultRole --enable-debugging --name 'benchmark-0106' --scale-down-behavior TERMINATE_AT_TASK_COMPLETION --region us-west-2
