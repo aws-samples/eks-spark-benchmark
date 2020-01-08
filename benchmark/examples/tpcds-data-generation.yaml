@@ -51,7 +51,7 @@ spec:
     memory: "8000m"
     serviceAccount: spark
   executor:
-    instances: 50
+    instances: 5
     cores: 1
     memory: "8000m"
     memoryOverhead: 2g

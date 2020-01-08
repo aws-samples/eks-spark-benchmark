@@ -11,7 +11,7 @@ spec:
   mainClass: org.apache.spark.examples.JavaWordCount
   mainApplicationFile: "local:///opt/spark/examples/jars/spark-examples_2.11-2.4.5-SNAPSHOT.jar"
   arguments:
-    - s3a://kubeflow-pipeline-data/data/input.txt
+    - s3a://pipeline-data/data/input.txt
   sparkVersion: "2.4.5-SNAPSHOT"
   restartPolicy:
     type: Never
