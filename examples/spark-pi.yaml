@@ -10,6 +10,7 @@ spec:
   imagePullPolicy: Always
   mainClass: org.apache.spark.examples.SparkPi
   mainApplicationFile: "local:///opt/spark/examples/jars/spark-examples_2.12-3.0.0-SNAPSHOT.jar"
+  batchScheduler: "volcano" 
   arguments:
     - "10000"
   sparkConf:
@@ -26,7 +27,7 @@ spec:
     serviceAccount: spark
   executor:
     cores: 1
-    instances: 2
-    memory: "512m"
+    instances: 10
+    memory: "8000m"
     labels:
       version: 2.4.5-SNAPSHOT

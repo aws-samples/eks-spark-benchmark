@@ -1,0 +1,176 @@
+DATA DIR is s3a://spark-k8s-data/TPCDS-TEST-1T
+Only WARN
+Creating temporary table catalog_sales using data stored in s3a://spark-k8s-data/TPCDS-TEST-1T/catalog_sales.
+Creating temporary table catalog_returns using data stored in s3a://spark-k8s-data/TPCDS-TEST-1T/catalog_returns.
+Creating temporary table inventory using data stored in s3a://spark-k8s-data/TPCDS-TEST-1T/inventory.
+Creating temporary table store_sales using data stored in s3a://spark-k8s-data/TPCDS-TEST-1T/store_sales.
+Creating temporary table store_returns using data stored in s3a://spark-k8s-data/TPCDS-TEST-1T/store_returns.
+Creating temporary table web_sales using data stored in s3a://spark-k8s-data/TPCDS-TEST-1T/web_sales.
+Creating temporary table web_returns using data stored in s3a://spark-k8s-data/TPCDS-TEST-1T/web_returns.
+Creating temporary table call_center using data stored in s3a://spark-k8s-data/TPCDS-TEST-1T/call_center.
+Creating temporary table catalog_page using data stored in s3a://spark-k8s-data/TPCDS-TEST-1T/catalog_page.
+Creating temporary table customer using data stored in s3a://spark-k8s-data/TPCDS-TEST-1T/customer.
+Creating temporary table customer_address using data stored in s3a://spark-k8s-data/TPCDS-TEST-1T/customer_address.
+Creating temporary table customer_demographics using data stored in s3a://spark-k8s-data/TPCDS-TEST-1T/customer_demographics.
+Creating temporary table date_dim using data stored in s3a://spark-k8s-data/TPCDS-TEST-1T/date_dim.
+Creating temporary table household_demographics using data stored in s3a://spark-k8s-data/TPCDS-TEST-1T/household_demographics.
+Creating temporary table income_band using data stored in s3a://spark-k8s-data/TPCDS-TEST-1T/income_band.
+Creating temporary table item using data stored in s3a://spark-k8s-data/TPCDS-TEST-1T/item.
+Creating temporary table promotion using data stored in s3a://spark-k8s-data/TPCDS-TEST-1T/promotion.
+Creating temporary table reason using data stored in s3a://spark-k8s-data/TPCDS-TEST-1T/reason.
+Creating temporary table ship_mode using data stored in s3a://spark-k8s-data/TPCDS-TEST-1T/ship_mode.
+Creating temporary table store using data stored in s3a://spark-k8s-data/TPCDS-TEST-1T/store.
+Creating temporary table time_dim using data stored in s3a://spark-k8s-data/TPCDS-TEST-1T/time_dim.
+Creating temporary table warehouse using data stored in s3a://spark-k8s-data/TPCDS-TEST-1T/warehouse.
+Creating temporary table web_page using data stored in s3a://spark-k8s-data/TPCDS-TEST-1T/web_page.
+Creating temporary table web_site using data stored in s3a://spark-k8s-data/TPCDS-TEST-1T/web_site.
+Running only queries: q70-v2.4,q82-v2.4,q64-v2.4
+Couldn't read table cross_sales and its not defined as a Benchmark.Table.
+Table store_sales exists.
+Table date_dim exists.
+Table store exists.
+Table item exists.
+Table inventory exists.
+Running execution q64-v2.4 iteration: 1, StandardRun=true
+Execution time: 944.893673598s
+Running execution q70-v2.4 iteration: 1, StandardRun=true
+Execution time: 93.557184901s
+Running execution q82-v2.4 iteration: 1, StandardRun=true
+Execution time: 97.949179908s
+Running execution q64-v2.4 iteration: 2, StandardRun=true
+Execution time: 899.0672243360001s
+Running execution q70-v2.4 iteration: 2, StandardRun=true
+Execution time: 90.308463656s
+Running execution q82-v2.4 iteration: 2, StandardRun=true
+Execution time: 96.557169887s
+Running execution q64-v2.4 iteration: 3, StandardRun=true
+Execution time: 911.089057906s
+Running execution q70-v2.4 iteration: 3, StandardRun=true
+Execution time: 86.712594759s
+Running execution q82-v2.4 iteration: 3, StandardRun=true
+Execution time: 95.976090526s
+Running execution q64-v2.4 iteration: 4, StandardRun=true
+Execution time: 900.450984198s
+Running execution q70-v2.4 iteration: 4, StandardRun=true
+Execution time: 87.04411012199999s
+Running execution q82-v2.4 iteration: 4, StandardRun=true
+Execution time: 96.358013764s
+Running execution q64-v2.4 iteration: 5, StandardRun=true
+Execution time: 909.6475707679999s
+Running execution q70-v2.4 iteration: 5, StandardRun=true
+Execution time: 84.84614722699999s
+Running execution q82-v2.4 iteration: 5, StandardRun=true
+Execution time: 96.766566581s
+Running execution q64-v2.4 iteration: 6, StandardRun=true
+Execution time: 916.769203416s
+Running execution q70-v2.4 iteration: 6, StandardRun=true
+Execution time: 87.20649554s
+Running execution q82-v2.4 iteration: 6, StandardRun=true
+Execution time: 95.844374262s
+Running execution q64-v2.4 iteration: 7, StandardRun=true
+Execution time: 917.479981239s
+Running execution q70-v2.4 iteration: 7, StandardRun=true
+Execution time: 88.87801054s
+Running execution q82-v2.4 iteration: 7, StandardRun=true
+Execution time: 93.229917176s
+Running execution q64-v2.4 iteration: 8, StandardRun=true
+Execution time: 914.4883199379999s
+Running execution q70-v2.4 iteration: 8, StandardRun=true
+Execution time: 90.747958825s
+Running execution q82-v2.4 iteration: 8, StandardRun=true
+Execution time: 99.081389507s
+Running execution q64-v2.4 iteration: 9, StandardRun=true
+Execution time: 932.765450663s
+Running execution q70-v2.4 iteration: 9, StandardRun=true
+Execution time: 88.744408963s
+Running execution q82-v2.4 iteration: 9, StandardRun=true
+Execution time: 98.76750766800001s
+Running execution q64-v2.4 iteration: 10, StandardRun=true
+Execution time: 929.4679505339999s
+Running execution q70-v2.4 iteration: 10, StandardRun=true
+Execution time: 89.265607072s
+Running execution q82-v2.4 iteration: 10, StandardRun=true
+Execution time: 98.759075431s
+Results written to table: 'sqlPerformance' at s3a://spark-k8s-data/BENCHMARK-RESULT/timestamp=1578509059861
+Reading result at s3a://spark-k8s-data/BENCHMARK-RESULT/timestamp=1578509059861
++--------------------+---------+--------------------+------+-------------+
+|       configuration|iteration|             results|  tags|    timestamp|
++--------------------+---------+--------------------+------+-------------+
+|[20, [application...|        1|[[0.011893, [], 9...|[true]|1578509059861|
+|[20, [application...|        2|[[0.001241, [], 8...|[true]|1578509059861|
+|[20, [application...|        3|[[0.001376, [], 9...|[true]|1578509059861|
+|[20, [application...|        4|[[0.001617, [], 9...|[true]|1578509059861|
+|[20, [application...|        5|[[0.00137, [], 90...|[true]|1578509059861|
+|[20, [application...|        6|[[0.001441, [], 9...|[true]|1578509059861|
+|[20, [application...|        7|[[0.001421, [], 9...|[true]|1578509059861|
+|[20, [application...|        8|[[0.001442, [], 9...|[true]|1578509059861|
+|[20, [application...|        9|[[0.001448, [], 9...|[true]|1578509059861|
+|[20, [application...|       10|[[0.001507, [], 9...|[true]|1578509059861|
++--------------------+---------+--------------------+------+-------------+
+
++---------+---------+-----------------+
+|iteration|queryName| executionSeconds|
++---------+---------+-----------------+
+|        1| q64-v2.4|    944.893673598|
+|        1| q70-v2.4|     93.557184901|
+|        1| q82-v2.4|     97.949179908|
+|        2| q64-v2.4|899.0672243360001|
+|        2| q70-v2.4|     90.308463656|
+|        2| q82-v2.4|     96.557169887|
+|        3| q64-v2.4|    911.089057906|
+|        3| q70-v2.4|     86.712594759|
+|        3| q82-v2.4|     95.976090526|
+|        4| q64-v2.4|    900.450984198|
+|        4| q70-v2.4|87.04411012199999|
+|        4| q82-v2.4|     96.358013764|
+|        5| q64-v2.4|909.6475707679999|
+|        5| q70-v2.4|84.84614722699999|
+|        5| q82-v2.4|     96.766566581|
+|        6| q64-v2.4|    916.769203416|
+|        6| q70-v2.4|      87.20649554|
+|        6| q82-v2.4|     95.844374262|
+|        7| q64-v2.4|    917.479981239|
+|        7| q70-v2.4|      88.87801054|
++---------+---------+-----------------+
+only showing top 20 rows
+
+Final results at s3a://spark-k8s-data/BENCHMARK-RESULT/timestamp=1578509059861
++---------+--------------------+-----------------+-----------------+
+|queryName|medianRuntimeSeconds|minRuntimeSeconds|maxRuntimeSeconds|
++---------+--------------------+-----------------+-----------------+
+| q64-v2.4|               915.0|              899|              944|
+| q70-v2.4|                88.0|               84|               93|
+| q82-v2.4|                96.0|               93|               99|
++---------+--------------------+-----------------+-----------------+
+
+
+Scheduling mode = FIFO
+Spark Context default degree of parallelism = 20
+Aggregated Spark stage metrics:
+numStages => 461
+sum(numTasks) => 86860
+elapsedTime => 11179917 (3.1 h)
+sum(stageDuration) => 30013674 (8.3 h)
+sum(executorRunTime) => 215178276 (59.8 h)
+sum(executorCpuTime) => 174322200 (48.4 h)
+sum(executorDeserializeTime) => 402932 (6.7 min)
+sum(executorDeserializeCpuTime) => 293902 (4.9 min)
+sum(resultSerializationTime) => 4371 (4 s)
+sum(jvmGCTime) => 4777682 (1.3 h)
+sum(shuffleFetchWaitTime) => 2858238 (48 min)
+sum(shuffleWriteTime) => 10641603 (3.0 h)
+max(resultSize) => 12785825 (12.0 MB)
+sum(numUpdatedBlockStatuses) => 0
+sum(diskBytesSpilled) => 0 (0 Bytes)
+sum(memoryBytesSpilled) => 0 (0 Bytes)
+max(peakExecutionMemory) => 429496729600
+sum(recordsRead) => 127932123167
+sum(bytesRead) => 895577095967 (834.0 GB)
+sum(recordsWritten) => 13
+sum(bytesWritten) => 1913133 (1868.0 KB)
+sum(shuffleTotalBytesRead) => 1927539405616 (1795.0 GB)
+sum(shuffleTotalBlocksFetched) => 9077546
+sum(shuffleLocalBlocksFetched) => 1161946
+sum(shuffleRemoteBlocksFetched) => 7915600
+sum(shuffleBytesWritten) => 1903885565984 (1773.0 GB)
+sum(shuffleRecordsWritten) => 64737946302

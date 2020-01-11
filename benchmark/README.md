@@ -10,8 +10,9 @@ This project uses sbt to compile scale codes, please install sbt [here](https://
 
 ### Prepare Spark Base Container Image
 
-> Note: Please follow instructions only if you want to build your own image, you can also use provided ones like
-`seedjeffwan/spark:2.4.5-SNAPSHOT` or `seedjeffwan/spark:3.0.0-SNAPSHOT`
+> Note: Please follow instructions only if you want to build your own image, you can also use provided ones like `seedjeffwan/spark:2.4.5-SNAPSHOT` or `seedjeffwan/spark:3.0.0-SNAPSHOT`.
+
+> We highly recommend you to use our provided images because it has some critital performance improvement which is not in the 2.4.4 distribution yet.
 
 1. Build Spark Base Image
 
@@ -84,6 +85,15 @@ Here's an example to use `seedjeffwan/spark-operator:v2.4.5-SNAPSHOT` as your sp
 helm install incubator/sparkoperator --namespace spark-operator --set enableWebhook=true --set sparkJobNamespace=default --set operatorImageName=seedjeffwan/spark-operator --set operatorVersion=v2.4.5-SNAPSHOT
 ```
 
+Create Spark service account
+
+```
+kubectl create serviceaccount spark
+kubectl create clusterrolebinding spark-role --clusterrole=edit --serviceaccount=default:spark --namespace=default
+```
+
+You can use service account `spark` in your driver pod.
+
 ## Run Benchmark
 
 ### Generate the TCP-DS data
@@ -98,7 +108,4 @@ kubectl apply -f examples/tpcds-data-generation.yaml
 kubectl apply -f examples/tpcds-benchmark.yaml
 ```
 
-## Credits
-
-TPC-DS and TeraSort is pretty popular in big data area and there're few existing solutions.
-Some codes in the example come from @Kisimple [here](https://github.com/kisimple/spark/tree/terasort/examples/src/main/scala/org/apache/spark/examples/terasort) and example from @cern [here](https://gitlab.cern.ch/db/spark-service/spark-k8s-examples).
+> Note: We use 1G dataset in the yaml examples, if you'd like to change to 100G or 1T, don't forget to change data num partitions as well. Executors resources can be changed correspondingly.

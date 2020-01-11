@@ -25,7 +25,7 @@ spec:
     - "1"
   # Optimize queries
     - "false"
-  # Filter queries, will run all if empty - "q70a,q82a,q64"
+  # Filter queries, will run all if empty - "q70-v2.4,q82-v2.4,q64-v2.4"
     - ""
   # Logging set to WARN
     - "true"
