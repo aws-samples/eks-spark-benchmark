@@ -5,10 +5,10 @@ metadata:
   namespace: default
 spec:
   type: Scala
-  image: seedjeffwan/spark:2.4.5-SNAPSHOT
+  image: seedjeffwan/spark:2.4.5-SNAPSHOT-examples
   sparkVersion: 2.4.5-SNAPSHOT
-  mainClass: com.amazonaws.eks.tpcds.DataGeneration
-  mainApplicationFile: local:///opt/spark/examples/jars/eks-spark-benchmark-assembly-1.0.jar
+  mainClass: com.amazonaws.eks.tpcds.DataGenTPCDS
+  mainApplicationFile: local:///opt/spark/examples/jars/eks-spark-examples-assembly-1.0.jar
   mode: cluster
   arguments:
   # TPC-DS data localtion

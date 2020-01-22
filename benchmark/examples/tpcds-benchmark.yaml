@@ -6,10 +6,10 @@ metadata:
 spec:
   type: Scala
   mode: cluster
-  image: seedjeffwan/spark:2.4.5-SNAPSHOT
+  image: seedjeffwan/spark:2.4.5-SNAPSHOT-examples
   sparkVersion: 2.4.5-SNAPSHOT
-  mainClass: com.amazonaws.eks.tpcds.BenchmarkSQL
-  mainApplicationFile: local:///opt/spark/examples/jars/eks-spark-benchmark-assembly-1.0.jar
+  mainClass: com.amazonaws.eks.tpcds.BenchmarkSparkSQL
+  mainApplicationFile: local:///opt/spark/examples/jars/eks-spark-examples-assembly-1.0.jar
   arguments:
   # TPC-DS data localtion
     - "s3a://spark-k8s-data/TPCDS-TEST-1G"

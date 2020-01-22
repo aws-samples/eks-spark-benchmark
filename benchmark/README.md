@@ -2,7 +2,15 @@
 
 This example is used to benchmark Spark performance on Kubernetes.
 
+> Note: We highly recommend you to use our provided images like `seedjeffwan/spark:2.4.5-SNAPSHOT-examples` or `seedjeffwan/spark:3.0.0-SNAPSHOT-examples` because it has some critital performance improvement which is not in the 2.4.4 distribution yet. If you want to use our image, you only need to grant S3 permission to node group and install `spark-operator`.
+
+
 ## Prerequisite
+
+### Attach S3 policy to node group roles
+
+In the benchmark, we use s3 to host TPC-DS dataset and also export query output to S3. Please make sure you attach
+`AmazonS3FullAccess` policy in your EKS node group role.
 
 ### Install SBT
 
@@ -10,19 +18,18 @@ This project uses sbt to compile scale codes, please install sbt [here](https://
 
 ### Prepare Spark Base Container Image
 
-> Note: Please follow instructions only if you want to build your own image, you can also use provided ones like `seedjeffwan/spark:2.4.5-SNAPSHOT` or `seedjeffwan/spark:3.0.0-SNAPSHOT`.
+1. Build Spark Base Image from prebuild Spark
 
-> We highly recommend you to use our provided images because it has some critital performance improvement which is not in the 2.4.4 distribution yet.
+> Note: If you'd like to build Spark base image from source. Please check Appendix A.
 
-1. Build Spark Base Image
-
-To create a Spark distribution like those distributed by the [Spark Downloads] page, and that is laid out so as to be runnable, use ./dev/make-distribution.sh in the project root directory. It can be configured with Maven profile settings and so on like the direct Maven build. Example:
+Go to [Spark Downloads](https://spark.apache.org/downloads.html) page and download latest version, in this case, we download `spark-2.4.4-bin-hadoop2.7.tgz` and unzip the file. Run following command to  build your Spark image.
 
 ```
-./dev/make-distribution.sh --name custom-spark --pip --r --tgz -Psparkr -Phadoop-2.7 -Phive -Phive-thriftserver -Pmesos -Pyarn -Pkubernetes
+cd ${your_download_spark_root}
+./bin/docker-image-tool.sh -r seedjeffwan -t 2.4.4 build
 ```
 
-This will build Spark distribution along with Python pip and R packages. For more information on usage, run ./dev/make-distribution.sh --help
+You will get images like `seedjeffwan/spark:2.4.4`, `seedjeffwan/spark-py:2.4.4` and `seedjeffwan/spark-r`.
 
 2. Add `hadoop-aws` and `aws-java-sdk-bundle` library
 
@@ -35,12 +42,6 @@ docker build -t <your_username>/spark:2.4.4 .
 ```
 
 This will give you `your_username/spark:2.4.4` with AWS S3 SDK libraries.
-
-
-### Attach S3 policy to node group roles
-
-In the benchmark, we use s3 to host TPC-DS dataset and also export query output to S3. Please make sure you attach
-`AmazonS3FullAccess` policy in your EKS node group role.
 
 
 ## Build benchamrk project
@@ -80,6 +81,35 @@ docker build -t seedjeffwan/spark-benchmark:$IMAGE_TAG --build-arg SPARK_BASE_IM
 
 We highly recommend you use [spark-operator](https://github.com/GoogleCloudPlatform/spark-on-k8s-operator) to manage spark applications. Please check [installation guidance](https://github.com/GoogleCloudPlatform/spark-on-k8s-operator#installation) to install spark-operator.
 
+To setup helm,
+
+```
+# Create tiller Service Account
+cat <<EOF | kubectl apply --filename -
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: tiller
+  namespace: kube-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: tiller
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+  - kind: ServiceAccount
+    name: tiller
+    namespace: kube-system
+EOF
+
+# Init Helm with tiller
+helm init --service-account tiller
+```
+
 Here's an example to use `seedjeffwan/spark-operator:v2.4.5-SNAPSHOT` as your spark operator image.
 ```
 helm install incubator/sparkoperator --namespace spark-operator --set enableWebhook=true --set sparkJobNamespace=default --set operatorImageName=seedjeffwan/spark-operator --set operatorVersion=v2.4.5-SNAPSHOT
@@ -109,3 +139,13 @@ kubectl apply -f examples/tpcds-benchmark.yaml
 ```
 
 > Note: We use 1G dataset in the yaml examples, if you'd like to change to 100G or 1T, don't forget to change data num partitions as well. Executors resources can be changed correspondingly.
+
+## Appendix A. Build Spark distribution from Source code.
+
+To create a Spark distribution like those distributed by the [Spark Downloads](https://spark.apache.org/downloads.html) page, and that is laid out so as to be runnable, use ./dev/make-distribution.sh in the project root directory. It can be configured with Maven profile settings and so on like the direct Maven build. Example:
+
+```
+./dev/make-distribution.sh --name custom-spark --pip --r --tgz -Psparkr -Phadoop-2.7 -Phive -Phive-thriftserver -Pmesos -Pyarn -Pkubernetes
+```
+
+This will build Spark distribution along with Python pip and R packages. For more information on usage, run ./dev/make-distribution.sh --help
