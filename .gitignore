@@ -59,3 +59,8 @@ nb-configuration.xml
 ## OS X
 ##########################
 .DS_Store
+
+##########################
+## Jupyter Checkpoints
+##########################
+.ipynb_checkpoints/

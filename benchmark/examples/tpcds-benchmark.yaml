@@ -6,19 +6,19 @@ metadata:
 spec:
   type: Scala
   mode: cluster
-  image: seedjeffwan/spark:2.4.5-SNAPSHOT-examples
-  sparkVersion: 2.4.5-SNAPSHOT
-  mainClass: com.amazonaws.eks.tpcds.BenchmarkSparkSQL
-  mainApplicationFile: local:///opt/spark/examples/jars/eks-spark-examples-assembly-1.0.jar
+  image: seedjeffwan/spark:v2.4.5-examples
+  sparkVersion: 2.4.5
+  mainClass: com.amazonaws.eks.tpcds.BenchmarkSQL
+  mainApplicationFile: local:///opt/spark/examples/jars/eks-spark-benchmark-assembly-1.0.jar
   arguments:
   # TPC-DS data localtion
     - "s3a://spark-k8s-data/TPCDS-TEST-1G"
   # results location
     - "s3a://spark-k8s-data/TPCDS-TEST-1G-RESULT"
-  # Data Format
-    - "parquet"
   # Path to kit in the docker image
     - "/opt/tpcds-kit/tools"
+  # Data Format
+    - "parquet"
   # Scale factor (in GB)
     - "1"
   # Number of iterations
@@ -53,12 +53,12 @@ spec:
     "spark.hadoop.fs.s3a.committer.name": "directory"
     "spark.hadoop.fs.s3a.committer.staging.conflict-mode": "append"
   driver:
-    cores: 4
-    coreLimit: "4096m"
+    cores: 2
+    coreLimit: "2048m"
     memory: "8000m"
     serviceAccount: spark
   executor:
-    instances: 10
+    instances: 3
     cores: 1
     memory: "8000m"
     memoryOverhead: "2g"

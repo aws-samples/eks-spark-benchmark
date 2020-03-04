@@ -6,13 +6,13 @@ metadata:
 spec:
   type: Scala
   mode: cluster
-  image: "seedjeffwan/spark:2.4.5-SNAPSHOT"
+  image: "seedjeffwan/spark:v2.4.5"
   imagePullPolicy: Always
   mainClass: org.apache.spark.examples.SparkPi
-  mainApplicationFile: "local:///opt/spark/examples/jars/spark-examples_2.11-2.4.5-SNAPSHOT.jar"
+  mainApplicationFile: "local:///opt/spark/examples/jars/spark-examples_2.11-2.4.5.jar"
   arguments:
     - "10000"
-  sparkVersion: "2.4.5-SNAPSHOT"
+  sparkVersion: "2.4.5"
   restartPolicy:
     type: Never
   volumes:
@@ -30,7 +30,7 @@ spec:
     coreLimit: "1024m"
     memory: "512m"
     labels:
-      version: 2.4.5-SNAPSHOT
+      version: 2.4.5
     serviceAccount: spark
     volumeMounts:
       - name: "spark-local-dir-1"
@@ -44,7 +44,7 @@ spec:
     instances: 2
     memory: "512m"
     labels:
-      version: 2.4.5-SNAPSHOT
+      version: 2.4.5
     volumeMounts:
       - name: "spark-local-dir-1"
         mountPath: "/tmp/mnt-1"

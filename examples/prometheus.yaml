@@ -6,13 +6,13 @@ metadata:
 spec:
   type: Scala
   mode: cluster
-  image: "seedjeffwan/spark:2.4.5-SNAPSHOT-prometheus"
+  image: "seedjeffwan/spark:v2.4.5-prometheus"
   imagePullPolicy: Always
   mainClass: org.apache.spark.examples.SparkPi
-  mainApplicationFile: "local:///opt/spark/examples/jars/spark-examples_2.11-2.4.5-SNAPSHOT.jar"
+  mainApplicationFile: "local:///opt/spark/examples/jars/spark-examples_2.11-2.4.5.jar"
   arguments:
     - "100000"
-  sparkVersion: "2.4.5-SNAPSHOT"
+  sparkVersion: "2.4.5"
   restartPolicy:
     type: Never
   driver:

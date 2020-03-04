@@ -1,9 +1,12 @@
 ## Spark on Kubernetes benchmark utility
 
-This example is used to benchmark Spark performance on Kubernetes.
+This repository is used to benchmark Spark performance on Kubernetes.
 
-> Note: We highly recommend you to use our provided images like `seedjeffwan/spark:2.4.5-SNAPSHOT-examples` or `seedjeffwan/spark:3.0.0-SNAPSHOT-examples` because it has some critital performance improvement which is not in the 2.4.4 distribution yet. If you want to use our image, you only need to grant S3 permission to node group and install `spark-operator`.
+We highly recommend you to use our provided images like `seedjeffwan/spark:v2.4.5-examples` or `seedjeffwan/spark:3.0.0-SNAPSHOT-examples` because it has some critital performance improvements which are not in the 2.4.5 distribution yet. Features like `tmpfs` and `hostPath` volume for spark scratch space are not avalable in v2.4.5.
 
+If you want to use our image, you can skip building image section and jump to [Install Spark-Operator](#install-spark-operator) directly.
+
+`seedjeffwan/spark:v2.4.5-examples` use Scala 2.12, it includes `hadoop-aws-3.1.0.jar` and `aws-java-sdk-bundle-1.11.271.jar` for S3A FileSystem.
 
 ## Prerequisite
 
@@ -18,44 +21,65 @@ This project uses sbt to compile scale codes, please install sbt [here](https://
 
 ### Prepare Spark Base Container Image
 
-1. Build Spark Base Image from prebuild Spark
+There're two ways to get Spark codes, either from prebuilt Apache Spark for fixed Apache Hadoop version or build your own Spark.
 
-> Note: If you'd like to build Spark base image from source. Please check Appendix A.
+#### Prebuilt Apache Spark
 
-Go to [Spark Downloads](https://spark.apache.org/downloads.html) page and download latest version, in this case, we download `spark-2.4.4-bin-hadoop2.7.tgz` and unzip the file. Run following command to  build your Spark image.
+1. Export your dockerhub username
 
-```
-cd ${your_download_spark_root}
-./bin/docker-image-tool.sh -r seedjeffwan -t 2.4.4 build
-```
+  ```shell
+  export DOCKERHUB_USERNAME=<your_dockerhub_username>
+  ```
 
-You will get images like `seedjeffwan/spark:2.4.4`, `seedjeffwan/spark-py:2.4.4` and `seedjeffwan/spark-r`.
+2. Build Spark Base Image from prebuilt Apache Spark
 
-2. Add `hadoop-aws` and `aws-java-sdk-bundle` library
+  Go to [Spark Downloads](https://spark.apache.org/downloads.html) page and download latest version, in this case, we download `spark-2.4.5-bin-hadoop2.7.tgz` and unzip the file. This binary uses scala 2.11 and we will use 2.11 for all other applications.
 
-Based on the the Hadoop version pre-built into Spark, you need to use right version of `hadoop-aws` and `aws-java-sdk-bundle`. Using 2.7.6 as an example,
+  Run following command to  build your Spark image.
 
-```
-cd ${project_location}/docker/hadoop-aws-2.7.6/
+  ```shell
+  cd spark-2.4.5-bin-hadoop2.7
+  ./bin/docker-image-tool.sh -r $DOCKERHUB_USERNAME -t v2.4.5 build
+  ```
 
-docker build -t <your_username>/spark:2.4.4 .
-```
+  You will get images like `$DOCKERHUB_USERNAME/spark:v2.4.5`, `$DOCKERHUB_USERNAME/spark-py:v2.4.5` and `$DOCKERHUB_USERNAME/spark-r:v2.4.5`.
 
-This will give you `your_username/spark:2.4.4` with AWS S3 SDK libraries.
+3. Add `hadoop-aws` and `aws-java-sdk-bundle` library
 
+  Based on the the Hadoop version pre-built into Spark, you need to use right version of `hadoop-aws` and `aws-java-sdk-bundle`. Using 2.7.6 as an example,
+
+  ```
+  cd ${project_location}/docker/hadoop-aws-2.7.6/
+
+  docker build -t $DOCKERHUB_USERNAME/spark:v2.4.5-s3 --build-arg BASE_IMAGE=$DOCKERHUB_USERNAME/spark:v2.4.5 .
+  ```
+
+  This will give you `your_username/spark:v2.4.5-s3` with AWS S3 SDK libraries.
+
+
+#### Build your own Spark
+
+If you would like to build your own spark, you can use profile `-Phadoop-3.1` or `-Phadoop-2.7`. Just remember to choose right `hadoop-aws` and `aws-java-sdk-bundle` version.
+
+Once you build your own Spark, create a distribution and all rest steps is exact same as above steps.
+
+Check appendix A for more details to build Apache Spark from source.
 
 ## Build benchamrk project
 
 ### Build Dependencies
 - [spark-sql-perf](https://github.com/databricks/spark-sql-perf)
 
-Latest maven version is 0.3.2 which is too old.
-Please build with `sbt +package` and get `spark-sql-perf_2.12-0.5.1-SNAPSHOT.jar`. Copy jars to `libs/`.
+Latest version in maven central repo is 0.3.2 which is too old, we need to build a new libary from source. This library `spark-sql-perf_2.11-0.5.1-SNAPSHOT.jar` has been added as a dependency in `benchmark/libs` if you want to skip it.
 
 ```
 git clone https://github.com/databricks/spark-sql-perf
 cd spark-sql-perf
 sbt +package
+```
+
+```
+cp target/scala-2.11/spark-sql-perf_2.11-0.5.1-SNAPSHOT.jar <your-code-path>/eks-spark-benchmark/benchmark/libs
 ```
 
 ### Build benchmark utility
@@ -68,14 +92,19 @@ $ sbt assembly
 
 ```
 IMAGE_TAG=v0.1-$(date +'%Y%m%d')
-docker build -t seedjeffwan/spark-benchmark:$IMAGE_TAG .
+docker build -t $DOCKERHUB_USERNAME/spark-benchmark:$IMAGE_TAG .
 ```
 
 If you like to build based on a different spark base image.
 
 ```
-docker build -t seedjeffwan/spark-benchmark:$IMAGE_TAG --build-arg SPARK_BASE_IMAGE=your_spark_image .
+docker build -t $DOCKERHUB_USERNAME/spark-benchmark:$IMAGE_TAG --build-arg SPARK_BASE_IMAGE=$DOCKERHUB_USERNAME/spark:v2.4.5-s3 .
 ```
+
+You can push image to dockerhub and then use image `$DOCKERHUB_USERNAME/spark-benchmark:$IMAGE_TAG` to replace image `seedjeffwan/spark:v2.4.5-examples` in the examples.
+
+> Note: If you build Spark source using Scala 2.12, please copy `scala-2.12/spark-sql-perf_2.12-0.5.1-SNAPSHOT.jar` and update scale version in benchmark project `build.sbt` and `Dockerfile`. Make sure you use scala-2.12 in all the application to match your Spark Scala version.
+
 
 ## Install Spark-Operator
 
@@ -110,9 +139,9 @@ EOF
 helm init --service-account tiller
 ```
 
-Here's an example to use `seedjeffwan/spark-operator:v2.4.5-SNAPSHOT` as your spark operator image.
+Here's an example to use `seedjeffwan/spark-operator:v2.4.5` as your spark operator image.
 ```
-helm install incubator/sparkoperator --namespace spark-operator --set enableWebhook=true --set sparkJobNamespace=default --set operatorImageName=seedjeffwan/spark-operator --set operatorVersion=v2.4.5-SNAPSHOT
+helm install incubator/sparkoperator --namespace spark-operator --set enableWebhook=true --set sparkJobNamespace=default --set operatorImageName=seedjeffwan/spark-operator --set operatorVersion=v2.4.5
 ```
 
 Create Spark service account
@@ -142,10 +171,10 @@ kubectl apply -f examples/tpcds-benchmark.yaml
 
 ## Appendix A. Build Spark distribution from Source code.
 
-To create a Spark distribution like those distributed by the [Spark Downloads](https://spark.apache.org/downloads.html) page, and that is laid out so as to be runnable, use ./dev/make-distribution.sh in the project root directory. It can be configured with Maven profile settings and so on like the direct Maven build. Example:
+To create a Spark distribution like those distributed by the [Spark Downloads](https://spark.apache.org/downloads.html) page, and that is laid out so as to be runnable, use `./dev/make-distribution.sh` in the project root directory. It can be configured with Maven profile settings and so on like the direct Maven build. Example:
 
 ```
-./dev/make-distribution.sh --name custom-spark --pip --r --tgz -Psparkr -Phadoop-2.7 -Phive -Phive-thriftserver -Pmesos -Pyarn -Pkubernetes
+./dev/make-distribution.sh --name custom-spark --pip --r --tgz -Psparkr -Phadoop-3.1 -Phive -Phive-thriftserver -Pmesos -Pyarn -Pkubernetes
 ```
 
-This will build Spark distribution along with Python pip and R packages. For more information on usage, run ./dev/make-distribution.sh --help
+This will build Spark distribution along with Python pip and R packages. For more information on usage, run `./dev/make-distribution.sh --help`

@@ -6,28 +6,24 @@ metadata:
 spec:
   type: Scala
   mode: cluster
-  image: "seedjeffwan/spark:3.0.0-SNAPSHOT"
+  image: "seedjeffwan/spark:v2.4.5"
   imagePullPolicy: Always
   mainClass: org.apache.spark.examples.SparkPi
-  mainApplicationFile: "local:///opt/spark/examples/jars/spark-examples_2.12-3.0.0-SNAPSHOT.jar"
-  batchScheduler: "volcano" 
+  mainApplicationFile: "local:///opt/spark/examples/jars/spark-examples_2.11-2.4.5.jar"
+  #batchScheduler: "volcano"
   arguments:
-    - "10000"
+    - "100000"
   sparkConf:
     "spark.kubernetes.local.dirs.tmpfs": "true"
-  sparkVersion: "2.4.5-SNAPSHOT"
+  sparkVersion: "2.4.5"
   restartPolicy:
     type: Never
   driver:
     cores: 1
     coreLimit: "1024m"
     memory: "512m"
-    labels:
-      version: 2.4.5-SNAPSHOT
     serviceAccount: spark
   executor:
     cores: 1
-    instances: 10
-    memory: "8000m"
-    labels:
-      version: 2.4.5-SNAPSHOT
+    instances: 2
+    memory: "1000m"

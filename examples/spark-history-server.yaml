@@ -6,13 +6,13 @@ metadata:
 spec:
   type: Scala
   mode: cluster
-  image: "seedjeffwan/spark:2.4.5-SNAPSHOT-s3"
+  image: "seedjeffwan/spark:v2.4.5"
   imagePullPolicy: Always
   mainClass: org.apache.spark.examples.SparkPi
-  mainApplicationFile: "local:///opt/spark/examples/jars/spark-examples_2.11-2.4.5-SNAPSHOT.jar"
+  mainApplicationFile: "local:///opt/spark/examples/jars/spark-examples_2.11-2.4.5.jar"
   arguments:
     - "1000"
-  sparkVersion: "2.4.5-SNAPSHOT"
+  sparkVersion: "2.4.5"
   restartPolicy:
     type: Never
   sparkConf:
@@ -20,8 +20,8 @@ spec:
     "spark.eventLog.dir": "s3a://spark-k8s-data/spark-history-server/"
     "spark.hadoop.fs.s3a.aws.credentials.provider": "com.amazonaws.auth.InstanceProfileCredentialsProvider"
   driver:
-    cores: 0.1
-    coreLimit: "200m"
+    cores: 1
+    coreLimit: "1024m"
     memory: "512m"
     serviceAccount: spark
   executor:

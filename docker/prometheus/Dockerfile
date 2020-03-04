@@ -15,7 +15,9 @@
 # limitations under the License.
 #
 
-FROM seedjeffwan/spark:2.4.5-SNAPSHOT
+ARG BASE_IMAGE=seedjeffwan/spark:v2.4.5
+
+FROM ${BASE_IMAGE}
 
 # Setup for the Prometheus JMX exporter.
 RUN mkdir -p /etc/metrics/conf

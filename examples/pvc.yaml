@@ -6,15 +6,16 @@ metadata:
 spec:
   type: Scala
   mode: cluster
-  image: "seedjeffwan/spark:2.4.5-SNAPSHOT"
+  image: "seedjeffwan/spark:v2.4.5"
   imagePullPolicy: Always
   mainClass: org.apache.spark.examples.JavaWordCount
-  mainApplicationFile: "local:///opt/spark/examples/jars/spark-examples_2.11-2.4.5-SNAPSHOT.jar"
+  mainApplicationFile: "local:///opt/spark/examples/jars/spark-examples_2.11-2.4.5.jar"
   arguments:
     - /data/out.txt
-  sparkVersion: "2.4.3"
+  sparkVersion: "2.4.5"
   restartPolicy:
     type: Never
+  # You can mount EFS to Spark pods, check https://github.com/kubernetes-sigs/aws-efs-csi-driver for more details.
   volumes:
   - name: persistent-storage
     persistentVolumeClaim:

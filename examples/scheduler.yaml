@@ -1,23 +1,24 @@
 apiVersion: "sparkoperator.k8s.io/v1beta2"
 kind: SparkApplication
 metadata:
-  name: wordcount-s3
+  name: spark-pi
   namespace: default
 spec:
   type: Scala
   mode: cluster
   image: "seedjeffwan/spark:v2.4.5"
   imagePullPolicy: Always
-  mainClass: org.apache.spark.examples.JavaWordCount
+  mainClass: org.apache.spark.examples.SparkPi
   mainApplicationFile: "local:///opt/spark/examples/jars/spark-examples_2.11-2.4.5.jar"
+  # This requires you install volcano scheduler, check https://github.com/volcano-sh/volcano for more details.
+  # batchScheduler: "volcano"
   arguments:
-    - s3a://spark-k8s-data/logs/ephemeral-storage-limit-range.yaml
+    - "100000"
+  sparkConf:
+    "spark.kubernetes.local.dirs.tmpfs": "true"
   sparkVersion: "2.4.5"
   restartPolicy:
     type: Never
-  sparkConf:
-    # Option 2: S3 Suggest to use this way
-    "spark.hadoop.fs.s3a.aws.credentials.provider": "com.amazonaws.auth.InstanceProfileCredentialsProvider"
   driver:
     cores: 1
     coreLimit: "1024m"
@@ -25,5 +26,5 @@ spec:
     serviceAccount: spark
   executor:
     cores: 1
-    instances: 1
-    memory: "1g"
+    instances: 2
+    memory: "1000m"

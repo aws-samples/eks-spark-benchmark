@@ -15,12 +15,15 @@
 # limitations under the License.
 #
 
-FROM seedjeffwan/spark:2.4.5-SNAPSHOT
+ARG BASE_IMAGE=seedjeffwan/spark:v2.4.5
 
-ARG hadoop_aws_jar=https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.1.0/hadoop-aws-3.1.0.jar
-ARG aws_java_sdk=https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.11.271/aws-java-sdk-bundle-1.11.271.jar
+FROM ${BASE_IMAGE}
 
-ADD ${hadoop_aws_jar} /opt/spark/jars
-ADD ${aws_java_sdk} /opt/spark/jars
+ARG HADOOP_AWS_VERSION=3.1.0
+ARG AWS_JAVA_SDK_VERSION=1.11.271
+
+# Add HADOOP_AWS_JAR and AWS_JAVA_SDK
+ADD https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/${HADOOP_AWS_VERSION}/hadoop-aws-${HADOOP_AWS_VERSION}.jar /opt/spark/jars
+ADD https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/${AWS_JAVA_SDK_VERSION}/aws-java-sdk-bundle-${AWS_JAVA_SDK_VERSION}.jar /opt/spark/jars
 
 ENTRYPOINT [ "/opt/entrypoint.sh" ]

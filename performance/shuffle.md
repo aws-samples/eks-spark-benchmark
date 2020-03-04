@@ -29,9 +29,9 @@ Spark creates a Kubernetes emptyDir volume for each directory specified in `spar
 --class org.apache.spark.examples.SparkPi  \
 --conf spark.executor.instances=2 \
 --conf spark.kubernetes.local.dirs.tmpfs=true \
---conf spark.kubernetes.container.image=seedjeffwan/spark:2.4.5-SNAPSHOT \
+--conf spark.kubernetes.container.image=seedjeffwan/spark:v2.4.5 \
 --conf spark.kubernetes.driver.pod.name=spark-pi \
---conf spark.kubernetes.authenticate.driver.serviceAccountName=spark local:///opt/spark/examples/target/original-spark-examples_2.11-2.4.5-SNAPSHOT.jar
+--conf spark.kubernetes.authenticate.driver.serviceAccountName=spark local:///opt/spark/jars/spark-examples_2.11-2.4.5.jar
 ```
 
 ```yaml
@@ -60,9 +60,9 @@ Currently, the k8s executor builder mount `spark.local.dir` as emptyDir or memor
 --conf spark.local.dir=/tmp/mnt-1 \
 --conf spark.kubernetes.executor.volumes.hostPath.spark-local-dir-1.mount.path=/tmp/mnt-1 \
 --conf spark.kubernetes.executor.volumes.hostPath.spark-local-dir-1.options.path=/tmp/mnt-1 \
---conf spark.kubernetes.container.image=seedjeffwan/spark:2.4.5-SNAPSHOT \
+--conf spark.kubernetes.container.image=seedjeffwan/spark:v2.4.5 \
 --conf spark.kubernetes.driver.pod.name=spark-pi \
---conf spark.kubernetes.authenticate.driver.serviceAccountName=spark local:///opt/spark/examples/target/original-spark-examples_2.11-2.4.5-SNAPSHOT.jar
+--conf spark.kubernetes.authenticate.driver.serviceAccountName=spark local:///opt/spark/jars/spark-examples_2.11-2.4.5.jar
 ```
 
 ```yaml
@@ -104,9 +104,9 @@ Single disk I/O maybe the performance bottleneck and you can add more disks for 
 --conf spark.kubernetes.executor.volumes.hostPath.spark-local-dir-2.options.path=/tmp/mnt-2 \
 --conf spark.kubernetes.executor.volumes.hostPath.spark-local-dir-3.mount.path=/tmp/mnt-3 \
 --conf spark.kubernetes.executor.volumes.hostPath.spark-local-dir-3.options.path=/tmp/mnt-3 \
---conf spark.kubernetes.container.image=seedjeffwan/spark:2.4.5-SNAPSHOT \
+--conf spark.kubernetes.container.image=seedjeffwan/spark:v2.4.5 \
 --conf spark.kubernetes.driver.pod.name=spark-pi \
---conf spark.kubernetes.authenticate.driver.serviceAccountName=spark local:///opt/spark/examples/target/original-spark-examples_2.11-2.4.5-SNAPSHOT.jar
+--conf spark.kubernetes.authenticate.driver.serviceAccountName=spark local:///opt/spark/jars/spark-examples_2.11-2.4.5.jar
 ```
 
 ```yaml
