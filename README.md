@@ -14,6 +14,16 @@ In order to run large scale spark applications in Kubernetes, there's still a lo
 
 To run TPC-DS benchmark on EKS cluster, please follow [instructions](./benchmark/README.md)
 
+## Performance Hits and Optimizations
+
+- [Kubernetes Cluster Optimization](./performance/kubernetes.md)
+
+- [Shuffle Performance Improvement](./performance/shuffle.md)
+
+- [S3A Committers](./performance/s3.md)
+
+- [Customized Schedulers](./performance/scheduler.md)
+
 ## TPC-DS Benchmark
 
 Created by a third-party committee, TPC-DS is the de-facto industry standard benchmark for measuring the performance of decision support solutions. According to its own homepage (https://www.tpc.org/tpcds/), it defines decision support systems as those that examine large volumes of data, give answers to real-world business questions, execute SQL queries of various operational requirements and complexities (e.g., ad-hoc, reporting, iterative OLAP, data mining), and are characterized by high CPU and IO load.
@@ -32,56 +42,15 @@ q64-v2.4, q70-v2.4, q82-v2.4 are very representative and typical. They are Netwo
 
 ![](docs/img/benchmark-major-queries.png)
 
-The following results come from [Spark Measture](https://github.com/LucaCanali/sparkMeasure) which is a tool for performance troubleshooting of Apache Spark workloads and simplify the collection and analysis of Spark workload metrics data.
-
-| Metrics | Kubernetes | Yarn |
-|-----------	|---------------------	|----------	|
-| numStages | 461 | 461 |
-| sum(numTasks) | 86860 | 86860 |
-| elapsedTime | 10789743 (3.0 h) | 11179917 (3.1 h) |
-| sum(stageDuration) | 28187853 (7.8 h) |  30013674 (8.3 h) |
-| sum(executorRunTime) | 191530056 (53.2 h) | 215178276 (59.8 h) |
-| sum(executorCpuTime) | 154363405 (42.9 h) | 174322200 (48.4 h) |
-| sum(executorDeserializeTime) | 416215 (6.9 min) | 402932 (6.7 min) |
-| sum(executorDeserializeCpuTime) | 257488 (4.3 min) | 293902 (4.9 min) |
-| sum(resultSerializationTime) | 2865 (3 s) | 4371 (4 s) |
-| sum(jvmGCTime) | 2542312 (42 min) | 4777682 (1.3 h) |
-| sum(shuffleFetchWaitTime) | 4981217 (1.4 h) | 2858238 (48 min) |
-| sum(shuffleWriteTime) | 14856523 (4.1 h) | 10641603 (3.0 h) |
-| max(resultSize) | 12785180 (12.0 MB) | 12785825 (12.0 MB) |
-| sum(numUpdatedBlockStatuses) | 0 | 0 |
-| sum(diskBytesSpilled) | 0 (0 Bytes) | 0 (0 Bytes) |
-| sum(memoryBytesSpilled) | 0 (0 Bytes) | 0 (0 Bytes) |
-| max(peakExecutionMemory) | 429496729600 | 429496729600 |
-| sum(recordsRead) | 127932123167 | 127932123167 |
-| sum(bytesRead) | 895574425081 (834.0 GB) | 895577095967 (834.0 GB) |
-| sum(recordsWritten) | 13 | 13 |
-| sum(bytesWritten) | 1875712 (1831.0 KB) | 1913133 (1868.0 KB) |
-| sum(shuffleTotalBytesRead) | 1927757194888 (1795.0 GB) | 1927539405616 (1795.0 GB) |
-| sum(shuffleTotalBlocksFetched) | 9080641 | 9077546 |
-| sum(shuffleLocalBlocksFetched) | 1942150 | 1161946 |
-| sum(shuffleRemoteBlocksFetched) | 7138491 | 7915600 |
-| sum(shuffleBytesWritten) | 1903885496455 (1773.0 GB) | 1903885565984 (1773.0 GB) |
-| sum(shuffleRecordsWritten) | 64737946302 | 64737946302 |
-
+There're 68% of queries running faster on Kubernetes, 6% of queries has similar performance as Yarn.
 
 ![](docs/img/benchmark-running-time-per-query.png)
 
-There're 68% of queries running faster on Kubernetes, 6% of queries has similar performance as Yarn.
+In total, our benchmark results shows TPC-DS queries against 1T dataset take less time to finish, it save ~5% time compare to YARN based cluster.
 
 ![](docs/img/benchmark-running-time-total.png)
 
-In total, our benchmark results shows TPC-DS queries against 1T dataset take less time to finish, it save ~5% time compare to YARN based cluster.
 
-## Perforamnce Hits and Optimizations
-
-- [Kubernetes Cluster Optimization](./performance/kubernetes.md)
-
-- [Shuffle Performance Improvement](./performance/shuffle.md)
-
-- [S3A Committers](./performance/s3.md)
-
-- [Customized Schedulers](./performance/scheduler.md)
 
 ## Credits and Thanks
 
