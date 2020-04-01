@@ -30,27 +30,21 @@ Created by a third-party committee, TPC-DS is the de-facto industry standard ben
 
 This benchmark includes 104 queries that exercise a large part of the SQL 2003 standards – 99 queries of the TPC-DS benchmark, four of which with two variants (14, 23, 24, 39) and “s_max” query performing a full scan and aggregation of the biggest table, store_sales.
 
-We can evaluate and measure the performance of Spark SQL using the TPC-DS benchmark on Kubernetes (EKS) and Apache Yarn (EMR).
+We can evaluate and measure the performance of Spark SQL using the TPC-DS benchmark on Kubernetes (EKS) and Apache Yarn (CDH).
 
 q64-v2.4, q70-v2.4, q82-v2.4 are very representative and typical. They are Network shuffle, CPU, I/O intensive queris. From the result, we can see performance on Kubernetes and Apache Yarn are very similar. kubernetes wins slightly on these three queries. In total, 10 iterations of the query have been performed and the median execution time is taken into consideration for comparison.
 
 - Spark on Kubernetes fetch more blocks from local rather than remote. Executors fetch local blocks from file and remote blocks need to be fetch through network. Fetch blocks locally is much more efficient compare to remote fetching.
 
-- Spark on Yarn seems take more time on JVM GC. Frequent GC will block executor process and have a big impact on the overall performance. We have not checked number of minor gc vs major gc, this need more investigation in the future.
+- Spark on Yarn seems take more time on JVM GC. Frequent GC will block executor process and have a big impact on the overall performance. We have not checked number of minor gc vs major gc, this need more investigation in the future. Memory management is also different in two different resource managers. Kubernetes request `spark.executor.memory` + `spark.executor.memoryOverhead` as total request and limit for executor pods, every pod has its own os cache space inside the container. While, Apache Yarn monitors `pmem` and `vmem` of containers and have system shared os cache.
 
-- Spark on Kubernetes use more time on `shuffleFetchWaitTime` and `shuffleWriteTime`. Looks like executors on Kubernetes take more time to read and write shuffle data. Spark on Kubernetes in the benchmark use `hostPath` as spark scratch space. I think disk performance I/O is not a problem.
+- Spark on Kubernetes uses more time on `shuffleFetchWaitTime` and `shuffleWriteTime`. Looks like executors on Kubernetes take more time to read and write shuffle data. Data locality is not available in Kubernetes, scheduler can not make decision to schedule workers in a network optimized way. They's probably the reason it takes longer on shuffle operations.
 
 ![](docs/img/benchmark-major-queries.png)
 
-There're 68% of queries running faster on Kubernetes, 6% of queries has similar performance as Yarn.
+There're 68% of queries running faster on Kubernetes, 6% of queries has similar performance as Yarn. In total, our benchmark results shows TPC-DS queries against 1T dataset take less time to finish, it save ~5% time compare to YARN based cluster.
 
 ![](docs/img/benchmark-running-time-per-query.png)
-
-In total, our benchmark results shows TPC-DS queries against 1T dataset take less time to finish, it save ~5% time compare to YARN based cluster.
-
-![](docs/img/benchmark-running-time-total.png)
-
-
 
 ## Credits and Thanks
 
