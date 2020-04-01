@@ -2,17 +2,17 @@
 
 ### Cluster Spec
 
-|   Spec    |  EMR  |    EKS    |
+|   Spec    |  CDH  |    EKS    |
 |-----------|-------|-----------|
 |   Master  |  1	  |     N/A   |
-|  Executor	|  3	  |     4     |
+|  Executor	|  4	  |     4     |
 | Committer	|  S3A  |    S3A    |
 |  TPC-DS   |  1T   |     1T    |
 
 
-| Instance 	  | vCPU 	| Mem (GiB) | Storage 	| Networking Performance (Gbps)	|
-|-----------	|-------|----------	|----------	|-------------------------------|
-| r4.2xlarge	|  8	  |     61   	|  EBS-Only |         Up to 10     	        |
+| Instance 	  | vCPU 	| Mem (GiB) | Storage  	 | Networking Performance (Gbps)	|
+|-----------	|-------|----------	|------------|--------------------------------|
+| r4.2xlarge	|  8	  |     61   	|  300GB IO1 |         Up to 10     	        |
 
 
 ### Spark application configurations
@@ -54,31 +54,70 @@
 "spark.hadoop.fs.s3a.committer.staging.conflict-mode": "append"
 ```
 
-## EMR
+## EKS
 
-### EMR Cluster CI Export
+Check [instruction](./benchmark/README.md)
+
+## Cloudera Manager and CDH on EC2 v6.3.2
+
+Following [Getting Started on Amazon Web Services (AWS)](https://docs.cloudera.com/documentation/director/latest/topics/director_get_started_aws.html) to provision your Hadoop Cluster.
+
+Please use following configurations. Beside that, attach IAM Role with `AmazonS3FullAccess` to instances, S3A will need it.
+
+Create Instance Template for Spark executors.
+![cdh-instance-template](./docs/img/cdh-instance-template.jpg)
+
+
+Select Services to providion.
+![cdh-services](./docs/img/cdh-services.png)
+
+
+Once you get everything ready, login to the master nodes,
+
+Create user `ec2-user` to submit Spark jobs.
 
 ```
-aws emr create-cluster --termination-protected --applications Name=Hadoop Name=Hive Name=Pig Name=Hue Name=Spark --ec2-attributes '{"KeyName":"aws-key","InstanceProfile":"EMR_EC2_DefaultRole","SubnetId":"subnet-bc3xxxx","EmrManagedSlaveSecurityGroup":"sg-0da3dxxxx","EmrManagedMasterSecurityGroup":"sg-0fxxxx"}' --release-label emr-5.28.0 --log-uri 's3n://aws-logs-348134392524-us-west-2/elasticmapreduce/' --steps '' --auto-scaling-role EMR_AutoScaling_DefaultRole --ebs-root-volume-size 10 --service-role EMR_DefaultRole --enable-debugging --name 'benchmark-0106' --scale-down-behavior TERMINATE_AT_TASK_COMPLETION --region us-west-2
+$ sudo -u hdfs hadoop fs -mkdir /user/ec2-user
+$ sudo -u hdfs hadoop fs -chown ec2-user /user/ec2-user
 ```
 
-### EMR Step configuration
+Submit your benchmark sql.
 
-Jar Location: command-runner.jar
-
-Main class: None
-
-Action on failure: Continue
-
-Arguments:
-
+```shell
+spark-submit --deploy-mode cluster \
+--driver-cores 4 \
+--driver-memory 8G \
+--executor-cores 2 \
+--executor-memory 8G \
+--num-executors 10 \
+--conf spark.executor.memoryOverhead=2G \
+--conf spark.dynamicAllocation.enabled=false \
+--conf spark.speculation=false \
+--conf spark.speculation.multiplier=3 \
+--conf spark.speculation.quantile=0.9 \
+--conf spark.sql.broadcastTimeout=7200 \
+--conf spark.sql.crossJoin.enabled=true \
+--conf spark.sql.parquet.mergeSchema=false \
+--conf spark.sql.parquet.filterPushdown=true \
+--conf spark.hadoop.fs.s3a.connection.timeout=1200000 \
+--conf spark.hadoop.fs.s3a.path.style.access=true \
+--conf spark.hadoop.fs.s3a.connection.maximum=200 \
+--conf spark.hadoop.fs.s3a.fast.upload=true \
+--conf spark.hadoop.mapreduce.outputcommitter.factory.scheme.s3a=org.apache.hadoop.fs.s3a.commit.S3ACommitterFactory \
+--conf spark.hadoop.fs.s3a.committer.name=directory \
+--conf spark.hadoop.fs.s3a.committer.staging.conflict-mode=append \
+--class com.amazonaws.eks.tpcds.BenchmarkSparkSQL s3a://spark-k8s-data/libs/eks-spark-examples-assembly-1.0.jar s3a://spark-k8s-data/TPCDS-TEST-1T s3a://spark-k8s-data/BENCHMARK-RESULT /opt/tpcds-kit/tools 1000 10 false q70-v2.4,q82-v2.4,q64-v2.4
 ```
-spark-submit --deploy-mode cluster --driver-cores 4 --driver-memory 8G --executor-cores 2 --executor-memory 8G --num-executors 10 --conf spark.dynamicAllocation.enabled=false --conf spark.executor.memoryOverhead=2G --conf spark.speculation=false --conf spark.speculation.multiplier=3 --conf spark.speculation.quantile=0.9 --conf spark.sql.broadcastTimeout=7200 --conf spark.sql.crossJoin.enabled=true --conf spark.sql.parquet.mergeSchema=false --conf spark.sql.parquet.filterPushdown=true --conf spark.hadoop.fs.s3a.connection.timeout=1200000 --conf spark.hadoop.fs.s3a.path.style.access=true --conf spark.hadoop.fs.s3a.connection.maximum=200 --conf spark.hadoop.fs.s3a.fast.upload=true --conf spark.hadoop.mapreduce.outputcommitter.factory.scheme.s3a=org.apache.hadoop.fs.s3a.commit.S3ACommitterFactory --conf spark.hadoop.fs.s3a.committer.name=directory --conf spark.hadoop.fs.s3a.committer.staging.conflict-mode=append --class com.amazonaws.eks.tpcds.BenchmarkSparkSQL s3a://spark-k8s-data/libs/eks-spark-examples-assembly-1.0.jar s3a://spark-k8s-data/TPCDS-TEST-1T s3a://spark-k8s-data/BENCHMARK-RESULT /opt/tpcds-kit/tools 1000 10 false q70-v2.4,q82-v2.4,q64-v2.4 true
-```
 
-> Note: EMR enables `spark.dynamicAllocation.enabled` by default. In order to control the size of executors, you need to explicitly set `spark.dynamicAllocation.enabled=false`.
+> Note: Since Kubernetes doesn't support `spark.dynamicAllocation.enabled` in v2.4.5, we disabled it for Yarn based Spark applications as well by explicitly setting `spark.dynamicAllocation.enabled=false`. This gives us the controler on number of executors.
 
-> Note: EMR support S3 with EMRFS, if you like to use EMRFS, please remove S3A related configurations and change path from `s3a://` to `s3://`.
+### Monitor jobs
+
+![cdh-rm-ui](./docs/img/cdh-rm-ui.png)
+
+![cdh-rm-application-list](./docs/img/cdh-rm-application-list.jpg)
+
+![cdh-rm-application](./docs/img/cdh-rm-application.jpg)
 
 
 ### Spark Measture metrics
