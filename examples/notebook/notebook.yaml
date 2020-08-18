@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubernetes.io/psp: eks.privileged
+    sidecar.istio.io/inject: "false"
+  labels:
+    app: spark-client
+    notebook-name: spark-client
+  name: spark-client
+  namespace: spark
+spec:
+  serviceAccount: spark
+  containers:
+  - env:
+    - name: NB_PREFIX
+      value: /
+    image: seedjeffwan/spark-notebook:0.1.2
+    imagePullPolicy: IfNotPresent
+    name: spark-client
+    ports:
+    - containerPort: 8888
+      name: notebook-port
+      protocol: TCP
+    resources:
+      requests:
+        cpu: "1"
+        memory: 1Gi

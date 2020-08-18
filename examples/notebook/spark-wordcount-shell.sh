@@ -1,0 +1,15 @@
+./bin/spark-submit \
+--master k8s://https://1B903EF0B91EAEE52BBE84C176B71EED.sk1.us-west-2.eks.amazonaws.com \
+--deploy-mode cluster \
+--name wordcount-s3-shell \
+--class org.apache.spark.examples.JavaWordCount  \
+--conf spark.kubernetes.namespace=spark \
+--conf spark.executor.instances=2 \
+--conf spark.kubernetes.driver.limit.cores=1 \
+--conf spark.kubernetes.executor.limit.cores=1 \
+--conf spark.driver.memory=1g \
+--conf spark.executor.memory=1g \
+--conf spark.kubernetes.container.image=seedjeffwan/spark:v3.0.0 \
+--conf spark.kubernetes.driver.pod.name=wordcount-s3-shell \
+--conf spark.hadoop.fs.s3a.aws.credentials.provider=com.amazonaws.auth.InstanceProfileCredentialsProvider \
+--conf spark.kubernetes.authenticate.driver.serviceAccountName=spark local:///opt/spark/examples/jars/spark-examples_2.12-3.0.0.jar s3a://spark-k8s-data/logs/ephemeral-storage-limit-range.yaml
